@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Linux," />
+  <meta name="keywords" content="Python,Mysql," />
 
 
 
@@ -87,19 +87,25 @@
 
 
 
-<meta name="description" content="之前就有想法把旧本本作为Linux工作，远程使用Xshell进行登录，这样有什么小的调试在实验室远程登录，无论是文件读取还是跑程序都方便的多。过程分两步，一、先在Linux（Ubuntu）上配置ssh服务二、在windows上安装Xmannager登录
-Linux配置ssh服务安装ssh-serverUbuntu下安装在终端使用下列命令进行安装：sudo apt-get install opens">
+<meta name="description" content="Yo!stock这是一个国内股票爬虫程序，利用新浪股票数据接口，和证券之星分类市场爬取国内证券市场的股票信息。
+完成基本的股票信息爬取，存储，和数据处理，每个模块完成相应的内容，并写了完整的Tk界面。程序使用python3.5，mysql5.6数据库。
+使用到beautifulsoup、pymysql、pandas等第三方库。
+功能分为六部分，mysqlstockui.py为界面程序（也是主程序）">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Xshell远程登录Linux配置小记">
-<meta property="og:url" content="http://ysbbs.cf/2017/04/21/Xshell远程登录Linux配置小记/index.html">
+<meta property="og:title" content="python3实现完整的国内股票市场爬虫程序">
+<meta property="og:url" content="http://ysbbs.cf/2017/05/20/python3实现完整的国内股票市场爬虫程序/index.html">
 <meta property="og:site_name" content="ysbbs">
-<meta property="og:description" content="之前就有想法把旧本本作为Linux工作，远程使用Xshell进行登录，这样有什么小的调试在实验室远程登录，无论是文件读取还是跑程序都方便的多。过程分两步，一、先在Linux（Ubuntu）上配置ssh服务二、在windows上安装Xmannager登录
-Linux配置ssh服务安装ssh-serverUbuntu下安装在终端使用下列命令进行安装：sudo apt-get install opens">
-<meta property="og:updated_time" content="2017-04-21T08:55:56.097Z">
+<meta property="og:description" content="Yo!stock这是一个国内股票爬虫程序，利用新浪股票数据接口，和证券之星分类市场爬取国内证券市场的股票信息。
+完成基本的股票信息爬取，存储，和数据处理，每个模块完成相应的内容，并写了完整的Tk界面。程序使用python3.5，mysql5.6数据库。
+使用到beautifulsoup、pymysql、pandas等第三方库。
+功能分为六部分，mysqlstockui.py为界面程序（也是主程序）">
+<meta property="og:updated_time" content="2017-05-20T02:13:44.620Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Xshell远程登录Linux配置小记">
-<meta name="twitter:description" content="之前就有想法把旧本本作为Linux工作，远程使用Xshell进行登录，这样有什么小的调试在实验室远程登录，无论是文件读取还是跑程序都方便的多。过程分两步，一、先在Linux（Ubuntu）上配置ssh服务二、在windows上安装Xmannager登录
-Linux配置ssh服务安装ssh-serverUbuntu下安装在终端使用下列命令进行安装：sudo apt-get install opens">
+<meta name="twitter:title" content="python3实现完整的国内股票市场爬虫程序">
+<meta name="twitter:description" content="Yo!stock这是一个国内股票爬虫程序，利用新浪股票数据接口，和证券之星分类市场爬取国内证券市场的股票信息。
+完成基本的股票信息爬取，存储，和数据处理，每个模块完成相应的内容，并写了完整的Tk界面。程序使用python3.5，mysql5.6数据库。
+使用到beautifulsoup、pymysql、pandas等第三方库。
+功能分为六部分，mysqlstockui.py为界面程序（也是主程序）">
 
 
 
@@ -127,13 +133,13 @@ Linux配置ssh服务安装ssh-serverUbuntu下安装在终端使用下列命令�
 
 
 
-  <link rel="canonical" href="http://ysbbs.cf/2017/04/21/Xshell远程登录Linux配置小记/"/>
+  <link rel="canonical" href="http://ysbbs.cf/2017/05/20/python3实现完整的国内股票市场爬虫程序/"/>
 
 
 
 
 
-  <title> Xshell远程登录Linux配置小记 | ysbbs </title>
+  <title> python3实现完整的国内股票市场爬虫程序 | ysbbs </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -262,7 +268,7 @@ Linux配置ssh服务安装ssh-serverUbuntu下安装在终端使用下列命令�
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://ysbbs.cf/2017/04/21/Xshell远程登录Linux配置小记/">
+    <link itemprop="mainEntityOfPage" href="http://ysbbs.cf/2017/05/20/python3实现完整的国内股票市场爬虫程序/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Yang Shuai">
@@ -283,7 +289,7 @@ Linux配置ssh服务安装ssh-serverUbuntu下安装在终端使用下列命令�
             
             
               
-                Xshell远程登录Linux配置小记
+                python3实现完整的国内股票市场爬虫程序
               
             
           </h1>
@@ -298,8 +304,8 @@ Linux配置ssh服务安装ssh-serverUbuntu下安装在终端使用下列命令�
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-21T16:55:12+08:00">
-                2017-04-21
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-20T10:12:31+08:00">
+                2017-05-20
               </time>
             
 
@@ -317,8 +323,8 @@ Linux配置ssh服务安装ssh-serverUbuntu下安装在终端使用下列命令�
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/04/21/Xshell远程登录Linux配置小记/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/04/21/Xshell远程登录Linux配置小记/" itemprop="commentCount"></span>
+                <a href="/2017/05/20/python3实现完整的国内股票市场爬虫程序/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/20/python3实现完整的国内股票市场爬虫程序/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -344,17 +350,18 @@ Linux配置ssh服务安装ssh-serverUbuntu下安装在终端使用下列命令�
       
 
       
-        <p>之前就有想法把旧本本作为Linux工作，远程使用Xshell进行登录，<br>这样有什么小的调试在实验室远程登录，无论是文件读取还是跑程序都方便的多。<br>过程分两步，<br>一、先在Linux（Ubuntu）上配置ssh服务<br>二、在windows上安装Xmannager登录</p>
-<h2 id="Linux配置ssh服务"><a href="#Linux配置ssh服务" class="headerlink" title="Linux配置ssh服务"></a>Linux配置ssh服务</h2><h3 id="安装ssh-server"><a href="#安装ssh-server" class="headerlink" title="安装ssh-server"></a>安装ssh-server</h3><p>Ubuntu下安装在终端使用下列命令进行安装：<br><code>sudo apt-get install openssh-client</code><br><code>sudo apt-get install openssh-server</code><br>Ubuntu16.04 已经安装好了openssh-client，只需要再安装openssh-server</p>
-<h3 id="启动ssh-server"><a href="#启动ssh-server" class="headerlink" title="启动ssh-server"></a>启动ssh-server</h3><p>接下来我们来启动ssh服务，执行以下命令:<br><code>sudo /etc/init.d/ssh start</code><br>系统显示：<br><code>[ ok ] Starting ssh (via systemctl): ssh.service.</code><br>说明已经启动了SSH服务。<br>如果你想停止ssh服务，则执行以下命令即可:<br><code>sudo /etc/init.d/ssh stop</code></p>
-<h3 id="查看本机IP"><a href="#查看本机IP" class="headerlink" title="查看本机IP"></a>查看本机IP</h3><p>命令：<br><code>ifconfig</code><br>可以查看Linux的IP地址，这个IP地址作为远程的登录地址</p>
-<p>（ps：网络上ssh的配置多提到了config文件配置，关于是否开启root权限登录和不需要密码的什么，我查看了一下默认配置，基本不用动，除非有特殊要求，可以自行前往配置ssh的配置文件。）</p>
-<h2 id="Windows端配置登录"><a href="#Windows端配置登录" class="headerlink" title="Windows端配置登录"></a>Windows端配置登录</h2><h3 id="安装Xmanager"><a href="#安装Xmanager" class="headerlink" title="安装Xmanager"></a>安装Xmanager</h3><p>Xmanager全套工具包含xshell，如果只装xshell的话会导致远程连接Linux后无法运行有界面的程序，会报错。<br>下载安装Xmanager-v5.0.<br>链接：<a href="http://pan.baidu.com/s/1hsIFeAg" target="_blank" rel="external">http://pan.baidu.com/s/1hsIFeAg</a> 密码：t925</p>
-<h3 id="配置Xshell"><a href="#配置Xshell" class="headerlink" title="配置Xshell"></a>配置Xshell</h3><p>安装完毕打开xshell，第一次打开默认让你新建会话连接，如果没有的话也可以手动选择“新建”，<br>名称为你要创建连接的昵称，<br>主机为你的Linux的IP地址<br>协议SSH<br>端口默认22</p>
-<p>在右侧 SSH-隧道（tunneling)<br>将：<br>-[x] Forward X11 connection to :<br>-[x] Xmanager<br>     勾选<br>     (这个是让Xshell通过Xmanager运行有界面程序）</p>
-<p>点击确认，创建好会话。</p>
-<h2 id="远程登录"><a href="#远程登录" class="headerlink" title="远程登录"></a>远程登录</h2><p>点击创建好的会话，点连接，会让你输入登录账户和密码，<br>账户和密码为你Linux下的用户名和密码。</p>
-<p>不出意外，你就登录进你的Linux啦，<br>试着打开Linux下的Firefox吧~</p>
+        <h1 id="Yo-stock"><a href="#Yo-stock" class="headerlink" title="Yo!stock"></a>Yo!stock</h1><p><strong>这是一个国内股票爬虫程序，利用新浪股票数据接口，和证券之星分类市场爬取国内证券市场的股票信息。</strong></p>
+<p>完成基本的股票信息爬取，存储，和数据处理，每个模块完成相应的内容，并写了完整的Tk界面。<br>程序使用python3.5，mysql5.6数据库。</p>
+<p>使用到beautifulsoup、pymysql、pandas等第三方库。</p>
+<p>功能分为六部分，mysqlstockui.py为界面程序（也是主程序），其它五个分别为五个小程序模块，最后import到ui界面程序中完成全部程序。</p>
+<p>其它几个程序分别为：ui、getstockvalue、getallrank、selectinsql、getallstock、pandasuse下面将分别介绍各模块功能和实现方法。</p>
+<h2 id="主程序main-py"><a href="#主程序main-py" class="headerlink" title="主程序main.py"></a>主程序main.py</h2><h2 id="界面ui-py"><a href="#界面ui-py" class="headerlink" title="界面ui.py"></a>界面ui.py</h2><p>功能简介：是用python内置的tkinter编写的界面，用来调用其它程序函数，并将各返回值传入UI界面上显示出来。</p>
+<h2 id="在线获取股票信息getstockvalue-py"><a href="#在线获取股票信息getstockvalue-py" class="headerlink" title="在线获取股票信息getstockvalue.py"></a>在线获取股票信息getstockvalue.py</h2><p>功能简介：程序getstockvalue.py实现功能是在用户输入股票代码后，自动相应的新浪股票信息链接，并在线爬取新浪股票的股票实时信息和股票的日线K线图，股票数据作为返回值返回，股票K线图下载到根目录</p>
+<h2 id="在线获取股票榜单getallrank-py"><a href="#在线获取股票榜单getallrank-py" class="headerlink" title="在线获取股票榜单getallrank.py"></a>在线获取股票榜单getallrank.py</h2><p>功能简介：程序getallrank.py实现功能是通过证券之星网站，爬取网站上在线的股票榜单，并格式化数据后返回，每个函数对应一个股票市场，运用到BeautifulSoup的库，用标签去解析网页源码，比用正则表达式更加简练方便</p>
+<h2 id="爬取全部股票并存入数据库getallstock-py"><a href="#爬取全部股票并存入数据库getallstock-py" class="headerlink" title="爬取全部股票并存入数据库getallstock.py"></a>爬取全部股票并存入数据库getallstock.py</h2><p>功能简介：程序getallstock.py实现功能是爬取证券之星网站上的股票市场上的股票数据，解析好格式并存入mysql数据库，数据表单依据用户操作系统日期动态创建，可实现不断刷新股票信息功能，当日股票数据可反复更新，全部股票按照A股、B股、中小板、存在当日三个不同表单中，为后面自定义查询做好分类工作</p>
+<h2 id="数据库查询股票数据selectinsql-py"><a href="#数据库查询股票数据selectinsql-py" class="headerlink" title="数据库查询股票数据selectinsql.py"></a>数据库查询股票数据selectinsql.py</h2><p>功能简介：程序selectinsql.py实现功能是从任意历史数据库中查询股票信息，可以满足用户去查询历史上某一天的股票价格信息，输入一个日期，和一个股票代码，程序会从mysql里找到当日三个市场表单进行查询，如果没有当日数据库，返回提示，如果没有对应股票信息，返回提示，查询到股票信息，返回格式化好的股票信息</p>
+<h2 id="用户自定义排序pandasuse-py"><a href="#用户自定义排序pandasuse-py" class="headerlink" title="用户自定义排序pandasuse.py"></a>用户自定义排序pandasuse.py</h2><p>功能简介：程序pandasuse.py实现功能是从任意历史数据库中获取当日股票市场的所有股票信息，进行自定义排序。用到了第三方库pandas，第一步通过判断用户输入的历史日期，将指定日期数据从mysql中取出传入给pandas，第二步将数据库的char型数据整改成float型，第三步，然后根据传入参数对关键数据进行排序，最后将数据以表单形式返回</p>
+<p><a href="https://github.com/ysbbswork/Stockcrawler" target="_blank" rel="external">yo!stock源码入口</a><br>欢迎各路小伙伴一起来改进代码~</p>
 
       
     </div>
@@ -399,7 +406,9 @@ Linux配置ssh服务安装ssh-serverUbuntu下安装在终端使用下列命令�
       
         <div class="post-tags">
           
-            <a href="/tags/Linux/" rel="tag"># Linux</a>
+            <a href="/tags/Python/" rel="tag"># Python</a>
+          
+            <a href="/tags/Mysql/" rel="tag"># Mysql</a>
           
         </div>
       
@@ -412,8 +421,8 @@ Linux配置ssh服务安装ssh-serverUbuntu下安装在终端使用下列命令�
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/04/20/Python优雅的生成不那么优雅的exe/" rel="next" title="Python优雅的生成不那么优雅的EXE">
-                <i class="fa fa-chevron-left"></i> Python优雅的生成不那么优雅的EXE
+              <a href="/2017/04/23/Win7下配置安装mysql/" rel="next" title="Win7下配置安装mysql">
+                <i class="fa fa-chevron-left"></i> Win7下配置安装mysql
               </a>
             
           </div>
@@ -421,10 +430,6 @@ Linux配置ssh服务安装ssh-serverUbuntu下安装在终端使用下列命令�
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/04/23/Win7下配置安装mysql/" rel="prev" title="Win7下配置安装mysql">
-                Win7下配置安装mysql <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -450,8 +455,8 @@ Linux配置ssh服务安装ssh-serverUbuntu下安装在终端使用下列命令�
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2017/04/21/Xshell远程登录Linux配置小记/"
-           data-title="Xshell远程登录Linux配置小记" data-url="http://ysbbs.cf/2017/04/21/Xshell远程登录Linux配置小记/">
+      <div class="ds-thread" data-thread-key="2017/05/20/python3实现完整的国内股票市场爬虫程序/"
+           data-title="python3实现完整的国内股票市场爬虫程序" data-url="http://ysbbs.cf/2017/05/20/python3实现完整的国内股票市场爬虫程序/">
       </div>
     
   </div>
@@ -548,7 +553,7 @@ Linux配置ssh服务安装ssh-serverUbuntu下安装在终端使用下列命令�
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux配置ssh服务"><span class="nav-number">1.</span> <span class="nav-text">Linux配置ssh服务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装ssh-server"><span class="nav-number">1.1.</span> <span class="nav-text">安装ssh-server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动ssh-server"><span class="nav-number">1.2.</span> <span class="nav-text">启动ssh-server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看本机IP"><span class="nav-number">1.3.</span> <span class="nav-text">查看本机IP</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Windows端配置登录"><span class="nav-number">2.</span> <span class="nav-text">Windows端配置登录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装Xmanager"><span class="nav-number">2.1.</span> <span class="nav-text">安装Xmanager</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置Xshell"><span class="nav-number">2.2.</span> <span class="nav-text">配置Xshell</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#远程登录"><span class="nav-number">3.</span> <span class="nav-text">远程登录</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Yo-stock"><span class="nav-number">1.</span> <span class="nav-text">Yo!stock</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#主程序main-py"><span class="nav-number">1.1.</span> <span class="nav-text">主程序main.py</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#界面ui-py"><span class="nav-number">1.2.</span> <span class="nav-text">界面ui.py</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在线获取股票信息getstockvalue-py"><span class="nav-number">1.3.</span> <span class="nav-text">在线获取股票信息getstockvalue.py</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在线获取股票榜单getallrank-py"><span class="nav-number">1.4.</span> <span class="nav-text">在线获取股票榜单getallrank.py</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#爬取全部股票并存入数据库getallstock-py"><span class="nav-number">1.5.</span> <span class="nav-text">爬取全部股票并存入数据库getallstock.py</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库查询股票数据selectinsql-py"><span class="nav-number">1.6.</span> <span class="nav-text">数据库查询股票数据selectinsql.py</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用户自定义排序pandasuse-py"><span class="nav-number">1.7.</span> <span class="nav-text">用户自定义排序pandasuse.py</span></a></li></ol></li></ol></div>
             
 
           </div>

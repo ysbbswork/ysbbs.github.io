@@ -87,19 +87,16 @@
 
 
 
-<meta name="description" content="typedef和#define宏有点相似，但比#define实际要复杂的多，也隐藏了很多陷阱，从网上摘了一些总结的很好的例子，希望下次用typedef的时候更能游刃有余。
-基本定义：typedef为C语言的关键字，作用是为一种数据类型定义一个新名字。这里的数据类型包括内部数据类型（int,char等）和自定义的数据类型（struct等）。 在编程中使用typedef目的一般有两个，一个是给变量一个">
+<meta name="description" content="typedef和#define宏有点相似，但比#define实际要复杂的多，也隐藏了很多陷阱，从网上摘了一些总结的很好的例子，希望下次用typedef的时候更能游刃有余。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C中的typedef用法小结">
 <meta property="og:url" content="http://ysbbs.cf/2017/09/13/C中的typedef用法小结/index.html">
 <meta property="og:site_name" content="ysbbs">
-<meta property="og:description" content="typedef和#define宏有点相似，但比#define实际要复杂的多，也隐藏了很多陷阱，从网上摘了一些总结的很好的例子，希望下次用typedef的时候更能游刃有余。
-基本定义：typedef为C语言的关键字，作用是为一种数据类型定义一个新名字。这里的数据类型包括内部数据类型（int,char等）和自定义的数据类型（struct等）。 在编程中使用typedef目的一般有两个，一个是给变量一个">
-<meta property="og:updated_time" content="2017-09-13T02:29:39.097Z">
+<meta property="og:description" content="typedef和#define宏有点相似，但比#define实际要复杂的多，也隐藏了很多陷阱，从网上摘了一些总结的很好的例子，希望下次用typedef的时候更能游刃有余。">
+<meta property="og:updated_time" content="2017-09-13T02:56:24.705Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C中的typedef用法小结">
-<meta name="twitter:description" content="typedef和#define宏有点相似，但比#define实际要复杂的多，也隐藏了很多陷阱，从网上摘了一些总结的很好的例子，希望下次用typedef的时候更能游刃有余。
-基本定义：typedef为C语言的关键字，作用是为一种数据类型定义一个新名字。这里的数据类型包括内部数据类型（int,char等）和自定义的数据类型（struct等）。 在编程中使用typedef目的一般有两个，一个是给变量一个">
+<meta name="twitter:description" content="typedef和#define宏有点相似，但比#define实际要复杂的多，也隐藏了很多陷阱，从网上摘了一些总结的很好的例子，希望下次用typedef的时候更能游刃有余。">
 
 
 
@@ -345,6 +342,7 @@
 
       
         <p>typedef和#define宏有点相似，但比#define实际要复杂的多，也隐藏了很多陷阱，从网上摘了一些总结的很好的例子，希望下次用typedef的时候更能游刃有余。</p>
+<a id="more"></a>
 <h2 id="基本定义："><a href="#基本定义：" class="headerlink" title="基本定义："></a><strong>基本定义：</strong></h2><p>typedef为C语言的关键字，作用是为一种数据类型定义一个新名字。这里的数据类型包括内部数据类型（int,char等）和自定义的数据类型（struct等）。 在编程中使用typedef目的一般有两个，一个是给变量一个易记且意义明确的新名字，另一个是简化一些比较复杂的类型声明。</p>
 <h2 id="用途一：与-define的区别"><a href="#用途一：与-define的区别" class="headerlink" title="用途一：与#define的区别"></a><strong>用途一：与#define的区别</strong></h2><p>typedef 行为有点像 #define 宏，用其实际类型替代同义字。不同点是 typedef 在编译时被解释，因此让编译器来应付超越预处理器能力的文本替换。</p>
 <h2 id="用途二：减少错误"><a href="#用途二：减少错误" class="headerlink" title="用途二：减少错误"></a><strong>用途二：减少错误</strong></h2><p>定义一种类型的别名，而不只是简单的宏替换。可以用作同时声明指针型的多个对象。比如：</p>
@@ -379,7 +377,8 @@
 <p><code>int mystrcmp(const pstr, const pstr);</code></p>
 <p>用GNU的gcc和g++编译器，是会出现警告的，按照顺序，‘const pstr’被解释为‘char* const‘（一个指向 char 的指针常量），两者表达的并非同一意思。为了得到正确的类型，应当如下声明： </p>
 <p><code>typedef const char* pstr;</code> </p>
-<h2 id="用途六：代码简化"><a href="#用途六：代码简化" class="headerlink" title="用途六：代码简化"></a><strong>用途六：代码简化</strong></h2><p>代码简化。为复杂的声明定义一个新的简单的别名。方法是：在原来的声明里逐步用别名替换一部分复杂声明，如此循环，把带变量名的部分留到最后替换，得到的就是原声明的最简化版。举例： </p>
+<h2 id="用途六：代码简化"><a href="#用途六：代码简化" class="headerlink" title="用途六：代码简化"></a><strong>用途六：代码简化</strong></h2><p>说实话这个我一直都是晕头转向的，这个typedef我还是慎用再慎用，我觉得能把函数写这么复杂的，一定没想过要给别人看。。。</p>
+<p>代码简化。为复杂的声明定义一个新的简单的别名。方法是：在原来的声明里逐步用别名替换一部分复杂声明，如此循环，把带变量名的部分留到最后替换，得到的就是原声明的最简化版。举例： </p>
 <p> 原声明：<br><code>void (*b[10]) (void (*)());</code></p>
 <p>变量名为b，先替换右边部分括号里的，pFunParam为别名<br><code>typedef void (*pFunParam)();</code></p>
 <p>再替换左边的变量b，pFunx为别名二：<br><code>typedef void (*pFunx)(pFunParam);</code></p>
@@ -466,6 +465,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2017/11/05/如何开始写一篇第一篇paper/" rel="prev" title="如何开始写一篇第一篇paper">
+                如何开始写一篇第一篇paper <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -540,7 +543,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-count">21</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -553,7 +556,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-count">14</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="随笔," />
+  <meta name="keywords" content="C/C++," />
 
 
 
@@ -87,37 +87,25 @@
 
 
 
-<meta name="description" content="昨天发生了一件我认为让我很不舒服的事情，
-颇多感慨，
-但也无奈，
-恶人之所以敢犯恶，无非就是剥夺别人利益的同时抱着一种你奈我何的态度，
-虽然知晓怼回去对别人的改变意义不大，
-但最起码表现出自己不是傻子，你背地里那些小九九真的太幼稚了。幼稚并且令我恶心。
-谷歌有句名言叫做，不作恶。
-但我觉得很多时候不作恶是不能够的，不仅不作恶，而当你周围的人作恶的时候，要敢于站住来，表明自己的态度，而不是说我没作恶">
+<meta name="description" content="在C++中有很多时候会栽在cin缓存区这个坑里，特别是将输入作为循环判断条件的时候，输入错误的情况下往往会陷入死循环。例：
+12345int i;while (1) &amp;#123;	cout &amp;lt;&amp;lt; &amp;quot;输入数字&amp;quot;;	cin &amp;gt;&amp;gt; i;&amp;#125;
+想要达到的效果是循环输入数字，一旦输入错误，比如输入为一个字母的时候，往往会陷入到一个死循环中。
+不停的输出提示">
 <meta property="og:type" content="article">
-<meta property="og:title" content="不仅要不作恶">
-<meta property="og:url" content="http://ysbbs.cf/2017/09/08/不仅要不作恶/index.html">
+<meta property="og:title" content="隐藏在cin中的陷阱">
+<meta property="og:url" content="http://ysbbs.cf/2017/11/28/隐藏在cin中的陷阱/index.html">
 <meta property="og:site_name" content="ysbbs">
-<meta property="og:description" content="昨天发生了一件我认为让我很不舒服的事情，
-颇多感慨，
-但也无奈，
-恶人之所以敢犯恶，无非就是剥夺别人利益的同时抱着一种你奈我何的态度，
-虽然知晓怼回去对别人的改变意义不大，
-但最起码表现出自己不是傻子，你背地里那些小九九真的太幼稚了。幼稚并且令我恶心。
-谷歌有句名言叫做，不作恶。
-但我觉得很多时候不作恶是不能够的，不仅不作恶，而当你周围的人作恶的时候，要敢于站住来，表明自己的态度，而不是说我没作恶">
-<meta property="og:updated_time" content="2017-09-08T07:05:01.505Z">
+<meta property="og:description" content="在C++中有很多时候会栽在cin缓存区这个坑里，特别是将输入作为循环判断条件的时候，输入错误的情况下往往会陷入死循环。例：
+12345int i;while (1) &amp;#123;	cout &amp;lt;&amp;lt; &amp;quot;输入数字&amp;quot;;	cin &amp;gt;&amp;gt; i;&amp;#125;
+想要达到的效果是循环输入数字，一旦输入错误，比如输入为一个字母的时候，往往会陷入到一个死循环中。
+不停的输出提示">
+<meta property="og:updated_time" content="2017-11-28T08:50:53.590Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="不仅要不作恶">
-<meta name="twitter:description" content="昨天发生了一件我认为让我很不舒服的事情，
-颇多感慨，
-但也无奈，
-恶人之所以敢犯恶，无非就是剥夺别人利益的同时抱着一种你奈我何的态度，
-虽然知晓怼回去对别人的改变意义不大，
-但最起码表现出自己不是傻子，你背地里那些小九九真的太幼稚了。幼稚并且令我恶心。
-谷歌有句名言叫做，不作恶。
-但我觉得很多时候不作恶是不能够的，不仅不作恶，而当你周围的人作恶的时候，要敢于站住来，表明自己的态度，而不是说我没作恶">
+<meta name="twitter:title" content="隐藏在cin中的陷阱">
+<meta name="twitter:description" content="在C++中有很多时候会栽在cin缓存区这个坑里，特别是将输入作为循环判断条件的时候，输入错误的情况下往往会陷入死循环。例：
+12345int i;while (1) &amp;#123;	cout &amp;lt;&amp;lt; &amp;quot;输入数字&amp;quot;;	cin &amp;gt;&amp;gt; i;&amp;#125;
+想要达到的效果是循环输入数字，一旦输入错误，比如输入为一个字母的时候，往往会陷入到一个死循环中。
+不停的输出提示">
 
 
 
@@ -145,13 +133,13 @@
 
 
 
-  <link rel="canonical" href="http://ysbbs.cf/2017/09/08/不仅要不作恶/"/>
+  <link rel="canonical" href="http://ysbbs.cf/2017/11/28/隐藏在cin中的陷阱/"/>
 
 
 
 
 
-  <title> 不仅要不作恶 | ysbbs </title>
+  <title> 隐藏在cin中的陷阱 | ysbbs </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -280,7 +268,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://ysbbs.cf/2017/09/08/不仅要不作恶/">
+    <link itemprop="mainEntityOfPage" href="http://ysbbs.cf/2017/11/28/隐藏在cin中的陷阱/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Yang Shuai">
@@ -301,7 +289,7 @@
             
             
               
-                不仅要不作恶
+                隐藏在cin中的陷阱
               
             
           </h1>
@@ -316,8 +304,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-08T15:04:10+08:00">
-                2017-09-08
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-28T16:50:25+08:00">
+                2017-11-28
               </time>
             
 
@@ -335,8 +323,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/09/08/不仅要不作恶/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/09/08/不仅要不作恶/" itemprop="commentCount"></span>
+                <a href="/2017/11/28/隐藏在cin中的陷阱/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/11/28/隐藏在cin中的陷阱/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -362,23 +350,24 @@
       
 
       
-        <p>昨天发生了一件我认为让我很不舒服的事情，</p>
-<p>颇多感慨，</p>
-<p>但也无奈，</p>
-<p>恶人之所以敢犯恶，无非就是剥夺别人利益的同时抱着一种你奈我何的态度，</p>
-<p>虽然知晓怼回去对别人的改变意义不大，</p>
-<p>但最起码表现出自己不是傻子，你背地里那些小九九真的太幼稚了。幼稚并且令我恶心。</p>
-<p>谷歌有句名言叫做，不作恶。</p>
-<p>但我觉得很多时候不作恶是不能够的，不仅不作恶，而当你周围的人作恶的时候，要敢于站住来，表明自己的态度，而不是说我没作恶都是他们干的，正是有太多这样软性的人，助长了恶人的气焰，在我眼里，有时候你比带头作恶的人还令我瞧不起。</p>
-<p>不过越是这样，越是发现他们总是在内斗，在算计，在这个小圈子里去剥夺别人的利益，去损人利己，习惯了，也去损人不利己。</p>
-<p>我觉得这样十足的失败，</p>
-<p>先做人后做事，这道理如果他们真的不明白，我连去和他们争的欲望都没有，</p>
-<p>一开始电话给小番茄，她听后，劝我别发脾气气到自己，我当时说我不一定能忍得住，我尽量，</p>
-<p>但后来上楼看了一眼他们那种浑浑噩噩，皮囊的感觉，我根本不想生气了，</p>
-<p>感觉格局不同，不相为谋，</p>
-<p>以后敬而远之，我只需努力朝着自己的路奋斗，以后道路必然不同，</p>
-<p>也以此警示自己，</p>
-<p>要始终做一个主动提供价值的人，而不是去剥夺别人的价值。</p>
+        <p>在C++中有很多时候会栽在cin缓存区这个坑里，特别是将输入作为循环判断条件的时候，输入错误的情况下往往会陷入死循环。例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">int i;</div><div class="line">while (1) &#123;</div><div class="line">	cout &lt;&lt; &quot;输入数字&quot;;</div><div class="line">	cin &gt;&gt; i;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>想要达到的效果是循环输入数字，一旦输入错误，比如输入为一个字母的时候，往往会陷入到一个死循环中。</p>
+<p>不停的输出提示信息，但是不允许用户再次输入。</p>
+<p>查了一下发现，</p>
+<p>这个是因为cin缓冲区没有清理，cin以后的每一次一次循环时直接读取缓冲区了</p>
+<p>因此，在输入前加上清空输入缓冲区的语句就可以解决问题。c++用于清空输入缓存的函数有三个：cin.clear（），cin.sync（），cin.ignore（）。</p>
+<p>cin.clear（）是用来更改cin的状态标示符的，cin在接收到错误的输入的时候，会设置状态位good。如果good位不为1，则cin不接受输入，直接跳过。如果下次输入前状态位没有改变那么即使清除了缓冲区数据流也无法输入。所以清除缓冲区之前必须要cin.clear（）。</p>
+<p>cin.ignore（a，ch）：从输入缓冲去中提取字符，提取的字符被忽略，不被使用。每抛弃一个字符，它都要计数和比较字符，如果计数值达到a或者被忽略的字符是ch，则cin.ignore（）函数终止执行。默认参数是a=1，即仅忽略缓冲区中的第一个字符。它的一个常用功能是用来清除以回车结束的输入缓冲区的内容，消除上一次输入对下一次输入的影响。比如cin.ignore（1024，’\n’），通常把第一个参数设置得足够大，这样实际上总是只有第二个参数起作用，所以这一句就是把回车（包括回车）之前的所有字符从输入缓冲区中清除。</p>
+<p>cin.sync（）的作用是清除输入缓冲区全部的内容。</p>
+<p>所以加上在下一次输入前加上两行，清除错误缓存区即可。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">int i;</div><div class="line">while (1) &#123;</div><div class="line">	cout &lt;&lt; &quot;输入数字&quot;;</div><div class="line">	cin &gt;&gt; i;</div><div class="line">	cin.clear();</div><div class="line">	cin.ignore();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>不知道为什么我使用cin.sync()并不能清除输入缓冲区全部的内容，还是会出现死循环。</p>
+<p>所以用cin.clear();cin.ignore();</p>
+<p>cin这个缓存区清理在循环中是一个不可忽略的陷阱，</p>
+<p>不中招也很难了解到，所以</p>
+<p>every built ,every debug.</p>
+<p>debug again ,better again.</p>
 
       
     </div>
@@ -423,7 +412,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/随笔/" rel="tag"># 随笔</a>
+            <a href="/tags/C-C/" rel="tag"># C/C++</a>
           
         </div>
       
@@ -436,8 +425,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/07/27/碎碎念/" rel="next" title="碎碎念">
-                <i class="fa fa-chevron-left"></i> 碎碎念
+              <a href="/2017/11/21/C中main函数输入参数小结/" rel="next" title="C中main函数输入参数小结">
+                <i class="fa fa-chevron-left"></i> C中main函数输入参数小结
               </a>
             
           </div>
@@ -445,10 +434,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/09/13/C中的typedef用法小结/" rel="prev" title="C中的typedef用法小结">
-                C中的typedef用法小结 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -474,8 +459,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2017/09/08/不仅要不作恶/"
-           data-title="不仅要不作恶" data-url="http://ysbbs.cf/2017/09/08/不仅要不作恶/">
+      <div class="ds-thread" data-thread-key="2017/11/28/隐藏在cin中的陷阱/"
+           data-title="隐藏在cin中的陷阱" data-url="http://ysbbs.cf/2017/11/28/隐藏在cin中的陷阱/">
       </div>
     
   </div>

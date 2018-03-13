@@ -87,16 +87,19 @@
 
 
 
-<meta name="description" content="typedef和#define宏有点相似，但比#define实际要复杂的多，也隐藏了很多陷阱，从网上摘了一些总结的很好的例子，希望下次用typedef的时候更能游刃有余。">
+<meta name="description" content="本博客采用创作共用版权协议, 要求署名、非商业用途和保持一致. 转载本博客文章必须也遵循署名-非商业用途-保持一致的创作共用协议.
+typedef和#define宏有点相似，但比#define实际要复杂的多，也隐藏了很多陷阱，从网上摘了一些总结的很好的例子，希望下次用typedef的时候更能游刃有余。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C中的typedef用法小结">
 <meta property="og:url" content="https://ysbbswork.github.io/2017/09/13/C中的typedef用法小结/index.html">
 <meta property="og:site_name" content="ysbbs">
-<meta property="og:description" content="typedef和#define宏有点相似，但比#define实际要复杂的多，也隐藏了很多陷阱，从网上摘了一些总结的很好的例子，希望下次用typedef的时候更能游刃有余。">
-<meta property="og:updated_time" content="2017-09-13T02:56:24.705Z">
+<meta property="og:description" content="本博客采用创作共用版权协议, 要求署名、非商业用途和保持一致. 转载本博客文章必须也遵循署名-非商业用途-保持一致的创作共用协议.
+typedef和#define宏有点相似，但比#define实际要复杂的多，也隐藏了很多陷阱，从网上摘了一些总结的很好的例子，希望下次用typedef的时候更能游刃有余。">
+<meta property="og:updated_time" content="2018-03-13T09:06:28.182Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C中的typedef用法小结">
-<meta name="twitter:description" content="typedef和#define宏有点相似，但比#define实际要复杂的多，也隐藏了很多陷阱，从网上摘了一些总结的很好的例子，希望下次用typedef的时候更能游刃有余。">
+<meta name="twitter:description" content="本博客采用创作共用版权协议, 要求署名、非商业用途和保持一致. 转载本博客文章必须也遵循署名-非商业用途-保持一致的创作共用协议.
+typedef和#define宏有点相似，但比#define实际要复杂的多，也隐藏了很多陷阱，从网上摘了一些总结的很好的例子，希望下次用typedef的时候更能游刃有余。">
 
 
 
@@ -352,7 +355,8 @@
       
 
       
-        <p>typedef和#define宏有点相似，但比#define实际要复杂的多，也隐藏了很多陷阱，从网上摘了一些总结的很好的例子，希望下次用typedef的时候更能游刃有余。</p>
+        <p><strong>本博客采用创作共用版权协议, 要求署名、非商业用途和保持一致. 转载本博客文章必须也遵循署名-非商业用途-保持一致的创作共用协议.</strong></p>
+<p>typedef和#define宏有点相似，但比#define实际要复杂的多，也隐藏了很多陷阱，从网上摘了一些总结的很好的例子，希望下次用typedef的时候更能游刃有余。</p>
 <a id="more"></a>
 <h2 id="基本定义："><a href="#基本定义：" class="headerlink" title="基本定义："></a><strong>基本定义：</strong></h2><p>typedef为C语言的关键字，作用是为一种数据类型定义一个新名字。这里的数据类型包括内部数据类型（int,char等）和自定义的数据类型（struct等）。 在编程中使用typedef目的一般有两个，一个是给变量一个易记且意义明确的新名字，另一个是简化一些比较复杂的类型声明。</p>
 <h2 id="用途一：与-define的区别"><a href="#用途一：与-define的区别" class="headerlink" title="用途一：与#define的区别"></a><strong>用途一：与#define的区别</strong></h2><p>typedef 行为有点像 #define 宏，用其实际类型替代同义字。不同点是 typedef 在编译时被解释，因此让编译器来应付超越预处理器能力的文本替换。</p>

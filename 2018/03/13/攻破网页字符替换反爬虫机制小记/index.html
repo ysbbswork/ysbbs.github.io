@@ -87,31 +87,34 @@
 
 
 
-<meta name="description" content="摘要：python3 进行网页爬取数据出现乱码，出现奇怪的编码方式，关键数据无法爬取，网站特殊字体的反爬机制的完整攻克过程。
+<meta name="description" content="本博客采用创作共用版权协议, 要求署名、非商业用途和保持一致. 转载本博客文章必须也遵循署名-非商业用途-保持一致的创作共用协议.
 
-最近在爬 实习僧 网站职位数据的时候遇到关键字体无法解析的问题。一开始还以为是chrome的解码格式不符合，解码错误导致的，但随着深入，发现这是可不是简单的编码问题，是网站精心策划的反爬机制。
-第一次遇到这种情况，攻克的过程也挺复杂有趣，中间学到了很多东西，新手一开始遇">
+摘要：python3 进行网页爬取数据出现乱码，出现奇怪的编码方式，关键数据无法爬取，网站特殊字体的反爬机制的完整攻克过程。
+
+最近在爬 实习僧 网站职位数据的时候遇到关键字体无法解析的问题。一开始还以为是chrome的解码格式不符合，解码错误导致的，但随着深入，发">
 <meta property="og:type" content="article">
 <meta property="og:title" content="攻破网页字符替换反爬虫机制小记">
 <meta property="og:url" content="https://ysbbswork.github.io/2018/03/13/攻破网页字符替换反爬虫机制小记/index.html">
 <meta property="og:site_name" content="ysbbs">
-<meta property="og:description" content="摘要：python3 进行网页爬取数据出现乱码，出现奇怪的编码方式，关键数据无法爬取，网站特殊字体的反爬机制的完整攻克过程。
+<meta property="og:description" content="本博客采用创作共用版权协议, 要求署名、非商业用途和保持一致. 转载本博客文章必须也遵循署名-非商业用途-保持一致的创作共用协议.
 
-最近在爬 实习僧 网站职位数据的时候遇到关键字体无法解析的问题。一开始还以为是chrome的解码格式不符合，解码错误导致的，但随着深入，发现这是可不是简单的编码问题，是网站精心策划的反爬机制。
-第一次遇到这种情况，攻克的过程也挺复杂有趣，中间学到了很多东西，新手一开始遇">
+摘要：python3 进行网页爬取数据出现乱码，出现奇怪的编码方式，关键数据无法爬取，网站特殊字体的反爬机制的完整攻克过程。
+
+最近在爬 实习僧 网站职位数据的时候遇到关键字体无法解析的问题。一开始还以为是chrome的解码格式不符合，解码错误导致的，但随着深入，发">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005HFdfGgy1fpb9y3c6byj30vz0mp10p.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005HFdfGgy1fpb9yio3z4j31ax03zq30.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005HFdfGgy1fpb9zgzuk7j30id04dq30.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005HFdfGgy1fpb9zqczrhj30n90h5q42.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005HFdfGgy1fpba4iulsjj30lw0cnjti.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005HFdfGgy1fpbadh6ajxj306n02ggle.jpg">
-<meta property="og:updated_time" content="2018-03-13T08:50:03.845Z">
+<meta property="og:updated_time" content="2018-03-13T09:02:51.759Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="攻破网页字符替换反爬虫机制小记">
-<meta name="twitter:description" content="摘要：python3 进行网页爬取数据出现乱码，出现奇怪的编码方式，关键数据无法爬取，网站特殊字体的反爬机制的完整攻克过程。
+<meta name="twitter:description" content="本博客采用创作共用版权协议, 要求署名、非商业用途和保持一致. 转载本博客文章必须也遵循署名-非商业用途-保持一致的创作共用协议.
 
-最近在爬 实习僧 网站职位数据的时候遇到关键字体无法解析的问题。一开始还以为是chrome的解码格式不符合，解码错误导致的，但随着深入，发现这是可不是简单的编码问题，是网站精心策划的反爬机制。
-第一次遇到这种情况，攻克的过程也挺复杂有趣，中间学到了很多东西，新手一开始遇">
+摘要：python3 进行网页爬取数据出现乱码，出现奇怪的编码方式，关键数据无法爬取，网站特殊字体的反爬机制的完整攻克过程。
+
+最近在爬 实习僧 网站职位数据的时候遇到关键字体无法解析的问题。一开始还以为是chrome的解码格式不符合，解码错误导致的，但随着深入，发">
 <meta name="twitter:image" content="http://ww1.sinaimg.cn/large/005HFdfGgy1fpb9y3c6byj30vz0mp10p.jpg">
 
 
@@ -368,7 +371,8 @@
       
 
       
-        <blockquote>
+        <p><strong>本博客采用创作共用版权协议, 要求署名、非商业用途和保持一致. 转载本博客文章必须也遵循署名-非商业用途-保持一致的创作共用协议.</strong></p>
+<blockquote>
 <p>摘要：python3 进行网页爬取数据出现乱码，出现奇怪的编码方式，关键数据无法爬取，网站特殊字体的反爬机制的完整攻克过程。</p>
 </blockquote>
 <p>最近在爬 实习僧 网站职位数据的时候遇到关键字体无法解析的问题。一开始还以为是chrome的解码格式不符合，解码错误导致的，但随着深入，发现这是可不是简单的编码问题，是网站精心策划的反爬机制。</p>

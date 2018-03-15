@@ -107,7 +107,7 @@
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005HFdfGgy1fpb9zqczrhj30n90h5q42.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005HFdfGgy1fpba4iulsjj30lw0cnjti.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005HFdfGgy1fpbadh6ajxj306n02ggle.jpg">
-<meta property="og:updated_time" content="2018-03-13T09:02:51.759Z">
+<meta property="og:updated_time" content="2018-03-15T07:56:42.483Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="攻破网页字符替换反爬虫机制小记">
 <meta name="twitter:description" content="本博客采用创作共用版权协议, 要求署名、非商业用途和保持一致. 转载本博客文章必须也遵循署名-非商业用途-保持一致的创作共用协议.
@@ -377,6 +377,7 @@
 </blockquote>
 <p>最近在爬 实习僧 网站职位数据的时候遇到关键字体无法解析的问题。一开始还以为是chrome的解码格式不符合，解码错误导致的，但随着深入，发现这是可不是简单的编码问题，是网站精心策划的反爬机制。</p>
 <p>第一次遇到这种情况，攻克的过程也挺复杂有趣，中间学到了很多东西，新手一开始遇到还真的会和我一样摸不着头脑，即使google可能也会从编码去查，绕很多弯路也百思不得其解。后来用这种发现这种方式的网站还挺多的，毕竟这种反爬机制是很易用的，想绕过去也是很麻烦的，所以写这篇文章，记录下整个攻克的方法和过程分享出来。</p>
+<a id="more"></a>
 <h1 id="初步摸索"><a href="#初步摸索" class="headerlink" title="初步摸索"></a>初步摸索</h1><p>用chrome的开发者工具查看源是这样子的：<img src="http://ww1.sinaimg.cn/large/005HFdfGgy1fpb9y3c6byj30vz0mp10p.jpg" alt=""></p>
 <p>关键的数据圈闭都是显示为乱码的方框状的，无法正确显示和爬取，很显然，是遇到了网站的反爬机制。</p>
 <p>然后查看未被解析的源代码，看看这个字体是怎么一回事：</p>
@@ -494,8 +495,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/12/27/c-lambda表达式/" rel="next" title="c++lambda表达式">
-                <i class="fa fa-chevron-left"></i> c++lambda表达式
+              <a href="/2018/03/05/C-QT设计模式（第二版）/" rel="next" title="C++QT设计模式（第二版）">
+                <i class="fa fa-chevron-left"></i> C++QT设计模式（第二版）
               </a>
             
           </div>
@@ -503,6 +504,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/15/补码小记/" rel="prev" title="补码小记">
+                补码小记 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -578,7 +583,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">28</span>
+                <span class="site-state-item-count">33</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

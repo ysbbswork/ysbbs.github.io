@@ -260,6 +260,391 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://ysbbswork.github.io/2018/05/21/C-socket编程之大端小端/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yang Shuai">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ysbbs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2018/05/21/C-socket编程之大端小端/" itemprop="url">
+                  C++socket编程之大端小端
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-21T16:18:02+08:00">
+                2018-05-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/05/21/C-socket编程之大端小端/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/05/21/C-socket编程之大端小端/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2018/05/21/C-socket编程之大端小端/" class="leancloud_visitors" data-flag-title="C++socket编程之大端小端">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>不同CPU中，4字节整数1在内存空间的存储方式是不同的。4字节整数1可用2进制表示如下：</p>
+<p>00000000 00000000 00000000 00000001</p>
+<p>有些CPU以上面的顺序存储到内存，另外一些CPU则以倒序存储，如下所示：</p>
+<p>00000001 00000000 00000000 00000000</p>
+<p>若不考虑这些就收发数据会发生问题，因为保存顺序的不同意味着对接收数据的解析顺序也不同。</p>
+<h2 id="大端序和小端序"><a href="#大端序和小端序" class="headerlink" title="大端序和小端序"></a>大端序和小端序</h2><p>CPU向内存保存数据的方式有两种：</p>
+<ul>
+<li>大端序（Big Endian）：高位字节存放到低位地址（高位字节在前）。</li>
+<li>小端序（Little Endian）：高位字节存放到高位地址（低位字节在前）。</li>
+</ul>
+<p>仅凭描述很难解释清楚，不妨来看一个实例。假设在 0x20 号开始的地址中保存4字节 int 型数据 0x12345678，大端序CPU保存方式如下图所示：</p>
+<p><img src="http://c.biancheng.net/cpp/uploads/allimg/151109/1-15110ZSA3309.jpg" alt="img"><br>图1：整数 0x12345678 的大端序字节表示</p>
+<p>对于大端序，最高位字节 0x12 存放到低位地址，最低位字节 0x78 存放到高位地址。小端序的保存方式如下图所示：</p>
+<p><img src="http://c.biancheng.net/cpp/uploads/allimg/151109/1-15110ZT059560.jpg" alt="img"><br>图2：整数 0x12345678 的小端序字节表示</p>
+<p>不同CPU保存和解析数据的方式不同（主流的Intel系列CPU为小端序），小端序系统和大端序系统通信时会发生数据解析错误。因此在发送数据前，要将数据转换为统一的格式——网络字节序（Network Byte Order）。网络字节序统一为大端序。</p>
+<p>主机A先把数据转换成大端序再进行网络传输，主机B收到数据后先转换为自己的格式再解析。</p>
+<h2 id="网络字节序转换函数"><a href="#网络字节序转换函数" class="headerlink" title="网络字节序转换函数"></a>网络字节序转换函数</h2><p>网络字节序转换函数，如下所示：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//创建sockaddr_in结构体变量</span></div><div class="line"><span class="keyword">struct</span> sockaddr_in serv_addr;</div><div class="line"><span class="built_in">memset</span>(&amp;serv_addr, <span class="number">0</span>, <span class="keyword">sizeof</span>(serv_addr));  <span class="comment">//每个字节都用0填充</span></div><div class="line">serv_addr.sin_family = AF_INET;  <span class="comment">//使用IPv4地址</span></div><div class="line">serv_addr.sin_addr.s_addr = inet_addr(<span class="string">"127.0.0.1"</span>);  <span class="comment">//具体的IP地址</span></div><div class="line">serv_addr.sin_port = htons(<span class="number">1234</span>);  <span class="comment">//端口号</span></div></pre></td></tr></table></figure>
+<p>htons() 用来将当前主机字节序转换为网络字节序，其中</p>
+<p><code>h</code>代表主机（host）字节序，</p>
+<p><code>n</code>代表网络（network）字节序，</p>
+<p><code>s</code>代表short，htons 是 h、to、n、s 的组合，可以理解为”将short型数据从当前主机字节序转换为网络字节序“。</p>
+<p>常见的网络字节转换函数有：</p>
+<ul>
+<li>htons()：host to network short，将short类型数据从主机字节序转换为网络字节序。</li>
+<li>ntohs()：network to host short，将short类型数据从网络字节序转换为主机字节序。</li>
+<li>htonl()：host to network long，将long类型数据从主机字节序转换为网络字节序。</li>
+<li>ntohl()：network to host long，将long类型数据从网络字节序转换为主机字节序。</li>
+</ul>
+<p>通常，以<code>s</code>为后缀的函数中，<code>s</code>代表2个字节short，因此用于端口号转换；以<code>l</code>为后缀的函数中，<code>l</code>代表4个字节的long，因此用于IP地址转换。</p>
+<p>举例说明上述函数的调用过程：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;WinSock2.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">pragma</span> comment(lib, <span class="meta-string">"ws2_32.lib"</span>)</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">unsigned</span> <span class="keyword">short</span> host_port = <span class="number">0x1234</span>, net_port;</div><div class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> host_addr = <span class="number">0x12345678</span>, net_addr;</div><div class="line">    net_port = htons(host_port);</div><div class="line">    net_addr = htonl(host_addr);</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"Host ordered port: %#x\n"</span>, host_port);</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"Network ordered port: %#x\n"</span>, net_port);</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"Host ordered address: %#lx\n"</span>, host_addr);</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"Network ordered address: %#lx\n"</span>, net_addr);</div><div class="line">    system(<span class="string">"pause"</span>);</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<p>Host ordered port: 0x1234</p>
+<p>Network ordered port: 0x3412</p>
+<p>Host ordered address: 0x12345678</p>
+<p>Network ordered address: 0x78563412</p>
+<p>另外需要说明的是，sockaddr_in 中保存IP地址的成员为32位整数，而我们熟悉的是点分十进制表示法，例如 127.0.0.1，它是一个字符串，因此为了分配IP地址，需要将字符串转换为4字节整数。</p>
+<p>inet_addr() 函数可以完成这种转换。inet_addr() 除了将字符串转换为32位整数，同时还进行网络字节序转换。请看下面的代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;WinSock2.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">pragma</span> comment(lib, <span class="meta-string">"ws2_32.lib"</span>)</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">char</span> *addr1 = <span class="string">"1.2.3.4"</span>;</div><div class="line">    <span class="keyword">char</span> *addr2 = <span class="string">"1.2.3.256"</span>;</div><div class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> conv_addr = inet_addr(addr1);</div><div class="line">    <span class="keyword">if</span>(conv_addr == INADDR_NONE)&#123;</div><div class="line">        <span class="built_in">puts</span>(<span class="string">"Error occured!"</span>);</div><div class="line">    &#125;<span class="keyword">else</span>&#123;</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"Network ordered integer addr: %#lx\n"</span>, conv_addr);</div><div class="line">    &#125;</div><div class="line">    conv_addr = inet_addr(addr2);</div><div class="line">    <span class="keyword">if</span>(conv_addr == INADDR_NONE)&#123;</div><div class="line">        <span class="built_in">puts</span>(<span class="string">"Error occured!"</span>);</div><div class="line">    &#125;<span class="keyword">else</span>&#123;</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"Network ordered integer addr: %#lx\n"</span>, conv_addr);</div><div class="line">    &#125;</div><div class="line">    system(<span class="string">"pause"</span>);</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<p>Network ordered integer addr: 0x4030201</p>
+<p>Error occured!</p>
+<p>从运行结果可以看出，inet_addr() 不仅可以把IP地址转换为32位整数，还可以检测无效IP地址。</p>
+<p>注意：为 sockaddr_in 成员赋值时需要显式地将主机字节序转换为网络字节序，而通过 write()/send() 发送数据时TCP协议会自动转换为网络字节序，不需要再调用相应的函数。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://ysbbswork.github.io/2018/05/21/C-socket编程（二）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yang Shuai">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ysbbs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2018/05/21/C-socket编程（二）/" itemprop="url">
+                  C++socket编程（二）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-21T16:16:56+08:00">
+                2018-05-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/05/21/C-socket编程（二）/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/05/21/C-socket编程（二）/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2018/05/21/C-socket编程（二）/" class="leancloud_visitors" data-flag-title="C++socket编程（二）">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="socket数据的接收和发送"><a href="#socket数据的接收和发送" class="headerlink" title="socket数据的接收和发送"></a>socket数据的接收和发送</h1><h2 id="Linux下数据的接收和发送"><a href="#Linux下数据的接收和发送" class="headerlink" title="Linux下数据的接收和发送"></a>Linux下数据的接收和发送</h2><p>Linux 不区分套接字文件和普通文件，使用 write() 可以向套接字中写入数据，使用 read() 可以从套接字中读取数据。</p>
+<p>前面我们说过，两台计算机之间的通信相当于两个套接字之间的通信，在服务器端用 write() 向套接字写入数据，客户端就能收到，然后再使用 read() 从套接字中读取出来，就完成了一次通信。</p>
+<p>write() 的原型为：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">ssize_t</span> write(<span class="keyword">int</span> fd, <span class="keyword">const</span> <span class="keyword">void</span> *buf, <span class="keyword">size_t</span> nbytes);</div></pre></td></tr></table></figure>
+<p>fd 为要写入的文件的描述符，buf 为要写入的数据的缓冲区地址，nbytes 为要写入的数据的字节数。</p>
+<blockquote>
+<p>size_t 是通过 typedef 声明的 unsigned int 类型；ssize_t 在 “size_t” 前面加了一个”s”，代表 signed，即 ssize_t 是通过 typedef 声明的 signed int 类型。</p>
+</blockquote>
+<p>write() 函数会将缓冲区 buf 中的 nbytes 个字节写入文件 fd，成功则返回写入的字节数，失败则返回 -1。</p>
+<p>read() 的原型为：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">ssize_t</span> read(<span class="keyword">int</span> fd, <span class="keyword">void</span> *buf, <span class="keyword">size_t</span> nbytes);</div></pre></td></tr></table></figure>
+<p>fd 为要读取的文件的描述符，buf 为要接收数据的缓冲区地址，nbytes 为要读取的数据的字节数。</p>
+<p>read() 函数会从 fd 文件中读取 nbytes 个字节并保存到缓冲区 buf，成功则返回读取到的字节数（但遇到文件结尾则返回0），失败则返回 -1。</p>
+<h2 id="Windows下数据的接收和发送"><a href="#Windows下数据的接收和发送" class="headerlink" title="Windows下数据的接收和发送"></a>Windows下数据的接收和发送</h2><p>Windows 和 Linux 不同，Windows 区分普通文件和套接字，并定义了专门的接收和发送的函数。</p>
+<p>从服务器端发送数据使用 send() 函数，它的原型为：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">send</span><span class="params">(SOCKET sock, <span class="keyword">const</span> <span class="keyword">char</span> *buf, <span class="keyword">int</span> len, <span class="keyword">int</span> flags)</span></span>;</div></pre></td></tr></table></figure>
+<p>sock 为要发送数据的套接字，buf 为要发送的数据的缓冲区地址，len 为要发送的数据的字节数，flags 为发送数据时的选项。</p>
+<p>返回值和前三个参数不再赘述，最后的 flags 参数一般设置为 0 或 NULL，初学者不必深究。</p>
+<p>在客户端接收数据使用 recv() 函数，它的原型为：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">recv</span><span class="params">(SOCKET sock, <span class="keyword">char</span> *buf, <span class="keyword">int</span> len, <span class="keyword">int</span> flags)</span></span>;</div></pre></td></tr></table></figure>
+<h1 id="关闭套接字"><a href="#关闭套接字" class="headerlink" title="关闭套接字"></a>关闭套接字</h1><p>调用 close()/closesocket() 函数意味着完全断开连接，即不能发送数据也不能接收数据，这种“生硬”的方式有时候会显得不太“优雅”。</p>
+<p><img src="http://c.biancheng.net/cpp/uploads/allimg/151020/1-15102016331RI.jpg" alt="img"><br>图1：close()/closesocket() 断开连接</p>
+<p>上图演示了两台正在进行双向通信的主机。主机A发送完数据后，单方面调用 close()/closesocket() 断开连接，之后主机A、B都不能再接受对方传输的数据。实际上，是完全无法调用与数据收发有关的函数。</p>
+<p>一般情况下这不会有问题，但有些特殊时刻，需要只断开一条数据传输通道，而保留另一条。</p>
+<p>使用 shutdown() 函数可以达到这个目的，它的原型为：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">shutdown</span><span class="params">(<span class="keyword">int</span> sock, <span class="keyword">int</span> howto)</span></span>;  <span class="comment">//Linux</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">shutdown</span><span class="params">(SOCKET s, <span class="keyword">int</span> howto)</span></span>;  <span class="comment">//Windows</span></div></pre></td></tr></table></figure>
+<p>sock 为需要断开的套接字，howto 为断开方式。</p>
+<p>howto 在 Linux 下有以下取值：</p>
+<ul>
+<li>SHUT_RD：断开输入流。套接字无法接收数据（即使输入缓冲区收到数据也被抹去），无法调用输入相关函数。</li>
+<li>SHUT_WR：断开输出流。套接字无法发送数据，但如果输出缓冲区中还有未传输的数据，则将传递到目标主机。</li>
+<li>SHUT_RDWR：同时断开 I/O 流。相当于分两次调用 shutdown()，其中一次以 SHUT_RD 为参数，另一次以 SHUT_WR 为参数。</li>
+</ul>
+<p>howto 在 Windows 下有以下取值：</p>
+<ul>
+<li>SD_RECEIVE：关闭接收操作，也就是断开输入流。</li>
+<li>SD_SEND：关闭发送操作，也就是断开输出流。</li>
+<li>SD_BOTH：同时关闭接收和发送操作。</li>
+</ul>
+<p>至于什么时候需要调用 shutdown() 函数，下节我们会以文件传输为例进行讲解。</p>
+<h4 id="close-closesocket-和shutdown-的区别"><a href="#close-closesocket-和shutdown-的区别" class="headerlink" title="close()/closesocket()和shutdown()的区别"></a>close()/closesocket()和shutdown()的区别</h4><p>确切地说，close() / closesocket() 用来关闭套接字，将套接字描述符（或句柄）从内存清除，之后再也不能使用该套接字，与C语言中的 fclose() 类似。应用程序关闭套接字后，与该套接字相关的连接和缓存也失去了意义，TCP协议会自动触发关闭连接的操作。</p>
+<p>shutdown() 用来关闭连接，而不是套接字，不管调用多少次 shutdown()，套接字依然存在，直到调用 close() / closesocket() 将套接字从内存清除。</p>
+<p>调用 close()/closesocket() 关闭套接字时，或调用 shutdown() 关闭输出流时，都会向对方发送 FIN 包。FIN 包表示数据传输完毕，计算机收到 FIN 包就知道不会再有数据传送过来了。</p>
+<p>默认情况下，close()/closesocket() 会立即向网络中发送FIN包，不管输出缓冲区中是否还有数据，而shutdown() 会等输出缓冲区中的数据传输完毕再发送FIN包。也就意味着，调用 close()/closesocket() 将丢失输出缓冲区中的数据，而调用 shutdown() 不会。</p>
+<h1 id="域名查找"><a href="#域名查找" class="headerlink" title="域名查找"></a>域名查找</h1><p>客户端中直接使用IP地址会有很大的弊端，一旦IP地址变化（IP地址会经常变动），客户端软件就会出现错误。</p>
+<p>而使用域名会方便很多，注册后的域名只要每年续费就永远属于自己的，更换IP地址时修改域名解析即可，不会影响软件的正常使用。</p>
+<p>关于域名注册、域名解析、host 文件、DNS 服务器等本节并未详细讲解，请读者自行脑补。本节重点讲解如何使用域名。</p>
+<h2 id="通过域名获取IP地址"><a href="#通过域名获取IP地址" class="headerlink" title="通过域名获取IP地址"></a>通过域名获取IP地址</h2><p>域名仅仅是IP地址的一个助记符，目的是方便记忆，通过域名并不能找到目标计算机，通信之前必须要将域名转换成IP地址。</p>
+<p>gethostbyname() 函数可以完成这种转换，它的原型为：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">struct</span> hostent *<span class="title">gethostbyname</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *hostname)</span></span>;</div></pre></td></tr></table></figure>
+<p>hostname 为主机名，也就是域名。使用该函数时，只要传递域名字符串，就会返回域名对应的IP地址。返回的地址信息会装入 hostent 结构体，该结构体的定义如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">struct</span> hostent&#123;</div><div class="line">    <span class="keyword">char</span> *h_name;  <span class="comment">//official name</span></div><div class="line">    <span class="keyword">char</span> **h_aliases;  <span class="comment">//alias list</span></div><div class="line">    <span class="keyword">int</span>  h_addrtype;  <span class="comment">//host address type</span></div><div class="line">    <span class="keyword">int</span>  h_length;  <span class="comment">//address lenght</span></div><div class="line">    <span class="keyword">char</span> **h_addr_list;  <span class="comment">//address list</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>从该结构体可以看出，不只返回IP地址，还会附带其他信息，各位读者只需关注最后一个成员 h_addr_list。下面是对各成员的说明：</p>
+<ul>
+<li>h_name：官方域名（Official domain name）。官方域名代表某一主页，但实际上一些著名公司的域名并未用官方域名注册。</li>
+<li>h_aliases：别名，可以通过多个域名访问同一主机。同一IP地址可以绑定多个域名，因此除了当前域名还可以指定其他域名。</li>
+<li>h_addrtype：gethostbyname() 不仅支持 IPv4，还支持 IPv6，可以通过此成员获取IP地址的地址族（地址类型）信息，IPv4 对应 AF_INET，IPv6 对应 AF_INET6。</li>
+<li>h_length：保存IP地址长度。IPv4 的长度为4个字节，IPv6 的长度为16个字节。</li>
+<li>h_addr_list：这是最重要的成员。通过该成员以整数形式保存域名对应的IP地址。对于用户较多的服务器，可能会分配多个IP地址给同一域名，利用多个服务器进行均衡负载。</li>
+</ul>
+<p>hostent 结构体变量的组成如下图所示：</p>
+<p>下面的代码主要演示 gethostbyname() 的应用，并说明 hostent 结构体的特性：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;WinSock2.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">pragma</span> comment(lib, <span class="meta-string">"ws2_32.lib"</span>)</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">    WSADATA wsaData;</div><div class="line">    WSAStartup( MAKEWORD(<span class="number">2</span>, <span class="number">2</span>), &amp;wsaData);</div><div class="line">    <span class="keyword">struct</span> hostent *host = gethostbyname(<span class="string">"www.baidu.com"</span>);</div><div class="line">    <span class="keyword">if</span>(!host)&#123;</div><div class="line">        <span class="built_in">puts</span>(<span class="string">"Get IP address error!"</span>);</div><div class="line">        system(<span class="string">"pause"</span>);</div><div class="line">        <span class="built_in">exit</span>(<span class="number">0</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//别名</span></div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; host-&gt;h_aliases[i]; i++)&#123;</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"Aliases %d: %s\n"</span>, i+<span class="number">1</span>, host-&gt;h_aliases[i]);</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//地址类型</span></div><div class="line">    <span class="built_in">printf</span>(<span class="string">"Address type: %s\n"</span>, (host-&gt;h_addrtype==AF_INET) ? <span class="string">"AF_INET"</span>: <span class="string">"AF_INET6"</span>);</div><div class="line">    <span class="comment">//IP地址</span></div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; host-&gt;h_addr_list[i]; i++)&#123;</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"IP addr %d: %s\n"</span>, i+<span class="number">1</span>, inet_ntoa( *(<span class="keyword">struct</span> in_addr*)host-&gt;h_addr_list[i] ) );</div><div class="line">    &#125;</div><div class="line">    system(<span class="string">"pause"</span>);</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>转载自：<a href="http://c.biancheng.net/cpp/html/3044.html" target="_blank" rel="external">http://c.biancheng.net/cpp/html/3044.html</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="https://ysbbswork.github.io/2018/05/21/C-socket编程（一）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1572,402 +1957,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://ysbbswork.github.io/2018/03/05/C-QT设计模式（第二版）/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Yang Shuai">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ysbbs">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2018/03/05/C-QT设计模式（第二版）/" itemprop="url">
-                  C++QT设计模式（第二版）
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-05T16:07:50+08:00">
-                2018-03-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/03/05/C-QT设计模式（第二版）/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/03/05/C-QT设计模式（第二版）/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2018/03/05/C-QT设计模式（第二版）/" class="leancloud_visitors" data-flag-title="C++QT设计模式（第二版）">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>《C++QT设计模式（第二版）》读书笔记</p>
-<p>Alan Ezust</p>
-<p>Paul Ezust</p>
-<p>好习惯：</p>
-<p>定义<strong>类</strong>，应将它的定义放到一个与这个类同名的头文件中，并添加预处理宏来避免多次包含。例：<code>aclass.h</code></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> _ACLASS_H_</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> _ACLASS_H_</span></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;Qstring&gt;</span></span></div><div class="line"><span class="keyword">class</span> Aclass&#123;</div><div class="line">  <span class="keyword">public</span>:</div><div class="line">  ...</div><div class="line">  </div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></div></pre></td></tr></table></figure>
-<p>再将这个类成员函数的具体实现写入一个单独的实现文件中去，命名为同名的cpp文件：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;QString&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">"aclass.h"</span></span></div><div class="line"></div><div class="line">QString Aclass::aprintfunc() <span class="keyword">const</span>&#123;</div><div class="line">    ...;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<blockquote>
-<p>默认情况下，类的成员是private类型</p>
-</blockquote>
-<h1 id="类的友元"><a href="#类的友元" class="headerlink" title="类的友元"></a>类的友元</h1><p><strong> 友元可以是一个类，另外一个类的成员函数，或者任何一个非成员函数。</strong></p>
-<p>破坏封装性可能会危害程序的课维护性，因此应该尽量少的使用友元，不得已使用时候也要倍加小心。</p>
-<p>通常而言，为了达到以下两个目的才是用友元函数：</p>
-<ul>
-<li>为了使用工厂方法，此时需要对某个类强制实施某些创建规则。（具体待补充）</li>
-<li>为了使用全局运算符函数，比如operator&lt;&lt;()</li>
-</ul>
-<h1 id="析构函数"><a href="#析构函数" class="headerlink" title="析构函数"></a>析构函数</h1><p>如果某个类满足以下条件，则无需提供析构函数：</p>
-<ul>
-<li>只拥有非指针的简单类型成员</li>
-<li>拥有已经适当定义的析构函数的类成员</li>
-<li>它是满足某些条件的一种QT类（待补充）</li>
-</ul>
-<h1 id="stactic"><a href="#stactic" class="headerlink" title="stactic"></a>stactic</h1><blockquote>
-<p>全局命名空间污染：将名称添加到全局作用域中（例如，声明全局变量或者全局函数）</p>
-<p>这是不好的编程风格</p>
-<p>相对于全局变量，我们更倾向于使用static成员（且一般可以代替全局变量），因为static成员不会在全局命名空间中增加不必要的名称</p>
-</blockquote>
-<p>每个static数据成员都必须在类定义之外的文件中被初始化（定义），一般在对应的类的实现文件中初始化。</p>
-<p>.cpp中</p>
-<p><code>int Thing::s_count = 0;</code></p>
-<h1 id="类的声明和定义"><a href="#类的声明和定义" class="headerlink" title="类的声明和定义"></a>类的声明和定义</h1><p>例：</p>
-<p>egg.h:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">[...]</div><div class="line">#include&quot;chinken.h&quot;</div><div class="line">class Egg&#123;</div><div class="line">  public:</div><div class="line">  Chicken* getParent();</div><div class="line">&#125;;</div><div class="line">[...]</div></pre></td></tr></table></figure>
-<p>chicken.h:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">#include &quot;egg.h&quot;</div><div class="line">class Chicken&#123;</div><div class="line">  public:</div><div class="line">  Egg* layEgg();</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<p>一个头文件包含另外一个头文件，另一个又包含回来了，<strong>预处理器不允许这样的循环依赖。</strong></p>
-<p>这两个头文件都不需要包含另一个头文件，因为这样做<strong>会不必要的在头文件之间建立一种强依赖性</strong>。</p>
-<p><strong>在正确的情况下，C++允许使用前置类声明，而不必包含某个特定的头文件。</strong></p>
-<p>例：egg.h</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">class Chinken;//前置类声明</div><div class="line">class Egg&#123;</div><div class="line">  Chinken* getparent();</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<p><strong>注意</strong>：cpp文件中可以包含多个头文件，而不会导致它们之间的循环依赖性。.cpp文件对两个头文件具有依赖性，但头文件之间彼此不存在依赖性。</p>
-<p>例：egg.cpp</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">#include&quot;chicken.h&quot;</div><div class="line">#include&quot;egg.h&quot;</div><div class="line">Chicken* Egg::getParent()&#123;</div><div class="line">  return new Chicken();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>因此，前置类声明使得定义双向关系成为可能，</p>
-<h1 id="转换构造函数"><a href="#转换构造函数" class="headerlink" title="转换构造函数"></a>转换构造函数</h1><p>当一个构造函数只有一个参数，而且该参数又不是本类的const引用时，这种构造函数称为转换构造函数。</p>
-<p>用转换构造函数可以将一个指定类型的数据转换为类的对象，但是不能反过来将一个类的对象转换为一个其他类型的数据。 类型转换函数的作用是将一个类的对象转换成另一个类型的数据。</p>
-<p>转换构造函数的作用是将某种类型的数据转换为类的对象，当一个构造函数只有一个参数，而且该参数又不是本类的const引用时，这种构造函数称为转换构造函数。试验了一下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">class A</div><div class="line">&#123;</div><div class="line">public:</div><div class="line">    int a;</div><div class="line">    A(int a) :a(a) &#123;&#125;</div><div class="line">    A reta()</div><div class="line">    &#123;</div><div class="line">        return a;</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line">int main()</div><div class="line">&#123;</div><div class="line">    A a(2);</div><div class="line">    A b = a.reta();</div><div class="line">    A c = 3;</div><div class="line">    cout&lt;&lt;b.a&lt;&lt;&quot;\n&quot;&lt;&lt;c.a&lt;&lt;endl;</div><div class="line">    return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p> 结果是输出2和3</p>
-<p><strong>实际上这是由隐式转换机制造成的，如果不想要这种效果，可以在构造函数前加上explicit声明。加上之后上面的代码就会编译出错</strong>，提示</p>
-<p>无法从“int”转换为“A”。</p>
-<p>既然能将数据转换为类型，类型也能转换为数据。c++的类型转换函数可以将一个类的对象转换为一个指定类型的数据。</p>
-<p>类型转换函数的一般形式为 :</p>
-<p>operator <a href="http://baike.baidu.com/view/2368989.htm" target="_blank" rel="external">类型名</a>()</p>
-<p>{实现转换的语句}</p>
-<p>测试代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">class A</div><div class="line">&#123;</div><div class="line">public:</div><div class="line">    int a;</div><div class="line">    A(int a) :a(a) &#123;&#125;</div><div class="line">    operator int()</div><div class="line">    &#123;</div><div class="line">        return a;</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line">int main()</div><div class="line">&#123;</div><div class="line">    A a(2);</div><div class="line">    int b = a + 3;</div><div class="line">    A c = a + 4;</div><div class="line">    cout&lt;&lt;b&lt;&lt;&quot;\n&quot;&lt;&lt;c.a&lt;&lt;endl;</div><div class="line">    return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>结果输出5和6</p>
-<h1 id="const成员函数"><a href="#const成员函数" class="headerlink" title="const成员函数"></a>const成员函数</h1><p>当将关键字const应用到一个（非static的）类成员函数时，其含义是比较特殊的。如果放置在参数之后，const就成为函数签名的一部分，从而保证此函数不会改变主题对象的状态。</p>
-<p>要理解只一点，好方法就是意识到每一个非static成员函数都有一个称为this的隐式参数，this是一个指向主题对象的指针。当将一个成员函数声明为const时，就相当于告诉编译器只要此函数被调用，this就是一个指向const的指针。</p>
-<p>可以看一下原始的C++到C语言的预处理器是如何处理成员函数的。因为C语言不支持重载函数或成员函数，预处理器会将这些函数翻译成具有“重整名称”的C语言函数，例：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">cpp中</div><div class="line">class Point&#123;</div><div class="line">  public:</div><div class="line">  void set(int nx ,int ny)&#123;&#125;</div><div class="line">  Qstring toString() const&#123;&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">c语言预处理后大概版本：</div><div class="line">_Point_set_int_int(Point* this,int nx,int ny)</div><div class="line">_Point_toString_string_const(const Point* this)</div></pre></td></tr></table></figure>
-<h1 id="用QT实现Unicode显示"><a href="#用QT实现Unicode显示" class="headerlink" title="用QT实现Unicode显示"></a>用QT实现Unicode显示</h1><p>QtextStream能够针对Unicode的QString和其它类型的Qt起作用</p>
-<p>所以配合QString的QtextStream可以顺利实现打印中文字符</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;QTextStream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;QString&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line"><span class="keyword">const</span> <span class="keyword">char</span>* charstr=<span class="string">"这是中文"</span>;</div><div class="line"><span class="function">QTextStream <span class="title">cout</span><span class="params">(<span class="built_in">stdout</span>,QIODevice::WriteOnly)</span></span>;<span class="comment">//WriteOnly，可省略：QTextStream cout(stdout);</span></div><div class="line">QString str=charstr;</div><div class="line"><span class="built_in">cout</span>&lt;&lt;str&lt;&lt;<span class="built_in">endl</span>;</div><div class="line"><span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h1 id="C-中避免使用数组"><a href="#C-中避免使用数组" class="headerlink" title="C++中避免使用数组"></a>C++中避免使用数组</h1><p>在C++中，数组被看成是“邪恶的”，</p>
-<p>下面是应该避免在C++中使用数组的一些理由：</p>
-<ul>
-<li>编译器和运行时系统都不会检查数组的下标是否位于正确范围之内</li>
-<li>使用数组的程序员有责任编写额外的范围检查代码</li>
-<li>数组的大小可以是固定不变的，或者必须使用堆中的动态内存</li>
-<li>对于堆数组，程序员有责任确保所有情况下正确释放内存</li>
-<li>为此需要深入理解C++已经异常，特别是发生异常时的底层处理机制。向数组插入、预分配或追加元素都是费时的操作（再运行时和开发时都是如此）。</li>
-</ul>
-<h1 id="QStringList与迭代"><a href="#QStringList与迭代" class="headerlink" title="QStringList与迭代"></a>QStringList与迭代</h1><p>例子：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;QStringList&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;QDebug&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line"></div><div class="line">QString winter=<span class="string">"December,January,February"</span>;</div><div class="line">QString spring=<span class="string">"March,April,May"</span>;</div><div class="line">QString summer=<span class="string">"June,July,Auguest"</span>;</div><div class="line">QString fall=<span class="string">"September,October,November"</span>;</div><div class="line"></div><div class="line">QStringList <span class="built_in">list</span>;</div><div class="line"><span class="built_in">list</span>&lt;&lt;winter;</div><div class="line"><span class="built_in">list</span>+=spring;</div><div class="line"><span class="built_in">list</span>.append(summer);</div><div class="line"><span class="built_in">list</span>&lt;&lt;fall;</div><div class="line"></div><div class="line">qDebug()&lt;&lt;"The spring mouths are: "&lt;&lt;<span class="built_in">list</span>[1];</div><div class="line"></div><div class="line">QString allmonths=<span class="built_in">list</span>.join(", ");//把元素连成一个字符串</div><div class="line">qDebug()&lt;&lt;allmonths;</div><div class="line"></div><div class="line">QStringList list2=allmonths.split(", ");//按某个字符，把一个字符串拆成列表</div><div class="line">qDebug()&lt;&lt;list2.size();</div><div class="line">qDebug()&lt;&lt;list2[1];</div><div class="line"></div><div class="line">foreach(<span class="keyword">const</span> QString &amp;str,<span class="built_in">list</span>)&#123;//QT foreach循环——类似于python的<span class="keyword">for</span>循环</div><div class="line">    qDebug()&lt;&lt;QString(" [%1] ").arg(str);</div><div class="line">&#125;</div><div class="line"></div><div class="line">//C++STL风格的迭代</div><div class="line"><span class="keyword">for</span>(QStringList::iterator it =<span class="built_in">list</span>.begin();it!=<span class="built_in">list</span>.end();++it)&#123;</div><div class="line">    QString current =*it;</div><div class="line">    qDebug()&lt;&lt;"[["&lt;&lt;current&lt;&lt;"]]";</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">return</span> 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h1 id="运算符重载"><a href="#运算符重载" class="headerlink" title="运算符重载"></a>运算符重载</h1><p>例：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Complex&#123;</div><div class="line">    <span class="keyword">friend</span> ostream&amp; <span class="keyword">operator</span>&lt;&lt;(ostream&amp; out,<span class="keyword">const</span> Complex&amp; c);</div><div class="line">    <span class="keyword">friend</span> Complex <span class="keyword">operator</span>-(<span class="keyword">const</span> Complex&amp; c1,<span class="keyword">const</span> Complex &amp; c2);</div><div class="line">    <span class="keyword">friend</span> Complex <span class="keyword">operator</span>*(<span class="keyword">const</span> Complex&amp; c1,<span class="keyword">const</span> Complex &amp; c2);</div><div class="line">  	<span class="keyword">friend</span> Complex <span class="keyword">operator</span>/(<span class="keyword">const</span> Complex&amp; c1,<span class="keyword">const</span> Complex &amp; c2);</div><div class="line">  <span class="keyword">public</span>:</div><div class="line">  Complex&amp; <span class="keyword">operator</span>+=(<span class="keyword">const</span> Complex &amp; c);</div><div class="line">  Complex&amp; <span class="keyword">operator</span>+=(<span class="keyword">const</span> Complex &amp; c);</div><div class="line">  </div><div class="line">  Complex <span class="keyword">operator</span>+(<span class="keyword">const</span> Complex &amp; c);<span class="comment">//这里应该将运算符重载函数声明成非成员友元函数</span></div><div class="line">  </div><div class="line">  <span class="keyword">private</span>:</div><div class="line">  <span class="keyword">double</span> m_r,m_i</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>例子中声明的运算符都是二元的（接收两个操作数）。对成员函数而言，却只有一个形式参数，因为第一个（左边的）操作数都是隐式的：*this</p>
-<p><strong>虽然可以将运算符重载为成员函数或者全局函数，但需要注意，它们的主要差异是调用它们的方式。特别地，成员函数运算符要求有一个用作左操作数的对象，而全局函数允许对任何一个操作数进行某种类型转换。</strong></p>
-<p>例：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//为什么+更适合作为非成员函数的理由</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="function">Complex <span class="title">c1</span><span class="params">(<span class="number">4.5</span>,<span class="number">1.2</span>)</span></span>;</div><div class="line">    <span class="function">Complex <span class="title">c2</span><span class="params">(<span class="number">3.6</span>,<span class="number">1.7</span>)</span></span>;</div><div class="line">  </div><div class="line">  Complex c3=c1+c2;</div><div class="line">  Complex c4=c3+<span class="number">1.4</span>;<span class="comment">//提升右操作数</span></div><div class="line">  Complex c5=<span class="number">8.0</span>-c4;<span class="comment">//提升左操作数</span></div><div class="line">  Complex c6=<span class="number">1.2</span>+c4;<span class="comment">//错误，左操作数没有针对成员运算符而提升</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>所以重载操作符应该视情况重载全局的运算符，将全局运算符重载函数声明成<strong>非成员友元函数</strong>。</p>
-<h1 id="从函数返回应用"><a href="#从函数返回应用" class="headerlink" title="从函数返回应用"></a>从函数返回应用</h1><p>有时候将函数设计成返回引用是非常有用的。例如，可以将多个操作“链”起来：</p>
-<p><code>cout&lt;&lt;thing1&lt;&lt;thing2&lt;&lt;thing3...;</code></p>
-<p>返回引用（尤其是*this)通常用来给成员函数提供左值行为。</p>
-<p>采用引用参数，就可以通过将对象的别名指定成const来保护返回的引用。</p>
-<p>例：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="function"><span class="keyword">int</span>&amp; <span class="title">maxi</span><span class="params">(<span class="keyword">int</span>&amp; x,<span class="keyword">int</span>&amp; y)</span></span>&#123;</div><div class="line">    <span class="keyword">return</span>(x&gt;y)?x:y;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">int</span> a= <span class="number">10</span>,b=<span class="number">20</span>;</div><div class="line">    maxi(a,b)=<span class="number">5</span>;<span class="comment">//给b赋值5</span></div><div class="line">    maxi(a,b)+=<span class="number">6</span>;<span class="comment">//给a增加6，a现在为16</span></div><div class="line">    ++maxi(a,b);<span class="comment">//给a增加1</span></div><div class="line">    <span class="built_in">cout</span>&lt;&lt;a&lt;&lt;<span class="string">"\t"</span>&lt;&lt;b&lt;&lt;<span class="built_in">endl</span>;</div><div class="line">  <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p><strong>注意</strong>：要小心，不要让函数返回一个临时（局部）对象的引用。当函数返回时，所有局部变量都销毁了。</p>
-<h1 id="inline函数的一些规则"><a href="#inline函数的一些规则" class="headerlink" title="inline函数的一些规则"></a>inline函数的一些规则</h1><ul>
-<li>inline函数必须在被调用之前定义（仅仅声明它是不够的）。</li>
-<li>在一个源代码模块中只能有一次inline定义。</li>
-<li>如果类成员函数的定义出现在类定义之内，则成员函数就是隐含inline的。</li>
-</ul>
-<p>如果函数太复杂，或者编译器选项改变了，则编译器可能会忽略inline指令。大多数编译器会拒绝包含如下语句的inline函数：</p>
-<ul>
-<li>while,for,do-while语句</li>
-<li>switch语句</li>
-<li>超过一定数量的代码行</li>
-</ul>
-<h1 id="继承和多态"><a href="#继承和多态" class="headerlink" title="继承和多态"></a>继承和多态</h1><p>没有<code>virtual时候*p1和*p2的具体类型靠函数指针类型来判断</code>：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="keyword">class</span> A</div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">getnum</span><span class="params">()</span> </span>&#123;<span class="comment">//A类中没有virtual函数</span></div><div class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; a &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line"></div><div class="line"><span class="keyword">private</span>:</div><div class="line">	<span class="keyword">int</span> a;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">class</span> B:<span class="keyword">public</span> A</div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">getnum</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; b&lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line"><span class="keyword">private</span>:</div><div class="line">	<span class="keyword">int</span> b;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">	A* p1 = <span class="keyword">new</span>(A);</div><div class="line">	<span class="function">A* <span class="title">p2</span><span class="params">(<span class="keyword">new</span> B)</span></span>;</div><div class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="keyword">typeid</span>(p1).name() &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;<span class="comment">//打印A*，指针类型始终不变</span></div><div class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="keyword">typeid</span>(p2).name() &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;<span class="comment">//打印A*，指针类型始终不变</span></div><div class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="keyword">typeid</span>(*p1).name() &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;<span class="comment">//打印A</span></div><div class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="keyword">typeid</span>(*p2).name() &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;<span class="comment">//打印A</span></div><div class="line">	<span class="built_in">std</span>::<span class="built_in">cin</span>.get();</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>有<code>virtual时候*p1和*p2的具体类型通过指向类型判断</code>，虚函数有虚函数表，可以确定数据类型：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="keyword">class</span> A</div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">getnum</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; a &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line"></div><div class="line"><span class="keyword">private</span>:</div><div class="line">	<span class="keyword">int</span> a;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">class</span> B:<span class="keyword">public</span> A</div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">getnum</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; b&lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line"><span class="keyword">private</span>:</div><div class="line">	<span class="keyword">int</span> b;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">	A* p1 = <span class="keyword">new</span>(A);</div><div class="line">	<span class="function">A* <span class="title">p2</span><span class="params">(<span class="keyword">new</span> B)</span></span>;</div><div class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="keyword">typeid</span>(p1).name() &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;<span class="comment">//打印A*，指针类型始终不变</span></div><div class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="keyword">typeid</span>(p2).name() &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;<span class="comment">//打印A*，指针类型始终不变</span></div><div class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="keyword">typeid</span>(*p1).name() &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;<span class="comment">//打印A</span></div><div class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="keyword">typeid</span>(*p2).name() &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;<span class="comment">//打印B，根据虚函数表判断具体指向数据类型</span></div><div class="line">	<span class="built_in">std</span>::<span class="built_in">cin</span>.get();</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://ysbbswork.github.io/2018/01/22/优雅的在latex中添加参考文献/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Yang Shuai">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ysbbs">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2018/01/22/优雅的在latex中添加参考文献/" itemprop="url">
-                  优雅的在latex中添加参考文献
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-22T18:57:55+08:00">
-                2018-01-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/01/22/优雅的在latex中添加参考文献/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/01/22/优雅的在latex中添加参考文献/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2018/01/22/优雅的在latex中添加参考文献/" class="leancloud_visitors" data-flag-title="优雅的在latex中添加参考文献">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>BibTeX 是一个使用数据库的的方式来管理参考文献程序, 用于协调LaTeX的参考文献处理.</p>
-<p>BibTeX 文件的后缀名为 .bib . 先来看一个例子:</p>
-<p>@article{Gettys90,<br>author = {Jim Gettys and Phil Karlton and Scott McGregor},<br>title = {The {X} Window System, Version 11},<br>journal = {Software Practice and Experience},<br>volume = {20},<br>number = {S2},<br>year = {1990},<br>abstract = {A technical overview of the X11 functionality. This is an update of the X10 TOG paper by Scheifler \&amp; Gettys.}<br>}</p>
-<p>在文献网站上都有导出bib数据库格式的链接，</p>
-<p>把所有的引用卸载一个.bib文件中，例如test.bib，</p>
-<p>然后在文章中导入：<code>\bibliography{test}</code></p>
-<p>就完成了文章引用了~</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2012,7 +2006,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-count">41</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

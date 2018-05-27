@@ -260,6 +260,327 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://ysbbswork.github.io/2018/03/15/补码小记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yang Shuai">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ysbbs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2018/03/15/补码小记/" itemprop="url">
+                  补码小记
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-15T16:04:54+08:00">
+                2018-03-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/03/15/补码小记/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/03/15/补码小记/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2018/03/15/补码小记/" class="leancloud_visitors" data-flag-title="补码小记">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>前段时间看了斯坦福大学的编程范式公开课，第一课讲到补码的时候印象非常深刻，我发现名校名师都有一个特点，就是把讲课当做一回事，当做一个真正的事业来做，你可以从他讲课的流程方式就可以看得出他对这堂课用了多少工夫，而且不是企图一劳永逸的，而是时刻准备的去更新新的知识内容。</p>
+<p>联想到在我当优课联盟当助教的这段时间里，也是颇为感触，同形形色色的老师交流过，也看过各式各样的在线课程。发现真正去传道授业解惑的老师，他一定是投入大量时间和精力在自己的课程内容上，和自身的成长上，并且他们都会做出很好的成绩并深受学生爱戴和欢迎，对于助教工作来说，能和这样的老师认识交流也是很愉快很成长的过程。</p>
+<p>在现在大学老师都在纷纷做研究发paper，评职称，做生意，谋利益的时候，能遇到一个花大量时间打造自己课程为学生学习助力的老师的时候，真的是肃然起敬，作为学生，也忍不住要好好学习起来了。</p>
+<p>围绕这个课程我有时间将笔记慢慢整理起来写成一系列的笔记吧，最近发现在本子上去写课程笔记没有用电脑敲字写的快了，看来真的是熟能生巧了。</p>
+<h2 id="二进制数补码小记"><a href="#二进制数补码小记" class="headerlink" title="二进制数补码小记"></a>二进制数补码小记</h2><p>计算机中的整数是用什么码存储的？</p>
+<p>答案是无符号类型是用原码存储，</p>
+<p>有符号类型的正数用原码存储，</p>
+<p>有符号类型的负数是用有符号正数的补码表示并存储的。</p>
+<p>这个我以答案写在知乎上，以下：</p>
+<p>补码是用来表示有符号的负数，不是signed numbers都用补码表示，signed numbers中正数的依然是以原码形式保存，</p>
+<p>对有符号数取补码一方面好处是方便计算机进行有符号运算，</p>
+<p>另一方面好处就是求有符号正数的补码时，可以自动将符号位处理一并处理了。</p>
+<p>例如7的</p>
+<p>原码：0 000 0111 （此时符号位为0，表示正数）</p>
+<p>补码：1 111 1001 （前面的符号位自动在取补码的时候转换了）</p>
+<p>计算机用此时7的补码来表示-7，这样有符号的负数运算就可以用电路实现：</p>
+<p>   0000 0111</p>
+<p>+ 1111 1001</p>
+<p>= 0000 0000</p>
+<p>但是，<strong>这里需要注意一下</strong>，一个有符号负数求补码的话，此时不能顺便将符号位一并处理了，</p>
+<p>需要单独将符号位孤立起来，剩下的部分再取反加一求补码，例：</p>
+<p>-7二进制有符号数:</p>
+<p>1 0000111</p>
+<p>其补码：</p>
+<p>1 1111001</p>
+<p>所以，<strong>有符号二进制数在计算机里都是以补码的形式存在的，</strong></p>
+<p>即，有符号的-7是1000 0111，但在计算机里是以1111 1001形式储存的。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://ysbbswork.github.io/2018/03/13/攻破网页字符替换反爬虫机制小记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yang Shuai">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ysbbs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2018/03/13/攻破网页字符替换反爬虫机制小记/" itemprop="url">
+                  攻破网页字符替换反爬虫机制小记
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-13T16:28:23+08:00">
+                2018-03-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/03/13/攻破网页字符替换反爬虫机制小记/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/03/13/攻破网页字符替换反爬虫机制小记/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2018/03/13/攻破网页字符替换反爬虫机制小记/" class="leancloud_visitors" data-flag-title="攻破网页字符替换反爬虫机制小记">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p><strong>本博客采用创作共用版权协议, 要求署名、非商业用途和保持一致. 转载本博客文章必须也遵循署名-非商业用途-保持一致的创作共用协议.</strong></p>
+<blockquote>
+<p>摘要：python3 进行网页爬取数据出现乱码，出现奇怪的编码方式，关键数据无法爬取，网站特殊字体的反爬机制的完整攻克过程。</p>
+</blockquote>
+<p>最近在爬 实习僧 网站职位数据的时候遇到关键字体无法解析的问题。一开始还以为是chrome的解码格式不符合，解码错误导致的，但随着深入，发现这是可不是简单的编码问题，是网站精心策划的反爬机制。</p>
+<p>第一次遇到这种情况，攻克的过程也挺复杂有趣，中间学到了很多东西，新手一开始遇到还真的会和我一样摸不着头脑，即使google可能也会从编码去查，绕很多弯路也百思不得其解。后来用这种发现这种方式的网站还挺多的，毕竟这种反爬机制是很易用的，想绕过去也是很麻烦的，所以写这篇文章，记录下整个攻克的方法和过程分享出来。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/03/13/攻破网页字符替换反爬虫机制小记/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="https://ysbbswork.github.io/2018/03/05/C-QT设计模式（第二版）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1600,314 +1921,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://ysbbswork.github.io/2017/11/21/C中main函数输入参数小结/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Yang Shuai">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ysbbs">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/11/21/C中main函数输入参数小结/" itemprop="url">
-                  C中main函数输入参数小结
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-21T11:54:11+08:00">
-                2017-11-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/11/21/C中main函数输入参数小结/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/11/21/C中main函数输入参数小结/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2017/11/21/C中main函数输入参数小结/" class="leancloud_visitors" data-flag-title="C中main函数输入参数小结">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><strong>本博客采用创作共用版权协议, 要求署名、非商业用途和保持一致. 转载本博客文章必须也遵循署名-非商业用途-保持一致的创作共用协议.</strong></p>
-<p>C/C++中main函数可以加入输入参数，比如为程序运行加上一个参数，或者打开一个文件进行处理等。</p>
-<p>主要是通过<code>int main(int argc,  char* argv[])</code>的方式，</p>
-<p><code>argc</code>是命令行的总的参数个数，<code>aargv[]</code>是记录每个参数的数组，</p>
-<p>这里运行程序本身是作为一个参数一直存在，即第0个参数，</p>
-<p>举例：</p>
-<p>程序名称为program，为一个打开文件并读取的程序</p>
-<p>命令行中：</p>
-<p>-&gt; program a.txt</p>
-<p>此时 argc = 2,</p>
-<p>argv[0] = “program”</p>
-<p>grav[1] = “a.txt”</p>
-<p>所以在程序中判断是否有参数输入：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">if (argc &lt; 2)</div><div class="line">&#123;</div><div class="line">	printf(&quot;没有输入参数\n&quot;);</div><div class="line">	return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>有参数就依次将grav[1]等传入即可。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://ysbbswork.github.io/2017/11/13/英语写作好帮手之Ginger-New-Tab/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Yang Shuai">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ysbbs">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/11/13/英语写作好帮手之Ginger-New-Tab/" itemprop="url">
-                  英语写作好帮手之Ginger New Tab
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-13T15:19:14+08:00">
-                2017-11-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/11/13/英语写作好帮手之Ginger-New-Tab/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/11/13/英语写作好帮手之Ginger-New-Tab/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2017/11/13/英语写作好帮手之Ginger-New-Tab/" class="leancloud_visitors" data-flag-title="英语写作好帮手之Ginger New Tab">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>最近一直在写rewrite paper，为什么要rewrite呢，因为前期只是为了搭架子把paper架构写出来，虽然整体逻辑还算满意，但因为偷懒引用了太多别人的原话，虽然是可以引用，但这种大段的复制势必要全部重写的，之说以一开始用直接复制原话，照抄句式，不仅是因为我懒，而且不得不承认英语写作一直是自己的软肋，简单的从句还是好写，但是一旦落到描述复杂的句式自己写出来了也拿不准会不会有什么语法错误。。。</p>
-<p>出来混的迟早是要还的，这paper架构逐渐成型，剩下的就是精雕细琢其中的细节了，先是把引用的句子都换个说法改一改，小的逻辑细节也要重写一下，然后后面再把图好好丰富一下了，虽然是个繁琐的工作，但看着自己的文章逐渐细腻，也是很有成就感嘛。</p>
-<p>关于像我一样在国内读书长大的土著写英文paper应该都需要各种“帮手”来完成，</p>
-<p>语言词汇的翻译最好用的莫过于Google translate 了，在线翻译最大的坏处就是你最后会依赖它的。。。</p>
-<p>然后就是今天发现的好帮手：<strong>Ginger New Tab</strong></p>
-<p>Ginger New Tab 虽然是chrome的一个插件，但实际上是Ginger提供的一个在线网页，提供细致的英文语法检测，可以帮助你修正你已经写好的拿不准的句子，可以标记处句子中的语法错误，并且提供修改提示，相比较其它在线语法检测工具已经是非常细腻了。</p>
-<p>更重要的是，它还提供同义词替换，将常用的表达方式进行替换，使句子更加丰富多彩，引用句子也能某种程度避免完全一样的尴尬。</p>
-<p>只不过现在论文检测有 Turnitin 这种神器在，这种同义词替换使肯定躲不过检测的，据说 Turnitin 论文检测算法诡异的很，更多时候还是自己组织语句比较靠谱，我这么懒的人都不偷懒了，还是一句一句自己重写最靠谱。</p>
-<p>总之Ginger用来辅助英语写作真的方便，用上之后写paper也没那么枯燥了，有个帮助检测语法的工具更多时候让自己更敢下笔写长句子了，效率当然也提高了好多。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1957,7 +1970,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">41</span>
+                <span class="site-state-item-count">43</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1970,7 +1983,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-count">24</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

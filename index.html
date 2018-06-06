@@ -260,6 +260,164 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://ysbbswork.github.io/2018/06/06/Linux编程笔记（三）——处理错误/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yang Shuai">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ysbbs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2018/06/06/Linux编程笔记（三）——处理错误/" itemprop="url">
+                  Linux编程笔记（三）——处理错误
+                </a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-06T17:18:55+08:00">
+                2018-06-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/06/06/Linux编程笔记（三）——处理错误/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/06/06/Linux编程笔记（三）——处理错误/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2018/06/06/Linux编程笔记（三）——处理错误/" class="leancloud_visitors" data-flag-title="Linux编程笔记（三）——处理错误">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="处理系统调用中的错误"><a href="#处理系统调用中的错误" class="headerlink" title="处理系统调用中的错误"></a>处理系统调用中的错误</h1><p>系统调用会遇到哪些错误呢？每个系统调用都有自己的错误集，以open为例，如果要打开的文件不存在，或者没有权限，都会报错，返回-1，但是如何确定到底是发生了哪一类具体错误呢？</p>
+<h2 id="确定错误种类：errno"><a href="#确定错误种类：errno" class="headerlink" title="确定错误种类：errno"></a>确定错误种类：errno</h2><p>内核通过全局变量errno来指明错误的类型，每个程序都可以访问到这个变量。</p>
+<p>在man error(3)和<code>&lt;errno.h&gt;</code>中可以看到包含的错误代码和相应说明，例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">#define EPERM 1 /*Operation not permitted*/</div></pre></td></tr></table></figure>
+<h2 id="根据不同错误进行不同的具体处理"><a href="#根据不同错误进行不同的具体处理" class="headerlink" title="根据不同错误进行不同的具体处理"></a>根据不同错误进行不同的具体处理</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;errno.h&gt;</span></span></div><div class="line"><span class="keyword">extern</span> <span class="keyword">int</span> errno; <span class="comment">//需要用到errno</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">sample</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> fd;</div><div class="line">    fd = open(<span class="string">"file"</span>,O_RDONLY)；</div><div class="line">    <span class="keyword">if</span>（fd == <span class="number">-1</span>)</div><div class="line">    &#123;</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"Cannot open file:"</span>);</div><div class="line">        <span class="keyword">if</span>(errno == ENOENT)</div><div class="line">            <span class="built_in">printf</span>(<span class="string">"there is no such file."</span>);</div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(errno == EINTR)</div><div class="line">            <span class="built_in">printf</span>(<span class="string">"Interrupted while opening file."</span>);</div><div class="line">        ...</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>需要根据不同的错误类型进行不同的处理。</p>
+<p>如果打开文件不存在，那么给出提示重新输入文件名，如果打开太多文件，就关闭一些不要的，去做一些相应的处理。</p>
+<h2 id="显示错误信息"><a href="#显示错误信息" class="headerlink" title="显示错误信息"></a>显示错误信息</h2><p>如果需要显示错误信息，根据不同错误代码打印相应的错误信息字符串，不需要像上面那个例子那样麻烦，简单的办法是使用<code>perror(string)</code>这个函数，它会自己查找错误代码，在标准错误输出中显示相应的错误信息，参数string是要同时显示出的描述性信息前缀。</p>
+<p>例如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">sample</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> fd;</div><div class="line">    fd = open(<span class="string">"file"</span>,ORDONLY);</div><div class="line">    <span class="keyword">if</span>(fd == <span class="number">-1</span>)</div><div class="line">    &#123;</div><div class="line">        perror(<span class="string">"Cannot open file"</span>);</div><div class="line">        <span class="keyword">return</span>;</div><div class="line">    &#125;</div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>当有错误发生时，会看到类似如下信息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Cannot open file：there is no such file.</div><div class="line">Cannot open file：Interrupted while opening file.</div></pre></td></tr></table></figure>
+<p>显示第一部分就是描述性信息前缀，第二部分是根据错误代码查到的错误提示。</p>
+<p>或者使用<code>&lt;string.h&gt;</code>下的strerror，输出一个描述error的字符串。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;errno.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> MYFILE <span class="meta-string">"missing.txt"</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    FILE *fin;</div><div class="line">    fin = fopen(MYFILE,<span class="string">"r"</span>);</div><div class="line">    <span class="keyword">if</span>(fin == (FILE*)<span class="literal">NULL</span>)&#123;</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"%s: %s\n"</span>,MYFILE,strerror(errno));</div><div class="line">        <span class="built_in">exit</span>(<span class="number">-1</span>);</div><div class="line">    &#125;</div><div class="line">    fclose(fin);</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>输出为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">missing.txt: No such file or directory</div></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="https://ysbbswork.github.io/2018/06/05/Linux编程笔记（二）——系统调用IO/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1849,197 +2007,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://ysbbswork.github.io/2018/05/09/有趣的linux下的表达方式vt100/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Yang Shuai">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ysbbs">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2018/05/09/有趣的linux下的表达方式vt100/" itemprop="url">
-                  有趣的linux下的表达方式vt100
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-09T18:47:15+08:00">
-                2018-05-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/05/09/有趣的linux下的表达方式vt100/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/05/09/有趣的linux下的表达方式vt100/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2018/05/09/有趣的linux下的表达方式vt100/" class="leancloud_visitors" data-flag-title="有趣的linux下的表达方式vt100">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>现在都是华丽的视窗操作系统的年代了，大家很难想象当年在纯shell环境下的界面效果该如何表达，使用linux的小伙伴可能有意无意的会发现在shell中的命令行和文字的交互中会出现，反显，红色，或者高亮的句子，提示符等，这样可以更鲜艳的在shell下表达信息，使不同信息层次分明的区别开来。</p>
-<p>这个使不同字符串以不一样的颜色和状态显示的控制码叫VT100 escape codes，又叫VT100终端编码。</p>
-<h1 id="VT100终端编码"><a href="#VT100终端编码" class="headerlink" title="VT100终端编码"></a>VT100终端编码</h1><h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><p>在C中，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">#include&lt;stdio.h&gt;</div><div class="line"></div><div class="line"></div><div class="line">int main()&#123;</div><div class="line">    printf(&quot;\x1B[7m helloword! \033[0m&quot;);//反显helloworld</div><div class="line">    return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">或者直接在shell下：</div><div class="line">printf(&quot;\x1B[7m helloword! \033[0m&quot;)</div></pre></td></tr></table></figure>
-<p>当VT100和C语言结合起来，就可以写出很多丰富多彩的程序，</p>
-<p>比如</p>
-<ul>
-<li>一个局域网的shell下的聊天室，每个人的聊天语言都可以使用不同的控制码实现不同的颜色。</li>
-<li>软件中的互动语句可以使用不同颜色在进行分级，比如 error为红色语句，waring为黄色</li>
-</ul>
-<h2 id="常见的VT100控制码："><a href="#常见的VT100控制码：" class="headerlink" title="常见的VT100控制码："></a>常见的VT100控制码：</h2><p>   \033[0m 关闭所有属性</p>
-<p>​    \033[1m 设置高亮度</p>
-<p>​    \033[4m 下划线</p>
-<p>​    \033[5m 闪烁</p>
-<p>​    \033[7m 反显</p>
-<p>​    \033[8m 消隐</p>
-<p>​    \033[30m – \033[37m 设置前景色</p>
-<p>​    \033[40m – \033[47m 设置背景色</p>
-<p>​    \033[nA 光标上移n 行</p>
-<p>​    \033[nB 光标下移n 行</p>
-<p>​    \033[nC 光标右移n 行</p>
-<p>​    \033[nD 光标左移n 行</p>
-<p>​    \033[y;xH设置光标位置</p>
-<p>​    \033[2J 清屏</p>
-<p>​    \033[K 清除从光标到行尾的内容</p>
-<p>​    \033[s 保存光标位置</p>
-<p>​    \033[u 恢复光标位置</p>
-<p>​    \033[?25l 隐藏光标</p>
-<p>​    \033[?25h 显示光标</p>
-<p>VT100 关于颜色的说明.<br>VT100 的颜色输出分为，注意要同时输出前景的字符颜色和背景颜色。</p>
-<p>字背景颜色范围:40—-49</p>
-<p>​     40:黑</p>
-<p>​     41:深红</p>
-<p>​     42:绿</p>
-<p>​     43:黄色</p>
-<p>​     44:蓝色</p>
-<p>​     45:紫色</p>
-<p>​     46:深绿</p>
-<p>​     47:白色</p>
-<p>​     字颜色:30———–39</p>
-<p>​     30:黑</p>
-<p>​     31:红</p>
-<p>​     32:绿</p>
-<p>​     33:黄</p>
-<p>​     34:蓝色</p>
-<p>​     35:紫色</p>
-<p>​     36:深绿</p>
-<p>​     37:白色</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2089,7 +2056,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">45</span>
+                <span class="site-state-item-count">46</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

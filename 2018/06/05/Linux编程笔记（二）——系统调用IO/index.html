@@ -98,7 +98,7 @@
 
 ​         用户程序不能直接访问内核中的文件描述符表,而只能使用文">
 <meta property="og:image" content="http://img.my.csdn.net/uploads/201304/15/1366040853_7047.png">
-<meta property="og:updated_time" content="2018-06-05T13:39:45.644Z">
+<meta property="og:updated_time" content="2018-06-06T14:26:04.316Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux编程笔记（二）——系统调用IO">
 <meta name="twitter:description" content="系统调用文件描述符每个进程在Linux内核中都有一个task_struct结构体来维护进程相关的 信息,称为进程描述符。task_struct中有一个指针(struct files_struct *files; )指向files_struct结构体,称为文件描述符表,其中每个表项包含一个指向已打开的文件的指针,如下图所示
@@ -364,6 +364,7 @@
 <p><img src="http://img.my.csdn.net/uploads/201304/15/1366040853_7047.png" alt="img"></p>
 <p>​         用户程序不能直接访问<strong>内核中的文件描述符表</strong>,而<strong>只能使用文件描述符表的索引</strong> (即0、1、2、3这些数字),它实际上是一个由内核保存的数组下标，所以不会是负数。这些索引就称为文件描述符(File Descriptor),用int 型变量保存。 当调用open 打开一个文件或创建一个新文件时,内核分配一个文件描述符并返回给用户程序,该文件描述符表项中的指针指向新打开的文件。当读写文件时,用户程序把文件描述符传给read 或write ,内核根据文件描述符找到相应的表项,再通过表项中的指针找到相应的文件。</p>
 <p>文件描述符数组在每个进程中都会持有一份，所以理论上是每个进程最多可以打开 1024 个文件，而不是系统中所有的进程一共只能打开 1024 个文件。</p>
+<a id="more"></a>
 <p>例：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">int in_fd,out_fd;  //int用来保存文件描述符</div><div class="line">in_fd=open(filename1,O_RDONLY);//系统调用的open和create成功后都是返回文件描述符</div><div class="line">out_fd=creat(filename2,COPYMODE);</div><div class="line">close(in_fd);//通过文件描述符来关闭文件</div><div class="line">close(out_fd);</div></pre></td></tr></table></figure>
 <h1 id="具体的系统调用I-O"><a href="#具体的系统调用I-O" class="headerlink" title="具体的系统调用I/O"></a>具体的系统调用I/O</h1><h2 id="fileno-3"><a href="#fileno-3" class="headerlink" title="fileno(3)"></a>fileno(3)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">1 #include &lt;stdio.h&gt;</div><div class="line">2 </div><div class="line">3 int fileno(FILE *stream);</div><div class="line">4 </div><div class="line">5    Feature Test Macro Requirements for glibc (see feature_test_macros(7)):</div><div class="line">6 </div><div class="line">7        fileno(): _POSIX_C_SOURCE &gt;= 1 || _XOPEN_SOURCE || _POSIX_SOURCE</div></pre></td></tr></table></figure>
@@ -648,7 +649,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">46</span>
+                <span class="site-state-item-count">47</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -661,7 +662,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">25</span>
+                <span class="site-state-item-count">26</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

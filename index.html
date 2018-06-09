@@ -260,6 +260,157 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://ysbbswork.github.io/2018/06/09/多和巨人待在一起/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yang Shuai">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ysbbs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2018/06/09/多和巨人待在一起/" itemprop="url">
+                  多和巨人待在一起
+                </a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-09T11:33:08+08:00">
+                2018-06-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/06/09/多和巨人待在一起/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/06/09/多和巨人待在一起/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2018/06/09/多和巨人待在一起/" class="leancloud_visitors" data-flag-title="多和巨人待在一起">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><img src="http://ww1.sinaimg.cn/large/005HFdfGgy1fs1tqnjkmdj30l20bwn9v.jpg" alt=""></p>
+ <!-- 标签别名 -->
+<blockquote class="blockquote-center"><p>多和巨人待在一起，即使成不了巨人，也能嗅到他们的气息。</p>
+</blockquote>
+<p>深圳这几天都是雨季，暴雨连绵不绝，来回实验室的路上都是趟着水在走，我个人不喜欢下雨天，阴霾的天气会使人心情低沉，打不起精神。很多时候，遇见问题，遇到岔路口，一个个生活的选择的时候，一个饱满有精神的自己是最好的武器。</p>
+<p>今天收到腾讯的暑期实习offer，阴雨的天气也挡不住我心中的喜悦，毕竟这是我一直以来非常喜欢欣赏的一家技术派公司，里面有很多巨人，能和他们共事，学习，本身就是一种幸运。</p>
+<p>最近要好好努力了，因为心中明白自己有很多不足，腾讯又有那么多大神，真的是感到鸭梨山大啊，</p>
+<p>无论如何路是一步一个脚印走出来的，好好做足准备，多和巨人待在一起，多嗅一嗅他们的气息，多被打压几次，顽强再战，最后努力成为巨人。</p>
+<p>所以，这只是个开始。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="https://ysbbswork.github.io/2018/06/06/Linux编程笔记（三）——处理错误/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -357,25 +508,14 @@
 
       
         
-          
-            <h1 id="处理系统调用中的错误"><a href="#处理系统调用中的错误" class="headerlink" title="处理系统调用中的错误"></a>处理系统调用中的错误</h1><p>系统调用会遇到哪些错误呢？每个系统调用都有自己的错误集，以open为例，如果要打开的文件不存在，或者没有权限，都会报错，返回-1，但是如何确定到底是发生了哪一类具体错误呢？</p>
-<h2 id="确定错误种类：errno"><a href="#确定错误种类：errno" class="headerlink" title="确定错误种类：errno"></a>确定错误种类：errno</h2><p>内核通过全局变量errno来指明错误的类型，每个程序都可以访问到这个变量。</p>
-<p>在man error(3)和<code>&lt;errno.h&gt;</code>中可以看到包含的错误代码和相应说明，例如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">#define EPERM 1 /*Operation not permitted*/</div></pre></td></tr></table></figure>
-<h2 id="根据不同错误进行不同的具体处理"><a href="#根据不同错误进行不同的具体处理" class="headerlink" title="根据不同错误进行不同的具体处理"></a>根据不同错误进行不同的具体处理</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;errno.h&gt;</span></span></div><div class="line"><span class="keyword">extern</span> <span class="keyword">int</span> errno; <span class="comment">//需要用到errno</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">sample</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> fd;</div><div class="line">    fd = open(<span class="string">"file"</span>,O_RDONLY)；</div><div class="line">    <span class="keyword">if</span>（fd == <span class="number">-1</span>)</div><div class="line">    &#123;</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"Cannot open file:"</span>);</div><div class="line">        <span class="keyword">if</span>(errno == ENOENT)</div><div class="line">            <span class="built_in">printf</span>(<span class="string">"there is no such file."</span>);</div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(errno == EINTR)</div><div class="line">            <span class="built_in">printf</span>(<span class="string">"Interrupted while opening file."</span>);</div><div class="line">        ...</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>需要根据不同的错误类型进行不同的处理。</p>
-<p>如果打开文件不存在，那么给出提示重新输入文件名，如果打开太多文件，就关闭一些不要的，去做一些相应的处理。</p>
-<h2 id="显示错误信息"><a href="#显示错误信息" class="headerlink" title="显示错误信息"></a>显示错误信息</h2><p>如果需要显示错误信息，根据不同错误代码打印相应的错误信息字符串，不需要像上面那个例子那样麻烦，简单的办法是使用<code>perror(string)</code>这个函数，它会自己查找错误代码，在标准错误输出中显示相应的错误信息，参数string是要同时显示出的描述性信息前缀。</p>
-<p>例如：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">sample</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> fd;</div><div class="line">    fd = open(<span class="string">"file"</span>,ORDONLY);</div><div class="line">    <span class="keyword">if</span>(fd == <span class="number">-1</span>)</div><div class="line">    &#123;</div><div class="line">        perror(<span class="string">"Cannot open file"</span>);</div><div class="line">        <span class="keyword">return</span>;</div><div class="line">    &#125;</div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>当有错误发生时，会看到类似如下信息：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Cannot open file：there is no such file.</div><div class="line">Cannot open file：Interrupted while opening file.</div></pre></td></tr></table></figure>
-<p>显示第一部分就是描述性信息前缀，第二部分是根据错误代码查到的错误提示。</p>
-<p>或者使用<code>&lt;string.h&gt;</code>下的strerror，输出一个描述error的字符串。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;errno.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> MYFILE <span class="meta-string">"missing.txt"</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    FILE *fin;</div><div class="line">    fin = fopen(MYFILE,<span class="string">"r"</span>);</div><div class="line">    <span class="keyword">if</span>(fin == (FILE*)<span class="literal">NULL</span>)&#123;</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"%s: %s\n"</span>,MYFILE,strerror(errno));</div><div class="line">        <span class="built_in">exit</span>(<span class="number">-1</span>);</div><div class="line">    &#125;</div><div class="line">    fclose(fin);</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>输出为：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">missing.txt: No such file or directory</div></pre></td></tr></table></figure>
-          
+          <h1 id="处理系统调用中的错误"><a href="#处理系统调用中的错误" class="headerlink" title="处理系统调用中的错误"></a>处理系统调用中的错误</h1><p>系统调用会遇到哪些错误呢？每个系统调用都有自己的错误集，以open为例，如果要打开的文件不存在，或者没有权限，都会报错，返回-1，但是如何确定到底是发生了哪一类具体错误呢？</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/06/06/Linux编程笔记（三）——处理错误/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -515,143 +655,17 @@
 
       
         
-          
-            <h1 id="系统调用"><a href="#系统调用" class="headerlink" title="系统调用"></a>系统调用</h1><h2 id="文件描述符"><a href="#文件描述符" class="headerlink" title="文件描述符"></a>文件描述符</h2><p>每个进程在Linux内核中都有一个task_struct结构体来维护进程相关的 信息,称为<strong>进程描述符</strong>。task_struct中有一个指针(struct files_struct *files; )指向files_struct结构体,称为文件描述符表,其中每个表项包含一个指向已打开的文件的指针,如下图所示</p>
+          <h1 id="系统调用"><a href="#系统调用" class="headerlink" title="系统调用"></a>系统调用</h1><h2 id="文件描述符"><a href="#文件描述符" class="headerlink" title="文件描述符"></a>文件描述符</h2><p>每个进程在Linux内核中都有一个task_struct结构体来维护进程相关的 信息,称为<strong>进程描述符</strong>。task_struct中有一个指针(struct files_struct *files; )指向files_struct结构体,称为文件描述符表,其中每个表项包含一个指向已打开的文件的指针,如下图所示</p>
 <p><img src="http://img.my.csdn.net/uploads/201304/15/1366040853_7047.png" alt="img"></p>
 <p>​         用户程序不能直接访问<strong>内核中的文件描述符表</strong>,而<strong>只能使用文件描述符表的索引</strong> (即0、1、2、3这些数字),它实际上是一个由内核保存的数组下标，所以不会是负数。这些索引就称为文件描述符(File Descriptor),用int 型变量保存。 当调用open 打开一个文件或创建一个新文件时,内核分配一个文件描述符并返回给用户程序,该文件描述符表项中的指针指向新打开的文件。当读写文件时,用户程序把文件描述符传给read 或write ,内核根据文件描述符找到相应的表项,再通过表项中的指针找到相应的文件。</p>
 <p>文件描述符数组在每个进程中都会持有一份，所以理论上是每个进程最多可以打开 1024 个文件，而不是系统中所有的进程一共只能打开 1024 个文件。</p>
-<p>例：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">int in_fd,out_fd;  //int用来保存文件描述符</div><div class="line">in_fd=open(filename1,O_RDONLY);//系统调用的open和create成功后都是返回文件描述符</div><div class="line">out_fd=creat(filename2,COPYMODE);</div><div class="line">close(in_fd);//通过文件描述符来关闭文件</div><div class="line">close(out_fd);</div></pre></td></tr></table></figure>
-<h1 id="具体的系统调用I-O"><a href="#具体的系统调用I-O" class="headerlink" title="具体的系统调用I/O"></a>具体的系统调用I/O</h1><h2 id="fileno-3"><a href="#fileno-3" class="headerlink" title="fileno(3)"></a>fileno(3)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">1 #include &lt;stdio.h&gt;</div><div class="line">2 </div><div class="line">3 int fileno(FILE *stream);</div><div class="line">4 </div><div class="line">5    Feature Test Macro Requirements for glibc (see feature_test_macros(7)):</div><div class="line">6 </div><div class="line">7        fileno(): _POSIX_C_SOURCE &gt;= 1 || _XOPEN_SOURCE || _POSIX_SOURCE</div></pre></td></tr></table></figure>
-<p> 这个函数的作用是从 STDIO 的 FILE 结构体指针中获得 SYSIO 的文件描述符。</p>
-<h2 id="fdopen-3"><a href="#fdopen-3" class="headerlink" title="fdopen(3)"></a>fdopen(3)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">1 #include &lt;stdio.h&gt;</div><div class="line">2 </div><div class="line">3 FILE *fdopen(int fd, const char *mode);</div><div class="line">4 </div><div class="line">5 　　Feature Test Macro Requirements for glibc (see feature_test_macros(7)):</div><div class="line">6 </div><div class="line">7      fdopen(): _POSIX_C_SOURCE &gt;= 1 || _XOPEN_SOURCE || _POSIX_SOURCE</div></pre></td></tr></table></figure>
-<p> 这个函数和上面的 flieno(3) 函数的功能是反过来的，作用是把 SYSIO 的文件描述符转换为 STDIO 的 FILE 结构体指针。mode 参数的作用与 fopen(3) 中的 mode 参数相同，这里不再赘述。</p>
-<p>虽然这两个函数可以在 STDIO 与 SYSIO 之间互相转换，但是并<strong>不推荐对同一个文件同时采用两种方式操作</strong>。因为 STDIO 和 SYSIO 之间它们处理文件的私有数据是不同步的，如果同时使用两种方式操作同一个文件则可能带来不可预知的后果，具体可以参考上一篇博文中提到的那个合并系统调用的例子。</p>
-<h2 id="open-2"><a href="#open-2" class="headerlink" title="open(2)"></a>open(2)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">1 open - open and possibly create a file or device</div><div class="line">2 </div><div class="line">3 #include &lt;sys/types.h&gt;</div><div class="line">4 #include &lt;sys/stat.h&gt;</div><div class="line">5 #include &lt;fcntl.h&gt;</div><div class="line">6 </div><div class="line">7 int open(const char *pathname, int flags);</div><div class="line">8 int open(const char *pathname, int flags, mode_t mode);</div></pre></td></tr></table></figure>
-<p> 想要使用 SYSIO 操作文件或设备，要先通过 open(2) 函数获得一个文件描述符。<strong>注意博文中在函数上方标识出来的头文件大家在使用这个函数的时候一定要一个不少的全部包含到源代码中</strong>。</p>
-<p>参数列表：</p>
-<p>　　pathname：要打开的文件路径。</p>
-<p>　　flags：指定文件的操作方式，多个选项之间用按位或( | )运算符链接。</p>
-<p>　　　　比选项，三选一：<strong>O_RDONLY, O_WRONLY, O_RDWR</strong></p>
-<p>　　　　可选项：可选项有很多，这里只介绍常用的，想要查看完全的可选项，可以查阅 man 手册。</p>
-<table>
-<thead>
-<tr>
-<th>选项</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>O_APPEND</td>
-<td>追加到文件尾部。</td>
-</tr>
-<tr>
-<td>O_CREAT</td>
-<td>创建新文件。</td>
-</tr>
-<tr>
-<td>O_DIRECT</td>
-<td>最小化缓冲。buffer 时写的加速机制，cache 是读的加速机制。</td>
-</tr>
-<tr>
-<td>O_DIRECTORY</td>
-<td>强调一定要打开一个目录，如果 pathname 不是目录则会打开失败。</td>
-</tr>
-<tr>
-<td>O_LARGEFILE</td>
-<td>打开大文件的时候要加这个，会将 off_t 定义为 64 bit，当然也可以在编译的时候使用上一篇博文提到的宏定义来指定 off_t 的长度。</td>
-</tr>
-<tr>
-<td>O_NOFOLLOW</td>
-<td>如果 pathname 是符号链接则不展开，也就是说打开的是符号链接文件本身，而不是符号链接指向的文件。</td>
-</tr>
-<tr>
-<td>O_NONBLOCK</td>
-<td>非阻塞形式。阻塞是读取不到数据时死等，非阻塞是尝试读取，无论能否读取到数据都返回。</td>
-</tr>
-</tbody>
-</table>
-<p>　　mode：8 进制文件权限。当 flags 包含 O_CREAT 选项时必须传这个参数，否则可以不用传这个参数。当然系统在创建文件的时候不会直接这个参数，而是通过如下的公式计算得到最终的文件权限：</p>
-<blockquote>
-<p>mode &amp; ~(umask)</p>
-</blockquote>
-<p>　　具体的 umask 的值可以通过 umask(1) 命令获得。通过这样的公式进行计算可以避免程序中创建出权限过高的文件。</p>
-<p>不知道小伙伴们注意到没有，这个函数有一个有趣的地方。C 语言中是没有<strong>函数重载</strong>这个概念的，那么为什么这两个 open(2) 函数很像重载的函数呢？实际上它们是用可变长参数列表来实现的。</p>
-<p>顿时让我想起来一道面试题：如何确定一个函数是用重载实现的还是用变长参数实现的？答案是给它多传几个参数嘛，如果报错了那一定是函数重载，否则就是变长参数实现的呗。</p>
-<h2 id="close-2"><a href="#close-2" class="headerlink" title="close(2)"></a>close(2)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">1 close - close a file descriptor</div><div class="line">2 </div><div class="line">3 #include &lt;unistd.h&gt;</div><div class="line">4 </div><div class="line">5 int close(int fd);</div></pre></td></tr></table></figure>
-<p> 关闭文件描述符。</p>
-<p>参数是要关闭的文件描述符。注意当一个文件描述符被关闭之后就不能再使用了，虽然 fd 这个变量的值没有变，但是内核已经将相关的资源释放了，这个 fd 相当于一个野指针了。</p>
-<p>返回值：</p>
-<p>　　成功为0，失败为-1。但很少对它的返回值做校验，一般都认为不会失败。</p>
-<h2 id="read-2"><a href="#read-2" class="headerlink" title="read(2)"></a>read(2)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">1 read - read from a file descriptor</div><div class="line">2 </div><div class="line">3 #include &lt;unistd.h&gt;</div><div class="line">4 </div><div class="line">5 ssize_t read(int fd, void *buf, size_t count);</div></pre></td></tr></table></figure>
-<p>这是 SYSIO 读取文件的函数，作用是从文件描述符 fd 中读取 count 个字节的数据到 buf 所指向的空间。</p>
-<p>返回值：返回成功读取到的字节数；0 表示读取到了文件末尾；-1 表示出现错误并设置 errno。</p>
-<p>　　注意 read(2) 函数与 STDIO 中的 fread(3) 函数的返回值是有区别的，fread(3) 返回的是成功读取到了多少个对象，而 read(2) 函数返回的是成功读取到的字节数量。</p>
-<h2 id="write-2"><a href="#write-2" class="headerlink" title="write(2)"></a>write(2)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">1 write - write to a file descriptor</div><div class="line">2 </div><div class="line">3 #include &lt;unistd.h&gt;</div><div class="line">4 </div><div class="line">5 ssize_t write(int fd, const void *buf, size_t count);</div></pre></td></tr></table></figure>
-<p> write(2) 是 SYSIO 向文件中写入数据的函数，作用是将 buf 中 count 字节的数据写入到文件描述符 fd 所对应的文件中。</p>
-<p>返回值：返回成功写入的字节数；0 并不表示写入失败，仅仅表示什么都没有写入；-1 才表示出现错误并设置 errno。</p>
-<p>　　注意 write(2) 函数与 STDIO 中的 fwrite(3) 函数的返回值是有区别的，fwrite(3) 返回的是成功写入了多少个对象，而 write(2) 函数返回的是成功写入的字节数量。</p>
-<p>大家想一想，为什么会出现写入的值是 0 的情况呢？其实原因有很多，其中一个原因是当写入的时候发生了阻塞，而阻塞中的 write(2) 系统调用恰巧被一个信号打断了，那么 write(2) 可能没有写入任何数据就返回了，所以返回值会是0。至于什么是阻塞，什么是信号，LZ 会在后面的博文中讲解。</p>
-<h2 id="lseek-2"><a href="#lseek-2" class="headerlink" title="lseek(2)"></a>lseek(2)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">1 lseek - reposition read/write file offset</div><div class="line">2 </div><div class="line">3 #include &lt;sys/types.h&gt;</div><div class="line">4 #include &lt;unistd.h&gt;</div><div class="line">5 </div><div class="line">6 off_t lseek(int fd, off_t offset, int whence);</div></pre></td></tr></table></figure>
-<p>通过上一篇博文大家知道了<strong>文件位置指针</strong>这个概念，它是系统为了方便我们读写文件而设定的一个标记，随着我们通过函数对文件的读写，它会自动相应的向文件尾部偏移。</p>
-<p>那么是不是说当我们读取过文件的一段内容之后，就没办法回去再次读取同一段内容了呢？</p>
-<p>其实不是的，通过 lseek(2) 函数就可以让我们随心所欲的控制文件位置指针了。</p>
-<p>参数列表：</p>
-<p>　　fd：要操作的文件描述符；</p>
-<p>　　offset：想对于 whence 的偏移量；</p>
-<p>　　whence：相对位置；三选一：SEEK_SET、SEEK_CUR、SEEK_END</p>
-<p>　　　　SEEK_SET 表示文件的起始位置；</p>
-<p>　　　　SEEK_CUR 表示文件位置指针当前所在位置；</p>
-<p>　　　　SEEK_END 表示文件末尾；</p>
-<p> 返回值：</p>
-<p>　　成功时返回文件首相对于移动结束之后的文件位置指针所在位置的偏移量；失败时返回 -1 并设置 errno；</p>
-<p>这个函数的 offset 参数和返回值都对基本数据类型进行了封装，这一点要比标准库的 fseek(3) 更先进。</p>
-<p>写一段伪代码来说明这个函数的使用方法。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">1 lseek(fd, -1024, SEEK_CUR); // 从文件位置指针当前位置向前偏移 1024 个字节</div><div class="line">2 lseek(fd, 1024, SEEK_SET); // 从文件起始位置向后偏移 1kb</div><div class="line">3 lseek(fd, 1024UL*1024UL*1024UL*5UL, SEEK_SET); // 产生一个 5GB 大小的空洞文件</div></pre></td></tr></table></figure>
-<h3 id="lseek使用"><a href="#lseek使用" class="headerlink" title="lseek使用"></a>lseek使用</h3><p>系统每次打开open一个文件都会保存一个指向文件当前位置的指针，当读写操作完成时，指针会移到下一个记录位置，这个指针与<strong>文件描述符</strong><code>（int fd)</code>相关联。</p>
-<p>所以write只会更新下一条记录，而不是修改当前找到的那条要修改的记录。</p>
-<p>那么问题就来了。</p>
-<p>问题：在文件操作中，如何改变一个文件的当前读/写位置？</p>
-<p>答题：使用系统调用lseek</p>
-<ul>
-<li><p>目标：是指针指向文件中指定的位置</p>
-</li>
-<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">off_t oldpos = lseek (int fd, off_t dist , int base)</div></pre></td></tr></table></figure>
-</li>
-<li><p>fd 文件描述符 ， dist 移动的距离 ， base  (SEEK_SET:文件开始位置，SEEK_CUR:当前位置 ，SEEK_END：文件结尾）</p>
-</li>
-<li><p>返回值：oldpos 指针变化前的位置 。遇到错误返回 -1</p>
-</li>
-</ul>
-<h2 id="time-1"><a href="#time-1" class="headerlink" title="time(1)"></a>time(1)</h2><p>之前讨论过 STDIO 与 SYSIO 的效率问题，所以在这里聊一聊 time(1) 命令。</p>
-<p>这个命令可不是用来查看系统当前时间的，想要查看系统时间得使用 date(1) 命令，这个不是我们今天要讨论的内容，所以就不说了。</p>
-<p>time(1) 命令的作用是监视一个程序的用户时间，从而可以粗略的帮助我们分析这个程序的执行效率。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"> 1 while ((readlen = read(srcfd, buf, BUFSIZE)) &gt; 0) &#123;</div><div class="line"> 2         pos = 0;</div><div class="line"> 3         while (readlen &gt; 0) &#123;</div><div class="line"> 4                 writelen = write(destfd, buf+pos, readlen);</div><div class="line"> 5                 if (writelen &lt; 0) &#123;</div><div class="line"> 6                         err = errno;</div><div class="line"> 7                         goto e_write;</div><div class="line"> 8                 &#125;</div><div class="line"> 9                 pos += writelen;</div><div class="line">10                 readlen -= writelen;</div><div class="line">11         &#125;</div><div class="line">12 &#125;</div></pre></td></tr></table></figure>
-<p> 这是一个模仿 cp(1) 命令的程序的核心部分代码，其中的 buf 是一个 char 数组，用来作为数据读写的缓存。当 buf 的容量不同时文件拷贝的效率也是不同的，因为过于频繁的执行系统调用和使用过大的缓存都会使效率下降。如果通过不停的修改 buf 的容量的方式测试 buf 为多大的时候拷贝效率最高的话，就可以使用 time(1) 命令监视程序的执行时间。</p>
-<blockquote>
-<p>>$ gcc -Wall mycp_sysio.c -o mycp_sysio<br>>$ time ./mycp_sysio rhel-server-6.4-x86_64-dvd.iso tmp.iso<br>real    1m30.014s<br>user    0m0.003s<br>sys    1m29.003s</p>
-</blockquote>
-<p>sys 是程序在内核态消耗的时间，也就是执行系统调用所消耗的时间。 </p>
-<p>user 是程序在用户态消耗的时间，也就是程序本身的代码所消耗的时间。</p>
-<p>real 是用户等待的总时间，是 sys + user + CPU 调度时间，所以 real 时间会稍微比 sys + user 时间长一点。一个程序从提高响应素的的方式提高用户体验，一般指的就是提高 real 时间。</p>
-<h2 id="其它小结"><a href="#其它小结" class="headerlink" title="其它小结"></a>其它小结</h2><ul>
-<li><p>linux下可以通过以下系统调用来操作文件：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">open(filename,how)</div><div class="line">creat(filename,mode)</div><div class="line">read(fd,buffer,amt)</div><div class="line">write(fd,buffer,amt)</div><div class="line">lseek(fd,distance,base)</div><div class="line">close(fd)</div></pre></td></tr></table></figure>
-</li>
-<li><p>进程对文件的读,写都要通过文件描述符，文件描述符表示文件和进程之间的连接。</p>
-</li>
-<li><p>每次系统调用都会导致用户模式和内核模式的切换以及执行内核代码，所以减少程序中的系统调用发生的次数可以提高程序的运行效率。</p>
-</li>
-<li><p>程序可以通过缓存技术来减少系统调用的次数，仅当写缓冲区满或读缓冲区空才调用内核服务。</p>
-</li>
-<li><p>内核就是通过内核缓冲来减少访问磁盘的IO次数。</p>
-</li>
-</ul>
-<p>参考资料：</p>
-<p><a href="http://www.cnblogs.com/0xcafebabe/p/4426126.html" target="_blank" rel="external">http://www.cnblogs.com/0xcafebabe/p/4426126.html</a></p>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/06/05/Linux编程笔记（二）——系统调用IO/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -791,12 +805,14 @@
 
       
         
-          
-            <p>学习使用cocos2dx的时候少不了的就是在各个时间环节出打Log了，游戏人物和场景进行到哪一步，坐标是怎么遍历的都可以通过Log输出到控制台，不仅是对于游戏编程，对于非黑窗口，或者不想往黑窗口中print调试语句的时候，往VS的控制台输出调试的语句跟踪程序运行是非常舒服的办法。</p>
-<p>具体做法比较麻烦，但是可以简单封装一下，</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">当你编写非控制台程序时，比如GUI程序，像<span class="built_in">std</span>::<span class="built_in">cout</span> 和 <span class="built_in">printf</span>()这样的函数，就无法使用了，（不是使用了，程序就编译不了，是可以通过编译的，只是你不会看到这些函数打印出的信息。） </div><div class="line"></div><div class="line">Visual Studio给我们提供了一个“控制台” — 输出窗口。我们要使用什么函数才能将调试信息打印到输出窗口里面呢？ 看看下面的方法吧。</div><div class="line"></div><div class="line">    <span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"atlbase.h"</span></span></div><div class="line">    <span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"atlstr.h"</span></span></div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">OutputDebugPrintf</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>* strOutputString, ...)</span></span></div><div class="line">    &#123;</div><div class="line">    	<span class="keyword">char</span> strBuffer[<span class="number">4096</span>] = &#123; <span class="number">0</span> &#125;;</div><div class="line">    	va_list vlArgs;</div><div class="line">    	va_start(vlArgs, strOutputString);</div><div class="line">    	_vsnprintf_s(strBuffer, <span class="keyword">sizeof</span>(strBuffer) - <span class="number">1</span>, strOutputString, vlArgs);</div><div class="line">    	<span class="comment">//vsprintf(strBuffer,strOutputString,vlArgs);</span></div><div class="line">    	va_end(vlArgs);</div><div class="line">    	OutputDebugString(CA2W(strBuffer));</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">    	<span class="keyword">int</span> i = <span class="number">10</span>;</div><div class="line">    	OutputDebugPrintf(<span class="string">"I'm %d years old.\n"</span>, i);</div><div class="line">    	<span class="keyword">while</span> (<span class="number">1</span>) &#123;&#125;</div><div class="line">    	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">程序解释</div><div class="line"></div><div class="line">    <span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"atlbase.h"</span></span></div><div class="line">    <span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"atlstr.h"</span></span></div><div class="line"></div><div class="line">这两个头文件是给这个CA2W()宏函数准备的。这个宏函数的功能是：将ANSI character <span class="built_in">string</span>转化为Unicode character <span class="built_in">string</span>的函数。</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">参考链接：http:<span class="comment">//www.voidcn.com/article/p-ecsfuzgu-wn.html</span></div></pre></td></tr></table></figure>
-
-          
+          <p>学习使用cocos2dx的时候少不了的就是在各个时间环节出打Log了，游戏人物和场景进行到哪一步，坐标是怎么遍历的都可以通过Log输出到控制台，不仅是对于游戏编程，对于非黑窗口，或者不想往黑窗口中print调试语句的时候，往VS的控制台输出调试的语句跟踪程序运行是非常舒服的办法。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/06/04/像cocos2dX一样往VS控制台输出log/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1824,189 +1840,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://ysbbswork.github.io/2018/05/10/Linux编程笔记（一）——标准IO/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Yang Shuai">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ysbbs">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2018/05/10/Linux编程笔记（一）——标准IO/" itemprop="url">
-                  Linux编程笔记（一）——标准IO
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-10T21:44:41+08:00">
-                2018-05-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/05/10/Linux编程笔记（一）——标准IO/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/05/10/Linux编程笔记（一）——标准IO/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2018/05/10/Linux编程笔记（一）——标准IO/" class="leancloud_visitors" data-flag-title="Linux编程笔记（一）——标准IO">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="综述"><a href="#综述" class="headerlink" title="综述"></a>综述</h1><p>标准I/O提供的f系列I/O文件操作，如（fwrite,fread,fseek等）都是提供了有缓存的接口，如果数据需要送到像控制终端等交互设备，必须要设置fflush或者使用非缓存I/O。</p>
-<p>而缓存可以减少系统调用的次数，增加效率。</p>
-<p>这是标准I/O相对于系统调用的特点，也是优点。</p>
-<p>而系统调用的I/O读写是无缓冲的，实时性高。</p>
-<p>到这里我们还是没有说明白为什么标准 IO 吞吐量高，而系统 IO 实时性高。我再举个简单的栗子：门卫老大爷负责送信到邮局，他去一次邮局要花费 10 分钟的时间，而每次最多能送 20 封信，每当信件累计到 20 封的时候他就要动身去邮局了。但是当他收到一封加急的邮件时，就会立即去一趟邮局。系统 IO 就好比每收到一封信时都要去一趟邮局，所以实时性高。而标准 IO 就好比要攒够 20 封信才去一趟邮局，所以吞吐量高，因为用户把信件交到老大爷的手上时就会立即返回，响应速度快，用户体验更好。而我们使用 fflush(3) 之类的函数强制刷新缓冲的时候，就相当于是老大爷收到了一封加急信件需要立即去一趟邮局送信。</p>
-<h1 id="标准I-O"><a href="#标准I-O" class="headerlink" title="标准I/O"></a>标准I/O</h1><h2 id="1-fopen-3"><a href="#1-fopen-3" class="headerlink" title="1.fopen(3)"></a>1.fopen(3)</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="function">FILE *<span class="title">fopen</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *path, <span class="keyword">const</span> <span class="keyword">char</span> *mode)</span></span>;</div></pre></td></tr></table></figure>
-<p>这是今天要学习的第一个函数，在操作文件之前，我们需要通过 fopen() 函数将文件打开，通过这个函数我们可以告诉操作系统我们要操作的是哪个文件，以及用什么样的方式操作这个文件。</p>
-<p>参数列表：</p>
-<p>path：要操作的文件路径。</p>
-<p>mode：文件的打开方式，这个打开方式一共分为6种。</p>
-<p>　　r：以<strong>只读</strong>的方式打开文件，并且文件位置指针会被定位到文件首。如果要打开的文件不存在则报错。</p>
-<p>　　r+：以<strong>读写</strong>的方式打开文件，并且文件位置指针会被定位到文件首。如果要打开的文件不存在则报错。</p>
-<p>　　w：以<strong>只写</strong>的方式打开文件，如果文件不存在则创建，如果文件已存在则被<strong>截断</strong>为 0 字节，并且文件位置指针会被定位到文件首。</p>
-<p>　　w+：以<strong>读写</strong>的方式打开文件，如果文件不存在则创建，如果文件已存在则被<strong>截断</strong>为 0 字节，并且文件位置指针会被定位到文件首。</p>
-<p>　　a：以<strong>追加</strong>的方式打开文件，如果文件不存在则创建，且文件位置指针会被定位到文件最后一个有效字符的后面（EOF，end of the file）。</p>
-<p>　　a+：以<strong>读和追加</strong>的方式打开文件，如果文件不存在则创建，且读文件位置指针会被初始化到文件首，但是总是写入到最后一个有效字符的后面（EOF，end of the file）。</p>
-<p>返回值：</p>
-<p>　　FILE 是一个由标准库定义的结构体，各位童鞋不要企图通过手动修改结构体里的内容来实现文件的操作，一定要通过标准库函数来操作文件。</p>
-<p>　　这个函数返回一个 FILE 类型的指针，它作为我们打开文件的凭据，后面所有对这个文件的操作都需要使用这个指针，而且使用之后一定不要忘记调用 fclose(3) 函数释放资源。</p>
-<p>　　如果该函数返回了一个指向 NULL 的指针，则表示文件打开失败了，可以通过 errno 获取到具体失败的原因。</p>
-<h2 id="2-fclose-3"><a href="#2-fclose-3" class="headerlink" title="2.fclose(3)"></a>2.fclose(3)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">1 fclose - close a stream</div><div class="line">2 </div><div class="line">3 #include &lt;stdio.h&gt;</div><div class="line">4 </div><div class="line">5 int fclose(FILE *fp);</div></pre></td></tr></table></figure>
-<p>这个函数是与 fopen(3) 函数对应的，当我们使用完一个文件之后，需要调用 fclose(3) 函数释放相关的资源，否则会造成内存泄漏。当一个 FILE 指针被 fclose(3) 函数成功释放后，这个指针所指向的内容将不能再次被使用，如果需要再次打开文件还需要调用 fopen(3) 函数。</p>
-<p>参数列表：</p>
-<p>　　fp：fopen(3) 函数的返回值作为参数传入即可。</p>
-<h2 id="3-fgets-3"><a href="#3-fgets-3" class="headerlink" title="3.fgets(3)"></a>3.fgets(3)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">1 fgets - input of strings</div><div class="line">2 </div><div class="line">3 #include &lt;stdio.h&gt;</div><div class="line">4 </div><div class="line">5 int fgetc(FILE *stream);</div><div class="line">6 </div><div class="line">7 char *fgets(char *s, int size, FILE *stream);</div></pre></td></tr></table></figure>
-<p>从输入流 stream 中读取一个字符串回填到 s 所指向的空间。</p>
-<p>这里出现了一个 stream 的概念，这个 stream 是什么呢，它被成为“流”，其实就是操作系统对于可以像文件一样操作的东西的一种抽象。它并非像自然界的小河流水一样潺潺细流，而通常是要么没有数据，要么一下子来一坨数据。当然 stream 也未必一定就是文件，比如系统为每个进程默认打开的三个 stream：stdin、stdout、stderr，它们本身就不是文件，就是与文件有着相同的操作方式，所以同样被抽象成了“流”。</p>
-<p>这个函数并没有解决 gets(3) 函数可能会导致的数组越界问题，而是通过牺牲了获取数据的正确性来保证程序不会出现数组越界的错误，实际上是掩盖了 gets(3) 的问题。</p>
-<p>该函数遇到如下四种情况会返回：</p>
-<p>　　1.当读入的数据量达到 size - 1 时；</p>
-<p>　　2.当读取的字符遇到 \n 时；</p>
-<p>　　3.当读取的字符遇到 EOF 时；</p>
-<p>　　4.当读取遇到错误时；</p>
-<p>并且它会在读取到的数据的最后面添加一个 \0 到 s 中。</p>
-<p>返回值：</p>
-<p>　　成功时返回 s。</p>
-<p>　　返回 NULL 时表示出现了错误或者读到了 strem 的末尾(EOF)。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/05/10/Linux编程笔记（一）——标准IO/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2056,7 +1889,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">46</span>
+                <span class="site-state-item-count">47</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2069,7 +1902,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">25</span>
+                <span class="site-state-item-count">26</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

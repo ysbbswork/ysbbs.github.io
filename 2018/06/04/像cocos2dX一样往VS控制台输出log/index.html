@@ -87,22 +87,16 @@
 
 
 
-<meta name="description" content="学习使用cocos2dx的时候少不了的就是在各个时间环节出打Log了，游戏人物和场景进行到哪一步，坐标是怎么遍历的都可以通过Log输出到控制台，不仅是对于游戏编程，对于非黑窗口，或者不想往黑窗口中print调试语句的时候，往VS的控制台输出调试的语句跟踪程序运行是非常舒服的办法。
-具体做法比较麻烦，但是可以简单封装一下，
-12345678910111213141516171819202122232">
+<meta name="description" content="学习使用cocos2dx的时候少不了的就是在各个时间环节出打Log了，游戏人物和场景进行到哪一步，坐标是怎么遍历的都可以通过Log输出到控制台，不仅是对于游戏编程，对于非黑窗口，或者不想往黑窗口中print调试语句的时候，往VS的控制台输出调试的语句跟踪程序运行是非常舒服的办法。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="像cocos2dX一样往VS控制台输出log">
 <meta property="og:url" content="https://ysbbswork.github.io/2018/06/04/像cocos2dX一样往VS控制台输出log/index.html">
 <meta property="og:site_name" content="ysbbs">
-<meta property="og:description" content="学习使用cocos2dx的时候少不了的就是在各个时间环节出打Log了，游戏人物和场景进行到哪一步，坐标是怎么遍历的都可以通过Log输出到控制台，不仅是对于游戏编程，对于非黑窗口，或者不想往黑窗口中print调试语句的时候，往VS的控制台输出调试的语句跟踪程序运行是非常舒服的办法。
-具体做法比较麻烦，但是可以简单封装一下，
-12345678910111213141516171819202122232">
-<meta property="og:updated_time" content="2018-06-04T09:32:34.832Z">
+<meta property="og:description" content="学习使用cocos2dx的时候少不了的就是在各个时间环节出打Log了，游戏人物和场景进行到哪一步，坐标是怎么遍历的都可以通过Log输出到控制台，不仅是对于游戏编程，对于非黑窗口，或者不想往黑窗口中print调试语句的时候，往VS的控制台输出调试的语句跟踪程序运行是非常舒服的办法。">
+<meta property="og:updated_time" content="2018-06-06T14:25:50.819Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="像cocos2dX一样往VS控制台输出log">
-<meta name="twitter:description" content="学习使用cocos2dx的时候少不了的就是在各个时间环节出打Log了，游戏人物和场景进行到哪一步，坐标是怎么遍历的都可以通过Log输出到控制台，不仅是对于游戏编程，对于非黑窗口，或者不想往黑窗口中print调试语句的时候，往VS的控制台输出调试的语句跟踪程序运行是非常舒服的办法。
-具体做法比较麻烦，但是可以简单封装一下，
-12345678910111213141516171819202122232">
+<meta name="twitter:description" content="学习使用cocos2dx的时候少不了的就是在各个时间环节出打Log了，游戏人物和场景进行到哪一步，坐标是怎么遍历的都可以通过Log输出到控制台，不仅是对于游戏编程，对于非黑窗口，或者不想往黑窗口中print调试语句的时候，往VS的控制台输出调试的语句跟踪程序运行是非常舒服的办法。">
 
 
 
@@ -359,6 +353,7 @@
 
       
         <p>学习使用cocos2dx的时候少不了的就是在各个时间环节出打Log了，游戏人物和场景进行到哪一步，坐标是怎么遍历的都可以通过Log输出到控制台，不仅是对于游戏编程，对于非黑窗口，或者不想往黑窗口中print调试语句的时候，往VS的控制台输出调试的语句跟踪程序运行是非常舒服的办法。</p>
+<a id="more"></a>
 <p>具体做法比较麻烦，但是可以简单封装一下，</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">当你编写非控制台程序时，比如GUI程序，像<span class="built_in">std</span>::<span class="built_in">cout</span> 和 <span class="built_in">printf</span>()这样的函数，就无法使用了，（不是使用了，程序就编译不了，是可以通过编译的，只是你不会看到这些函数打印出的信息。） </div><div class="line"></div><div class="line">Visual Studio给我们提供了一个“控制台” — 输出窗口。我们要使用什么函数才能将调试信息打印到输出窗口里面呢？ 看看下面的方法吧。</div><div class="line"></div><div class="line">    <span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"atlbase.h"</span></span></div><div class="line">    <span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"atlstr.h"</span></span></div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">OutputDebugPrintf</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>* strOutputString, ...)</span></span></div><div class="line">    &#123;</div><div class="line">    	<span class="keyword">char</span> strBuffer[<span class="number">4096</span>] = &#123; <span class="number">0</span> &#125;;</div><div class="line">    	va_list vlArgs;</div><div class="line">    	va_start(vlArgs, strOutputString);</div><div class="line">    	_vsnprintf_s(strBuffer, <span class="keyword">sizeof</span>(strBuffer) - <span class="number">1</span>, strOutputString, vlArgs);</div><div class="line">    	<span class="comment">//vsprintf(strBuffer,strOutputString,vlArgs);</span></div><div class="line">    	va_end(vlArgs);</div><div class="line">    	OutputDebugString(CA2W(strBuffer));</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">    	<span class="keyword">int</span> i = <span class="number">10</span>;</div><div class="line">    	OutputDebugPrintf(<span class="string">"I'm %d years old.\n"</span>, i);</div><div class="line">    	<span class="keyword">while</span> (<span class="number">1</span>) &#123;&#125;</div><div class="line">    	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">程序解释</div><div class="line"></div><div class="line">    <span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"atlbase.h"</span></span></div><div class="line">    <span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"atlstr.h"</span></span></div><div class="line"></div><div class="line">这两个头文件是给这个CA2W()宏函数准备的。这个宏函数的功能是：将ANSI character <span class="built_in">string</span>转化为Unicode character <span class="built_in">string</span>的函数。</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">参考链接：http:<span class="comment">//www.voidcn.com/article/p-ecsfuzgu-wn.html</span></div></pre></td></tr></table></figure>
 
@@ -506,7 +501,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">46</span>
+                <span class="site-state-item-count">47</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -519,7 +514,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">25</span>
+                <span class="site-state-item-count">26</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

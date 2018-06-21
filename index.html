@@ -260,6 +260,323 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://ysbbswork.github.io/2018/06/21/Linux后台开发常用命令/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yang Shuai">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ysbbs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2018/06/21/Linux后台开发常用命令/" itemprop="url">
+                  Linux后台开发常用命令
+                </a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-21T16:30:08+08:00">
+                2018-06-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/06/21/Linux后台开发常用命令/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/06/21/Linux后台开发常用命令/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2018/06/21/Linux后台开发常用命令/" class="leancloud_visitors" data-flag-title="Linux后台开发常用命令">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Linux后台开发主要涉及进程，网络，系统性能调优等方面的命令，网络上给的总结如下。</p>
+<p>ipcs：</p>
+<p>提供关于一些进程间通信方式的信息，包括<strong>共享内存</strong>，<strong>消息队列</strong>，<strong>信号</strong></p>
+<p><strong>interprocess communication （ipc）</strong></p>
+<table>
+<thead>
+<tr>
+<th>Ipcs -a</th>
+<th>默认输出信息，打印出所有进程间通信方式的信息</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ipcs -q</td>
+<td>输出使用消息队列进行进程间通信的信息</td>
+</tr>
+<tr>
+<td>Ipcs -s</td>
+<td>输出使用信号进行进程间通信的信息</td>
+</tr>
+<tr>
+<td>Ipcs -m</td>
+<td>输出使用共享内存进行进程间通信的信息</td>
+</tr>
+<tr>
+<td>Ipcs -t</td>
+<td>输出信息的时间详细变化</td>
+</tr>
+<tr>
+<td>Ipcs -p</td>
+<td>输出ipc方式的进程<strong>id</strong></td>
+</tr>
+<tr>
+<td>Ipcs -c</td>
+<td>输出ipc方式的创建者</td>
+</tr>
+<tr>
+<td>Ipcs -u</td>
+<td>输出ipc方式的各种状态</td>
+</tr>
+</tbody>
+</table>
+<p>ipcrm：</p>
+<p>移除一个消息<strong>对象</strong>。或者共享内存<strong>段</strong>，或者一个信号<strong>集</strong>，同时会将与ipc对象相关链的数据也一起移除。只有<strong>超级管理员，或者ipc对象的创建者</strong>才有这项权利啦.</p>
+<p>Key id  shm msg sem</p>
+<table>
+<thead>
+<tr>
+<th>Ipcrm -M shmkey</th>
+<th>移除使用shmkey创建的共享内存段</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ipcrm -m shmid</td>
+<td>移除使用shmid标识的共享内存段</td>
+</tr>
+<tr>
+<td>Ipcrm -Q msgkey</td>
+<td>移除使用msgkey创建的消息队列</td>
+</tr>
+<tr>
+<td>Ipcrm -q msgid</td>
+<td>移除使用msgid标识的消息队列</td>
+</tr>
+<tr>
+<td>Ipcrm -S semkey</td>
+<td>移除使用semkey创建的信号</td>
+</tr>
+<tr>
+<td>Ipcrm -s semid</td>
+<td>移除使用semid标识的信号</td>
+</tr>
+</tbody>
+</table>
+<p>信号量又称为信号灯，它是用来协调不同<a href="http://soft.zdnet.com.cn/files/list-0-0-76839-1-1.htm" target="_blank" rel="external">进程</a>间的数据对象的，而最主要的应用是<strong>共享内存方式的</strong><a href="http://soft.zdnet.com.cn/files/list-0-0-76839-1-1.htm" target="_blank" rel="external"><strong>进程</strong></a><strong>间通信。</strong>本质上，信号量是一个计数器，它用来记录对某个资源（如共享内存）的存取状况；共享内存是运行在同一台机器上的<a href="http://soft.zdnet.com.cn/files/list-0-0-76839-1-1.htm" target="_blank" rel="external">进</a><a href="http://soft.zdnet.com.cn/files/list-0-0-76839-1-1.htm" target="_blank" rel="external">程</a>间通信最快的方式，因为数据不需要在不同的<a href="http://soft.zdnet.com.cn/files/list-0-0-76839-1-1.htm" target="_blank" rel="external">进程</a>间复制。通常由一个<a href="http://soft.zdnet.com.cn/files/list-0-0-76839-1-1.htm" target="_blank" rel="external">进程</a>创建一块共享内存区，其余<a href="http://soft.zdnet.com.cn/files/list-0-0-76839-1-1.htm" target="_blank" rel="external">进程</a>对这块内存区进行读写。在<a href="http://soft.zdnet.com.cn/files/list-0-0-96517-1-1.htm" target="_blank" rel="external">Linux</a>系统下 ，常用的方式是通过shmXXX函数族来实现利用共享内存进行存储的。如Shmget，类似于 malloc函数。</p>
+<p>netstat</p>
+<p>是一款命令行工具，可用于列出系统上<strong>所有</strong>网络套接字的连接情况，包括tcp/udp/unix套接字，还能列出处于<strong>监听状态/等待请求</strong>的套接字。如果想确认系统web服务有没有开启，可以查看80端口是否开启。主要功能：打印网络连接、路由表、连接的数据统计、伪装连接以及广播域成员。</p>
+<p><strong>1.列出所有连接（-a（all））</strong></p>
+<p>netstat –a  上述命令列出 tcp, udp 和 unix 协议下所有套接字的所有连接</p>
+<p><strong>2.只列出tcp/udp的连接</strong></p>
+<p>Netstat –<strong>at</strong>  (all tcp)  只列出tcp连接（包括ipv4/ipv6）</p>
+<p>Netstat –<strong>au</strong>   只列出udp连接（包括ipv4/ipv6）</p>
+<p><strong>3.禁用反向域名解析，加快查询速度（-n 助记no（禁止））</strong></p>
+<p>默认情况下 netstat 会通过<strong>反向域名解析技术</strong>查找每个 IP 地址对应的主机名。这会降低查找速度。如果你觉得 IP 地址已经足够，而没有必要知道主机名，就使用 -n 选项禁用域名解析功能。</p>
+<p>Netstat <strong>-ant</strong></p>
+<p><strong>4.列出监听套接字的连接（-l：listen）</strong></p>
+<p>任何网络服务的后台进程都会打开一个端口，用于监听接入的请求</p>
+<p>Netstat<strong>–tnl</strong>  现在我们可以看到处于监听状态的 TCP 端口和连接。</p>
+<p>如果你查看所有监听端口，去掉 -t 选项。如果你只想查看 UDP 端口，使用 -u 选项，代替 -t 选项。-tnl -unl</p>
+<p><strong>注意</strong>：不要使用 -a 选项，否则 netstat 会列出所有连接，而不仅仅是监听端口。</p>
+<p><strong>5.获取进程名，进程号和用户id（-p，process）</strong></p>
+<p>查看端口和连接的信息时，能查看到它们对应的进程名和进程号对系统管理员来说是非常有帮助的。举个栗子，Apache 的 httpd 服务开启80端口，如果你要查看 http 服务是否已经启动，或者 http 服务是由 apache 还是 nginx 启动的，这时候你可以看看进程名。</p>
+<p>使用 <strong>-p 选项查看进程信息。</strong></p>
+<p>使用 -p 选项时，netstat 必须运行在 root 权限之下，不然它就不能得到运行在 root 权限下的进程名，而很多服务包括 http 和 ftp 都运行在root 权限之下。</p>
+<p><strong>Sudo netstat -nlpt</strong> 列出tcp监听套接字和对应的进程名</p>
+<p>使用 -ep 选项可以同时查看进程名和用户名。</p>
+<p>sudo netstat -ltpe</p>
+<p>列出用户名，若结合-n：则只列出用户id</p>
+<p><strong>6.打印统计数据（-s/statistics）</strong></p>
+<p>Netstat 可以打印出<strong>网络统计数据</strong>，包括某个协议下的收发包数量。</p>
+<p>Netstat –s   若需要打印tcp/udp的数据包，则加-t/-u选项。</p>
+<p><strong>7.打印内核路由信息（-r/route）</strong></p>
+<p>Netstat –r   跟route命令显示的一样。</p>
+<p><strong>8.打印网络接口信息（-i/interface）</strong></p>
+<p>Netstat –I  加-e：更清晰明了 跟ifconfig命令一样</p>
+<p><strong>9.持续输出（-c/continue）</strong></p>
+<p>Netstat –ct 持续输出tcp信息</p>
+<p><strong>10.显示多播组信息（-g/group）</strong></p>
+<p>Netstat -g</p>
+<p><strong>11.打印active状态的连接</strong></p>
+<p><strong>Active状态的套接字用ESTABLISHED来表示</strong>。</p>
+<p>netstat -atnp | grep ESTA：意思是列出active状态的tcp连接，配合watch 命令监视 active 状态的连接</p>
+<p><strong>watch-d -n0 “netstat -atnp | grep ESTA”</strong></p>
+<p><strong>12.查看服务是否在运行</strong></p>
+<p>如果你想看看 http,smtp 或ntp 服务是否在运行，使用 <strong>grep</strong></p>
+<p>sudo netstat -aple | grep ntp</p>
+<p>ntp 是网络时间协议，用于保证机器时间一致。不只是服务器，你的 Windowd、Mac 这样的桌面大多也有用它。ntpd 是提供这个服务的守护进程。</p>
+<p><strong>tcpdump</strong></p>
+<p>用简单的话来定义tcpdump，就是：dumpthe traffic on a network，根据使用者的定义对网络上的<strong>数据包进行截获的包分析工具</strong>。 tcpdump可以将网络中传送的数据包的<strong>“头”</strong>完全截获下来提供分析。它支持针对<strong>网络层</strong>、<strong>协议</strong>、<strong>主机</strong>、<strong>网络</strong>或<strong>端口</strong>的过滤，并提供<strong>and、or、not</strong>等逻辑语句来帮助你去掉无用的信息。如果选用明文传送内容，还可以对截获内容查看，所以有点黑客工具的味道。</p>
+<p><strong>常用命令：</strong></p>
+<table>
+<thead>
+<tr>
+<th>tcpdump</th>
+<th>普通情况下，直接启动tcpdump将监视<strong>第一个网络接口上所有流过的数据包</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>tcpdump -i <strong>eth1</strong></td>
+<td>监视指定接口的数据包</td>
+</tr>
+<tr>
+<td>tcpdump <strong>hos</strong>t sundown</td>
+<td>截获所有进入或离开sundown的数据包</td>
+</tr>
+<tr>
+<td>tcpdump host 210.27.48.1</td>
+<td>截获所有210.27.48.1 的主机收到的和发出的所有的数据包</td>
+</tr>
+<tr>
+<td>tcpdump host helios and hotoracehotorace</td>
+<td>打印helios 与 hot 或者与 ace 之间通信的数据包</td>
+</tr>
+<tr>
+<td>tcpdump host 210.27.48.1 and \ (210.27.48.2 or 210.27.48.3 )</td>
+<td>截获主机210.27.48.1 和主机210.27.48.2 或210.27.48.3的通信</td>
+</tr>
+<tr>
+<td>tcpdump ip host ace and not helios</td>
+<td>打印ace与任何其他主机之间通信的IP 数据包, 但<strong>不包括</strong>与helios之间的数据包.</td>
+</tr>
+<tr>
+<td>tcpdump ip host 210.27.48.1 and ! 210.27.48.2</td>
+<td>获取主机210.27.48.1除了和主机210.27.48.2之外所有主机通信的ip包</td>
+</tr>
+<tr>
+<td>tcpdump -i eth0 src host hostname</td>
+<td>截获主机hostname发送的所有数据</td>
+</tr>
+<tr>
+<td>tcpdump -i eth0 dst host hostname</td>
+<td>监视所有送到主机hostname的数据包</td>
+</tr>
+<tr>
+<td>tcpdump <strong>tcp port</strong> 23 and host 210.27.48.1</td>
+<td>获取主机210.27.48.1接收或发出的tcp包</td>
+</tr>
+<tr>
+<td>tcpdump <strong>udp </strong>port 123</td>
+<td>对本机的udp 123 端口进行监视</td>
+</tr>
+</tbody>
+</table>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="https://ysbbswork.github.io/2018/06/15/使用select实现套接字多路复用小记/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1673,198 +1990,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://ysbbswork.github.io/2018/05/21/C-socket编程之大端小端/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Yang Shuai">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ysbbs">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2018/05/21/C-socket编程之大端小端/" itemprop="url">
-                  C++socket编程之大端小端
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-21T16:18:02+08:00">
-                2018-05-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/05/21/C-socket编程之大端小端/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/05/21/C-socket编程之大端小端/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2018/05/21/C-socket编程之大端小端/" class="leancloud_visitors" data-flag-title="C++socket编程之大端小端">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>不同CPU中，4字节整数1在内存空间的存储方式是不同的。4字节整数1可用2进制表示如下：</p>
-<p>00000000 00000000 00000000 00000001</p>
-<p>有些CPU以上面的顺序存储到内存，另外一些CPU则以倒序存储，如下所示：</p>
-<p>00000001 00000000 00000000 00000000</p>
-<p>若不考虑这些就收发数据会发生问题，因为保存顺序的不同意味着对接收数据的解析顺序也不同。</p>
-<h2 id="大端序和小端序"><a href="#大端序和小端序" class="headerlink" title="大端序和小端序"></a>大端序和小端序</h2><p>CPU向内存保存数据的方式有两种：</p>
-<ul>
-<li>大端序（Big Endian）：高位字节存放到低位地址（高位字节在前）。</li>
-<li>小端序（Little Endian）：高位字节存放到高位地址（低位字节在前）。</li>
-</ul>
-<p>仅凭描述很难解释清楚，不妨来看一个实例。假设在 0x20 号开始的地址中保存4字节 int 型数据 0x12345678，大端序CPU保存方式如下图所示：</p>
-<p><img src="http://c.biancheng.net/cpp/uploads/allimg/151109/1-15110ZSA3309.jpg" alt="img"><br>图1：整数 0x12345678 的大端序字节表示</p>
-<p>对于大端序，最高位字节 0x12 存放到低位地址，最低位字节 0x78 存放到高位地址。小端序的保存方式如下图所示：</p>
-<p><img src="http://c.biancheng.net/cpp/uploads/allimg/151109/1-15110ZT059560.jpg" alt="img"><br>图2：整数 0x12345678 的小端序字节表示</p>
-<p>不同CPU保存和解析数据的方式不同（主流的Intel系列CPU为小端序），小端序系统和大端序系统通信时会发生数据解析错误。因此在发送数据前，要将数据转换为统一的格式——网络字节序（Network Byte Order）。网络字节序统一为大端序。</p>
-<p>主机A先把数据转换成大端序再进行网络传输，主机B收到数据后先转换为自己的格式再解析。</p>
-<h2 id="网络字节序转换函数"><a href="#网络字节序转换函数" class="headerlink" title="网络字节序转换函数"></a>网络字节序转换函数</h2><p>网络字节序转换函数，如下所示：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//创建sockaddr_in结构体变量</span></div><div class="line"><span class="keyword">struct</span> sockaddr_in serv_addr;</div><div class="line"><span class="built_in">memset</span>(&amp;serv_addr, <span class="number">0</span>, <span class="keyword">sizeof</span>(serv_addr));  <span class="comment">//每个字节都用0填充</span></div><div class="line">serv_addr.sin_family = AF_INET;  <span class="comment">//使用IPv4地址</span></div><div class="line">serv_addr.sin_addr.s_addr = inet_addr(<span class="string">"127.0.0.1"</span>);  <span class="comment">//具体的IP地址</span></div><div class="line">serv_addr.sin_port = htons(<span class="number">1234</span>);  <span class="comment">//端口号</span></div></pre></td></tr></table></figure>
-<p>htons() 用来将当前主机字节序转换为网络字节序，其中</p>
-<p><code>h</code>代表主机（host）字节序，</p>
-<p><code>n</code>代表网络（network）字节序，</p>
-<p><code>s</code>代表short，htons 是 h、to、n、s 的组合，可以理解为”将short型数据从当前主机字节序转换为网络字节序“。</p>
-<p>常见的网络字节转换函数有：</p>
-<ul>
-<li>htons()：host to network short，将short类型数据从主机字节序转换为网络字节序。</li>
-<li>ntohs()：network to host short，将short类型数据从网络字节序转换为主机字节序。</li>
-<li>htonl()：host to network long，将long类型数据从主机字节序转换为网络字节序。</li>
-<li>ntohl()：network to host long，将long类型数据从网络字节序转换为主机字节序。</li>
-</ul>
-<p>通常，以<code>s</code>为后缀的函数中，<code>s</code>代表2个字节short，因此用于端口号转换；以<code>l</code>为后缀的函数中，<code>l</code>代表4个字节的long，因此用于IP地址转换。</p>
-<p>举例说明上述函数的调用过程：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;WinSock2.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">pragma</span> comment(lib, <span class="meta-string">"ws2_32.lib"</span>)</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">unsigned</span> <span class="keyword">short</span> host_port = <span class="number">0x1234</span>, net_port;</div><div class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> host_addr = <span class="number">0x12345678</span>, net_addr;</div><div class="line">    net_port = htons(host_port);</div><div class="line">    net_addr = htonl(host_addr);</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"Host ordered port: %#x\n"</span>, host_port);</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"Network ordered port: %#x\n"</span>, net_port);</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"Host ordered address: %#lx\n"</span>, host_addr);</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"Network ordered address: %#lx\n"</span>, net_addr);</div><div class="line">    system(<span class="string">"pause"</span>);</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>运行结果：</p>
-<p>Host ordered port: 0x1234</p>
-<p>Network ordered port: 0x3412</p>
-<p>Host ordered address: 0x12345678</p>
-<p>Network ordered address: 0x78563412</p>
-<p>另外需要说明的是，sockaddr_in 中保存IP地址的成员为32位整数，而我们熟悉的是点分十进制表示法，例如 127.0.0.1，它是一个字符串，因此为了分配IP地址，需要将字符串转换为4字节整数。</p>
-<p>inet_addr() 函数可以完成这种转换。inet_addr() 除了将字符串转换为32位整数，同时还进行网络字节序转换。请看下面的代码：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;WinSock2.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">pragma</span> comment(lib, <span class="meta-string">"ws2_32.lib"</span>)</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">char</span> *addr1 = <span class="string">"1.2.3.4"</span>;</div><div class="line">    <span class="keyword">char</span> *addr2 = <span class="string">"1.2.3.256"</span>;</div><div class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> conv_addr = inet_addr(addr1);</div><div class="line">    <span class="keyword">if</span>(conv_addr == INADDR_NONE)&#123;</div><div class="line">        <span class="built_in">puts</span>(<span class="string">"Error occured!"</span>);</div><div class="line">    &#125;<span class="keyword">else</span>&#123;</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"Network ordered integer addr: %#lx\n"</span>, conv_addr);</div><div class="line">    &#125;</div><div class="line">    conv_addr = inet_addr(addr2);</div><div class="line">    <span class="keyword">if</span>(conv_addr == INADDR_NONE)&#123;</div><div class="line">        <span class="built_in">puts</span>(<span class="string">"Error occured!"</span>);</div><div class="line">    &#125;<span class="keyword">else</span>&#123;</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"Network ordered integer addr: %#lx\n"</span>, conv_addr);</div><div class="line">    &#125;</div><div class="line">    system(<span class="string">"pause"</span>);</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>运行结果：</p>
-<p>Network ordered integer addr: 0x4030201</p>
-<p>Error occured!</p>
-<p>从运行结果可以看出，inet_addr() 不仅可以把IP地址转换为32位整数，还可以检测无效IP地址。</p>
-<p>注意：为 sockaddr_in 成员赋值时需要显式地将主机字节序转换为网络字节序，而通过 write()/send() 发送数据时TCP协议会自动转换为网络字节序，不需要再调用相应的函数。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1909,7 +2039,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-count">51</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

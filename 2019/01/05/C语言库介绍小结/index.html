@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="随笔," />
+  <meta name="keywords" content="C/C++,笔记," />
 
 
 
@@ -87,31 +87,31 @@
 
 
 
-<meta name="description" content="本博客采用创作共用版权协议, 要求署名、非商业用途和保持一致. 转载本博客文章必须也遵循署名-非商业用途-保持一致的创作共用协议. 
- 
-人必须忠于自己。不能违背本性。带着杀戮活下去是很难的，这里面是没有退路的。对或错，都是个标签。这种标签会伴你一生。现在快跑回去找你妈妈吧，告诉她一切都好。山谷里不会再有杀戮了。
-
-今天一个人去电影院把金刚狼3看了，虽然国内官方将电影译作金刚狼3：殊死一战，虽算得">
+<meta name="description" content="对C/C++语言的库相关内容进行了总结，在平时项目中经常用到链接库，
+虽然很多人都会用，但是对于其原因如何探究下去就是一种模糊的状态，可谓是知其然而不知其所以然，
+为什么要链接库？静态库和动态库分别有什么特点？
+自己什么时候该动态库，什么时候又该用静态库呢？
+自己该如何编译一个库呢？
+下面就以笔记的方式总结了一下。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="金刚狼3暮狼寻乡">
-<meta property="og:url" content="https://ysbbswork.github.io/2017/03/05/金刚狼3/index.html">
+<meta property="og:title" content="C语言库介绍小结">
+<meta property="og:url" content="https://ysbbswork.github.io/2019/01/05/C语言库介绍小结/index.html">
 <meta property="og:site_name" content="ysbbs">
-<meta property="og:description" content="本博客采用创作共用版权协议, 要求署名、非商业用途和保持一致. 转载本博客文章必须也遵循署名-非商业用途-保持一致的创作共用协议. 
- 
-人必须忠于自己。不能违背本性。带着杀戮活下去是很难的，这里面是没有退路的。对或错，都是个标签。这种标签会伴你一生。现在快跑回去找你妈妈吧，告诉她一切都好。山谷里不会再有杀戮了。
-
-今天一个人去电影院把金刚狼3看了，虽然国内官方将电影译作金刚狼3：殊死一战，虽算得">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/005HFdfGgy1fdcbzk9dxbj30zk0g6gql">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/005HFdfGgy1fdccornthrj30j60vk3zh">
-<meta property="og:updated_time" content="2018-03-13T09:06:21.008Z">
+<meta property="og:description" content="对C/C++语言的库相关内容进行了总结，在平时项目中经常用到链接库，
+虽然很多人都会用，但是对于其原因如何探究下去就是一种模糊的状态，可谓是知其然而不知其所以然，
+为什么要链接库？静态库和动态库分别有什么特点？
+自己什么时候该动态库，什么时候又该用静态库呢？
+自己该如何编译一个库呢？
+下面就以笔记的方式总结了一下。">
+<meta property="og:updated_time" content="2019-01-05T13:33:15.252Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="金刚狼3暮狼寻乡">
-<meta name="twitter:description" content="本博客采用创作共用版权协议, 要求署名、非商业用途和保持一致. 转载本博客文章必须也遵循署名-非商业用途-保持一致的创作共用协议. 
- 
-人必须忠于自己。不能违背本性。带着杀戮活下去是很难的，这里面是没有退路的。对或错，都是个标签。这种标签会伴你一生。现在快跑回去找你妈妈吧，告诉她一切都好。山谷里不会再有杀戮了。
-
-今天一个人去电影院把金刚狼3看了，虽然国内官方将电影译作金刚狼3：殊死一战，虽算得">
-<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/005HFdfGgy1fdcbzk9dxbj30zk0g6gql">
+<meta name="twitter:title" content="C语言库介绍小结">
+<meta name="twitter:description" content="对C/C++语言的库相关内容进行了总结，在平时项目中经常用到链接库，
+虽然很多人都会用，但是对于其原因如何探究下去就是一种模糊的状态，可谓是知其然而不知其所以然，
+为什么要链接库？静态库和动态库分别有什么特点？
+自己什么时候该动态库，什么时候又该用静态库呢？
+自己该如何编译一个库呢？
+下面就以笔记的方式总结了一下。">
 
 
 
@@ -139,13 +139,13 @@
 
 
 
-  <link rel="canonical" href="https://ysbbswork.github.io/2017/03/05/金刚狼3/"/>
+  <link rel="canonical" href="https://ysbbswork.github.io/2019/01/05/C语言库介绍小结/"/>
 
 
 
 
 
-  <title> 金刚狼3暮狼寻乡 | ysbbs </title>
+  <title> C语言库介绍小结 | ysbbs </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -274,7 +274,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://ysbbswork.github.io/2017/03/05/金刚狼3/">
+    <link itemprop="mainEntityOfPage" href="https://ysbbswork.github.io/2019/01/05/C语言库介绍小结/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Yang Shuai">
@@ -295,7 +295,7 @@
             
             
               
-                金刚狼3暮狼寻乡
+                C语言库介绍小结
               
             
           </h2>
@@ -310,8 +310,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-05T22:06:50+08:00">
-                2017-03-05
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-05T21:31:17+08:00">
+                2019-01-05
               </time>
             
 
@@ -329,8 +329,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/03/05/金刚狼3/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/05/金刚狼3/" itemprop="commentCount"></span>
+                <a href="/2019/01/05/C语言库介绍小结/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2019/01/05/C语言库介绍小结/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -338,7 +338,7 @@
 
           
           
-             <span id="/2017/03/05/金刚狼3/" class="leancloud_visitors" data-flag-title="金刚狼3暮狼寻乡">
+             <span id="/2019/01/05/C语言库介绍小结/" class="leancloud_visitors" data-flag-title="C语言库介绍小结">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -367,39 +367,183 @@
       
 
       
-        <p><strong>本博客采用创作共用版权协议, 要求署名、非商业用途和保持一致. 转载本博客文章必须也遵循署名-非商业用途-保持一致的创作共用协议.</strong> </p>
- <!-- 标签别名 -->
-<blockquote class="blockquote-center"><p>人必须忠于自己。不能违背本性。带着杀戮活下去是很难的，这里面是没有退路的。对或错，都是个标签。这种标签会伴你一生。现在快跑回去找你妈妈吧，告诉她一切都好。山谷里不会再有杀戮了。</p>
-</blockquote>
-<p><img src="http://ww1.sinaimg.cn/large/005HFdfGgy1fdcbzk9dxbj30zk0g6gql" alt=""><br>今天一个人去电影院把金刚狼3看了，<br>虽然国内官方将电影译作金刚狼3：殊死一战，虽算得上恰当，<br>但在我心中借用漫画名字，暮狼寻乡，更为合适，<br>受到长期核辐射的影响之后，金刚狼体内的自愈因子也渐渐失去了作用，</p>
-<p>反复的收缩钢爪，进入体内的病菌使他变得年迈多病，<br>此时的Logan，是一匹已经受尽杀戮老狼，也许死亡是他最好的归宿。</p>
+        <p>对C/C++语言的库相关内容进行了总结，在平时项目中经常用到链接库，</p>
+<p>虽然很多人都会用，但是对于其原因如何探究下去就是一种模糊的状态，可谓是知其然而不知其所以然，</p>
+<p>为什么要链接库？静态库和动态库分别有什么特点？</p>
+<p>自己什么时候该动态库，什么时候又该用静态库呢？</p>
+<p>自己该如何编译一个库呢？</p>
+<p>下面就以笔记的方式总结了一下。</p>
 <a id="more"></a>
-<p>金刚狼系列电影真的很好的阐述了金刚狼的一生，无论什么时候他都是不原因去伤害别人，<br>从第一次X计划，杀掉整个部落的人只是为了得到艾德曼金属，金刚狼做不到，第一个离去，<br>无论是躲到深山里当伐木工人，<br>还是在西伯利亚当一个猎人，<br>无论怎样逃避战争，无论离世界多么远，麻烦也会一次又一次找上门来，带走他身边一个又一个熟悉的人。</p>
-<p>金刚狼只能不断去逃避社会，放逐自己，越发脾气暴躁，不和任何人打交道，不会去爱任何人，<br>他不是孤僻粗俗，而是细腻的不想去伤害任何人。<br>外表粗犷却又感情丰富，</p>
-<p>X-23问他做了什么噩梦，也是别人伤害了你吗？<br>金刚狼说，我的噩梦里，都是我伤害了别人。</p>
-<p>而X-23的到来，这个那么像他的女孩，真是让暮年的狼又拾起了爱，<br>一种家人之间的爱。<br><img src="http://ww1.sinaimg.cn/large/005HFdfGgy1fdccornthrj30j60vk3zh" alt=""></p>
-<p>在查尔斯死后，他对活着的留念莫过于照顾好这个“跟他很像”的女儿，<br>也想去活出一个生活的模样，一个家的样子。</p>
-<p>但当金刚狼带她找到所谓安全地方，却咬着牙跟X-23吼着，<br>金刚狼吼道，我已经带你到你想去的地方，已经带你找到你想找的人，你还想要什么！<br>几乎歇斯底里吼着，<br>赶着女孩走。</p>
-<p>他怕再一次因为自己伤害到最亲的人，</p>
-<p>但这一次却流露出最温情的一面，</p>
-<p>吼红了眼睛，泛着泪说，</p>
-<p><strong>我总是能带来厄运，所有我亲近的人都会被我害死。</strong></p>
-<p>迟暮之年的狼叔，在自己已卸下所谓的超级英雄，他也是一个普普通通的人，Logan。</p>
-<p>我记不清具体的台词，但我看到这一幕，我真的能感受到那种刀割的感觉，</p>
-<p>他本对这个世界并不留念，</p>
-<p>但突然冒出来一个“跟他很像”的女儿，让他吼着吼着吼出眼泪的女儿。</p>
-<p>他，</p>
-<p>想爱，却不敢爱。</p>
-<p>最后，Logan为自己爱的人战死，卸下所有的标签，作为一个父亲保护自己女儿死去，</p>
-<p>在生命的最后，守护到了自己的爱，对于暮年的Logan，</p>
-<p>已是最好的归宿。</p>
-<p>放倒的十字架，隐喻着X战警也随之落幕了，是的，没有金刚狼的X战警即使继续拍，也会少了很多，</p>
-<p>在我们的心中，谢幕的不仅仅是金刚狼，</p>
-<p>更是一个时代。</p>
-<p>——Ys</p>
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=18828737&auto=1&height=66"></iframe>
-
-
+<h1 id="旋风式介绍"><a href="#旋风式介绍" class="headerlink" title="旋风式介绍"></a>旋风式介绍</h1><ul>
+<li>库是什么？(二进制源代码)<ul>
+<li>二进制文件</li>
+<li>将源代码-》二进制格式的源代码<ul>
+<li>.c .cpp</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>能干什么：加密，保护知识产品，封装</li>
+<li>怎么用？<ul>
+<li>静态库：<ul>
+<li>gcc -c 参数生成 .o：<code>gcc a.c b.c -c</code></li>
+<li>用ar rcs 进行打包：<code>ar rcs libtest.a a.o b.o</code></li>
+<li>使用：编写测试程序test.c：<code>gcc test.c -L./ -ltest</code></li>
+</ul>
+</li>
+<li>动态库：<ul>
+<li>gcc -c -fpic 参数生成 .o：<code>gcc a.c b.c -c</code> -fpic</li>
+<li>用gcc -shared 参数进行打包：<code>gcc -shared a.o b.o -o libtest.so</code></li>
+<li>使用：编写测试程序test.c：<code>gcc test.c -L./ -ltest</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>静态库优缺点<ul>
+<li>优点：<ul>
+<li>静态库被打包到应用程序中加载速度快</li>
+<li>发布程序无需提供静态库，移植方便</li>
+</ul>
+</li>
+<li>缺点：<ul>
+<li>修改库里什么东西，都要重新编译整个项目，更新的时候很麻烦<ul>
+<li>就比如手机里有个游戏，每次更新都需要你重新安装APP，岂不是烦死了。。。</li>
+</ul>
+</li>
+<li>浪费系统资源（一些不同程序共用的库都得自行分别加载到内存），浪费内存</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>动态库优缺点<ul>
+<li>优点<ul>
+<li>只有程序调用到动态库中的函数时候，才会把动态库加载到内存<ul>
+<li>ld-linux 为动态链接器，负责调度这个过程</li>
+</ul>
+</li>
+<li>程序升级简单</li>
+<li>可实现进程间资源共享</li>
+<li>程序员可以控制何时加载动态库</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>加载速度比静态库慢</li>
+<li>发布程序需要提供依赖的动态库</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="具体介绍"><a href="#具体介绍" class="headerlink" title="具体介绍"></a>具体介绍</h1><ul>
+<li><p>库制作出来之后，如何给用户使用？ </p>
+<ul>
+<li>头文件（使用说明）</li>
+<li>制作出的库</li>
+</ul>
+</li>
+<li><p>静态库的制作和使用</p>
+<ul>
+<li><p>命名规则：libtest.a</p>
+<ul>
+<li>前缀lib</li>
+<li>xxx-库的名字</li>
+<li>.a</li>
+</ul>
+</li>
+<li><p>制作步骤：</p>
+<ul>
+<li>原材料：源代码.c .cpp</li>
+<li>将.c 生成.o<ul>
+<li><code>gcc a.cpp b.cpp -c</code></li>
+</ul>
+</li>
+<li>将.o打包<ul>
+<li>ar rcs 静态库的名字 原材料<ul>
+<li><code>ar rcs libtest.a *.o</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>nm可以查看静态库中有什么内容：<code>nm  libtest.a</code></li>
+</ul>
+</li>
+<li><p>库的使用</p>
+<ul>
+<li>-L：指定静态库的文件所在的路径</li>
+<li>-l：指定静态库的名字</li>
+</ul>
+<p>例：静态库文件名叫libtest.a：</p>
+<p><code>gcc main.c -I ./include -L ./lib -ltest -o myapp</code></p>
+</li>
+</ul>
+</li>
+<li><p>动态库的制作和使用.so</p>
+<ul>
+<li>命名规则<ul>
+<li>libxxx.so</li>
+</ul>
+</li>
+<li>制作步骤<ul>
+<li>将源文件生成.o<ul>
+<li><code>gcc a.c b.c -fpic(fPIC)</code></li>
+</ul>
+</li>
+<li>打包<ul>
+<li><code>gcc -shared -o libxxx.so a.o b.o</code></li>
+</ul>
+</li>
+<li>库的使用<ul>
+<li>头文件</li>
+<li>动态库 libtest.so</li>
+<li>链接：<code>gcc main.c -I ./include -L ./ -l test -o myapp</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>查看库的链接：ldd myapp</li>
+<li>动态库无法加载：<ul>
+<li>使用环境变量<ul>
+<li>临时设置：在终端：<code>export LD_LIBRARY_PATH=动态库的路径</code><ul>
+<li>为了不覆盖LD_LIBRARY_PATH内的值：用拼接写法：<code>export LD_LIBRARY_PATH=XXXXX:$LD_LIBRARY_PATH</code></li>
+</ul>
+</li>
+<li>永久设置<ul>
+<li>用户级别：<ul>
+<li>~/.bashrc</li>
+<li>把shell语句<code>export LD_LIBRARY_PATH=XXXXX:$LD_LIBRARY_PATH</code>加到文件最后</li>
+<li>source ~/.bashrc ：相当于重新对文件做个加载</li>
+</ul>
+</li>
+<li>系统级别：<ul>
+<li>/etc/profile</li>
+<li>修改完：source /etc/profile</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>/etc/ld.so.cache 文件列表 (适用于库位置基本不变了)<ul>
+<li>找到一个配置文件<ul>
+<li>/etc/ld.so.conf</li>
+<li>把动态库的绝对路径添加到文件中</li>
+</ul>
+</li>
+<li>执行一个命令：<ul>
+<li>sudo ldconfig -v</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>拓展方式：<ul>
+<li>dlopen,dlclose,dlsym</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 
       
     </div>
@@ -407,6 +551,36 @@
     <div>
       
         
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script type="text/javascript" src="http://jslibs.wuxubj.cn/sweetalert_mini/jquery-1.7.1.min.js"></script>
+  <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
+  <p><span>本文标题:</span><a href="/2019/01/05/C语言库介绍小结/">C语言库介绍小结</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 Yang Shuai 的个人博客">Yang Shuai</a></p>
+  <p><span>发布时间:</span>2019年01月05日 - 21:01</p>
+  <p><span>最后更新:</span>2019年01月05日 - 21:01</p>
+  <p><span>原始链接:</span><a href="/2019/01/05/C语言库介绍小结/" title="C语言库介绍小结">https://ysbbswork.github.io/2019/01/05/C语言库介绍小结/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://ysbbswork.github.io/2019/01/05/C语言库介绍小结/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>
+</div>
+<script>
+    var clipboard = new Clipboard('.fa-clipboard');
+    clipboard.on('success', $(function(){
+      $(".fa-clipboard").click(function(){
+        swal({
+          title: "",
+          text: '复制成功',
+          html: false,
+          timer: 500,
+          showConfirmButton: false
+        });
+      });
+    }));
+</script>
+
 
       
     </div>
@@ -451,7 +625,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/随笔/" rel="tag"># 随笔</a>
+            <a href="/tags/C-C/" rel="tag"># C/C++</a>
+          
+            <a href="/tags/笔记/" rel="tag"># 笔记</a>
           
         </div>
       
@@ -464,8 +640,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/05/随笔/" rel="next" title="随笔">
-                <i class="fa fa-chevron-left"></i> 随笔
+              <a href="/2019/01/04/gcc实用笔记/" rel="next" title="gcc实用笔记">
+                <i class="fa fa-chevron-left"></i> gcc实用笔记
               </a>
             
           </div>
@@ -473,10 +649,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/03/10/chrome-插件/" rel="prev" title="chrome浏览器使用">
-                chrome浏览器使用 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -502,8 +674,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2017/03/05/金刚狼3/"
-           data-title="金刚狼3暮狼寻乡" data-url="https://ysbbswork.github.io/2017/03/05/金刚狼3/">
+      <div class="ds-thread" data-thread-key="2019/01/05/C语言库介绍小结/"
+           data-title="C语言库介绍小结" data-url="https://ysbbswork.github.io/2019/01/05/C语言库介绍小结/">
       </div>
     
   </div>
@@ -527,8 +699,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.jpg"
@@ -581,6 +762,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#旋风式介绍"><span class="nav-number">1.</span> <span class="nav-text">旋风式介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#具体介绍"><span class="nav-number">2.</span> <span class="nav-text">具体介绍</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

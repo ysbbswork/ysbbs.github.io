@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Linux,笔记,进程,C," />
+  <meta name="keywords" content="Linux,笔记,C,进程," />
 
 
 
@@ -88,25 +88,19 @@
 
 
 <meta name="description" content="进程并发应该是一手筷子，一手电话，说一句话，咽一口饭。
-并行是咽一口饭同时说一句话，而这光靠一张嘴是办不到的，至少两张嘴。
-进程控制块PCB每启动一个进程，进程中有个内核区，内核区里有一个进程控制块(PCB)来维护进程相关的信息，进程控制块时一个很大很复杂的结构体，用来保存进程的各种状态，资源上限数据，进程切换时要保存和恢复的cpu寄存器信息，环境变量等等。
-PSaux和elf两种参数的区别参考：">
+并行是咽一口饭同时说一句话，而这光靠一张嘴是办不到的，至少两张嘴。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux进程相关笔记">
 <meta property="og:url" content="https://ysbbswork.github.io/2019/03/07/Linux进程相关笔记/index.html">
 <meta property="og:site_name" content="ysbbs">
 <meta property="og:description" content="进程并发应该是一手筷子，一手电话，说一句话，咽一口饭。
-并行是咽一口饭同时说一句话，而这光靠一张嘴是办不到的，至少两张嘴。
-进程控制块PCB每启动一个进程，进程中有个内核区，内核区里有一个进程控制块(PCB)来维护进程相关的信息，进程控制块时一个很大很复杂的结构体，用来保存进程的各种状态，资源上限数据，进程切换时要保存和恢复的cpu寄存器信息，环境变量等等。
-PSaux和elf两种参数的区别参考：">
+并行是咽一口饭同时说一句话，而这光靠一张嘴是办不到的，至少两张嘴。">
 <meta property="og:image" content="https://s1.51cto.com/images/blog/201808/05/1da59b9e9c3873b61c1f3b8def972e4b.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=">
-<meta property="og:updated_time" content="2019-03-07T03:23:08.047Z">
+<meta property="og:updated_time" content="2019-03-07T06:20:45.472Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux进程相关笔记">
 <meta name="twitter:description" content="进程并发应该是一手筷子，一手电话，说一句话，咽一口饭。
-并行是咽一口饭同时说一句话，而这光靠一张嘴是办不到的，至少两张嘴。
-进程控制块PCB每启动一个进程，进程中有个内核区，内核区里有一个进程控制块(PCB)来维护进程相关的信息，进程控制块时一个很大很复杂的结构体，用来保存进程的各种状态，资源上限数据，进程切换时要保存和恢复的cpu寄存器信息，环境变量等等。
-PSaux和elf两种参数的区别参考：">
+并行是咽一口饭同时说一句话，而这光靠一张嘴是办不到的，至少两张嘴。">
 <meta name="twitter:image" content="https://s1.51cto.com/images/blog/201808/05/1da59b9e9c3873b61c1f3b8def972e4b.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=">
 
 
@@ -365,6 +359,7 @@ PSaux和elf两种参数的区别参考：">
       
         <h1 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h1><p>并发应该是一手筷子，一手电话，说一句话，咽一口饭。</p>
 <p>并行是咽一口饭同时说一句话，而这光靠一张嘴是办不到的，至少两张嘴。</p>
+<a id="more"></a>
 <h1 id="进程控制块PCB"><a href="#进程控制块PCB" class="headerlink" title="进程控制块PCB"></a>进程控制块PCB</h1><p>每启动一个进程，进程中有个内核区，内核区里有一个进程控制块(PCB)来维护进程相关的信息，进程控制块时一个很大很复杂的结构体，用来保存进程的各种状态，资源上限数据，进程切换时要保存和恢复的cpu寄存器信息，环境变量等等。</p>
 <h1 id="PS"><a href="#PS" class="headerlink" title="PS"></a>PS</h1><h1 id="aux和elf两种参数的区别"><a href="#aux和elf两种参数的区别" class="headerlink" title="aux和elf两种参数的区别"></a>aux和elf两种参数的区别</h1><p>参考：<a href="https://blog.51cto.com/10412806/2154827" target="_blank" rel="external">https://blog.51cto.com/10412806/2154827</a></p>
 <p>在以往操作linux查看进程中总是看到有使用 ps aux 和 ps -elf的,我本人用的最多也是ps -elf ,今天就来和大家聊聊两者之间的区别:<br>首先,这两个密令都可以配合grep查看进程, ps aux 来自BSD风格(<strong>不带 -</strong>),ps -elf 来自 UNIXf风格 (<strong>必须带 -</strong>),在终端下截图为证:<br><img src="https://s1.51cto.com/images/blog/201808/05/1da59b9e9c3873b61c1f3b8def972e4b.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_100,g_se,x_10,y_10,shadow_90,type_ZmFuZ3poZW5naGVpdGk=" alt="聊聊 ps aux 和 ps -elf   (^_^)"></p>
@@ -527,7 +522,7 @@ PSaux和elf两种参数的区别参考：">
   <p><span>本文标题:</span><a href="/2019/03/07/Linux进程相关笔记/">Linux进程相关笔记</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 Yang Shuai 的个人博客">Yang Shuai</a></p>
   <p><span>发布时间:</span>2019年03月07日 - 11:03</p>
-  <p><span>最后更新:</span>2019年03月07日 - 11:03</p>
+  <p><span>最后更新:</span>2019年03月07日 - 14:03</p>
   <p><span>原始链接:</span><a href="/2019/03/07/Linux进程相关笔记/" title="Linux进程相关笔记">https://ysbbswork.github.io/2019/03/07/Linux进程相关笔记/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://ysbbswork.github.io/2019/03/07/Linux进程相关笔记/"  aria-label="复制成功！"></i></span>
   </p>
@@ -596,9 +591,9 @@ PSaux和elf两种参数的区别参考：">
           
             <a href="/tags/笔记/" rel="tag"># 笔记</a>
           
-            <a href="/tags/进程/" rel="tag"># 进程</a>
-          
             <a href="/tags/C/" rel="tag"># C</a>
+          
+            <a href="/tags/进程/" rel="tag"># 进程</a>
           
         </div>
       
@@ -620,6 +615,10 @@ PSaux和elf两种参数的区别参考：">
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/08/巴菲特工作策略笔记/" rel="prev" title="巴菲特工作策略笔记">
+                巴菲特工作策略笔记 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -695,7 +694,7 @@ PSaux和elf两种参数的区别参考：">
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">65</span>
+                <span class="site-state-item-count">67</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -708,7 +707,7 @@ PSaux和elf两种参数的区别参考：">
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-count">40</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

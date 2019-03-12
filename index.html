@@ -260,6 +260,153 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://ysbbswork.github.io/2019/03/12/守护进程/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yang Shuai">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ysbbs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2019/03/12/守护进程/" itemprop="url">
+                  守护进程
+                </a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-12T17:57:09+08:00">
+                2019-03-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/03/12/守护进程/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2019/03/12/守护进程/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2019/03/12/守护进程/" class="leancloud_visitors" data-flag-title="守护进程">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>守护进程是没有终端的，不依赖于终端的程序。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/03/12/守护进程/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="https://ysbbswork.github.io/2019/03/12/Linux线程同步笔记/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -357,8 +504,7 @@
 
       
         
-          
-            <h2 id="互斥锁"><a href="#互斥锁" class="headerlink" title="互斥锁"></a>互斥锁</h2><ul>
+          <h2 id="互斥锁"><a href="#互斥锁" class="headerlink" title="互斥锁"></a>互斥锁</h2><ul>
 <li><p>创建互斥锁</p>
 <ul>
 <li><code>pthread_mutex_t mutex;</code></li>
@@ -393,145 +539,13 @@
 </ul>
 </li>
 </ul>
-<h2 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h2><p>造成死锁原因：</p>
-<ul>
-<li>自己锁自己两次<ul>
-<li>会阻塞在第二次锁的位置</li>
-<li>操作完成后一定要解锁</li>
-</ul>
-</li>
-<li>多个线程多个锁，两个共享资源互锁<ul>
-<li>线程1对共享资源A加锁成功——A锁</li>
-<li>线程2对共享资源B加锁成功——B锁<ul>
-<li>线程1访问共享资源B，对b加锁——线程1阻塞在B锁上</li>
-<li>线程2访问共享资源A，对A加锁——线程2阻塞在A锁上</li>
-</ul>
-</li>
-<li>如何解决：<ul>
-<li>让线程都按照一定的顺序去访问共享资源</li>
-<li>去访问其它锁的时候，先将自己的锁解开</li>
-<li>trylock，如果失败就进行处理，比如sleep一下，在尝试加锁访问数学，不要阻塞在那里</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="读写锁"><a href="#读写锁" class="headerlink" title="读写锁"></a>读写锁</h2><ul>
-<li><p>读写锁的类型</p>
-<ul>
-<li>读锁</li>
-</ul>
-</li>
-<li><p>只要没有线程持有给定的读写锁用于写，那么任意数目的线程可以持有读写锁用于读。</p>
-</li>
-<li><p>仅当没有线程持有某个给定的读写锁用于读或用于写时，才能分配读写锁用于写。</p>
-</li>
-<li><p>读写锁用于读称为共享锁，读写锁用于写称为排它锁。</p>
-</li>
-<li><p>函数原型：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">pthread_rwlock lock;</div><div class="line">pthread_rwlock_init(&amp;lock,NULL);</div><div class="line">pthread_rwlock_destroy(pthread_rwlock *rwlock);</div><div class="line">int pthread_rwlock_rdlock(pthread_rwlock *rwlock);</div><div class="line">int pthread_rwlock_wrlock(pthread_rwlock *rwlock);</div><div class="line">int pthread_rwlock_unlock(pthread_rwlock *rwlock);</div></pre></td></tr></table></figure>
-</li>
-<li><p>特点</p>
-<ul>
-<li>读共享</li>
-<li>写独占</li>
-<li>读写不能同时，写的优先级高</li>
-</ul>
-</li>
-<li><p>几种场景</p>
-<ul>
-<li>线程A加写锁成功，线程B请求读锁<ul>
-<li>线程B阻塞</li>
-</ul>
-</li>
-<li>线程A持有读锁，线程B请求写锁<ul>
-<li>线程B阻塞</li>
-</ul>
-</li>
-<li>线程A拥有读锁，线程B请求读锁<ul>
-<li>线程B加锁成功</li>
-</ul>
-</li>
-<li>线程A持有读锁，然后线程B请求写锁，然后线程C请求读锁<ul>
-<li>B阻塞，C阻塞——因为写的优先级高</li>
-<li>A解锁，B线程加写锁成功，C继续阻塞</li>
-<li>B解锁，C加读锁成功</li>
-</ul>
-</li>
-<li>线程A持有写锁，然后线程B请求读锁，然后线程C请求写锁<ul>
-<li>B阻塞，C阻塞</li>
-<li>A解锁，C加写锁成功，B继续阻塞</li>
-<li>C解锁，B加锁成功</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>使用场景</p>
-<ul>
-<li>互斥锁：读写都串行</li>
-<li>读写锁：<ul>
-<li>读：并行</li>
-<li>写：串行</li>
-</ul>
-</li>
-<li>读写场景，读多写少</li>
-</ul>
-</li>
-</ul>
-<h2 id="自旋锁"><a href="#自旋锁" class="headerlink" title="自旋锁"></a>自旋锁</h2><p>自旋锁类似于互斥锁，它的性能比互斥锁更高。<br>自旋锁与互斥锁很重要的一个区别在于，线程在申请自旋锁的时候，线程不会被挂起，它处于忙等待的状态，一般用于等待时间比较短的情形。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">pthread_spin_init</div><div class="line">pthread_spin_destroy</div><div class="line">pthread_spin_lock</div><div class="line">pthread_spin_unlock</div></pre></td></tr></table></figure>
-<h2 id="条件变量"><a href="#条件变量" class="headerlink" title="条件变量"></a>条件变量</h2><p>多线程中经常需要使用到锁(pthread_mutex_t)来完成多个线程之间的互斥操作。</p>
-<p><strong>但是互斥锁有一个明显到缺点: 只有两种状态，锁定和非锁定。</strong></p>
-<p><strong>而条件变量则通过允许线程阻塞并等待另一个线程发送唤醒信号的方法弥补了互斥锁的不足，它常和互斥锁一起使用。</strong></p>
-<ul>
-<li><p>条件变量不是锁，但是条件变量能够阻塞线程</p>
-</li>
-<li><p>使用条件变量+互斥量，才能实现同步</p>
-<ul>
-<li>互斥量：保护一块共享数据</li>
-<li>条件变量：引起阻塞<ul>
-<li>生产者和消费者模型</li>
-<li><img src="http://ww1.sinaimg.cn/large/005HFdfGgy1g10019l7ypj30p60c7n3g.jpg" alt=""></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>条件变量的两个动作</p>
-<ul>
-<li>条件不满足，线程阻塞</li>
-<li>当条件满足，通知阻塞线程开始工作</li>
-</ul>
-</li>
-<li><p>条件变量的类型：pthread_cond_t;</p>
-</li>
-<li><p>主要函数：</p>
-<ul>
-<li><p>初始化一个条件变量</p>
-</li>
-<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">pthread_cond_init(</div><div class="line">	pthread_cond_t *restrict cond,</div><div class="line">	const pthread_condattr_t *restrict</div><div class="line">);</div></pre></td></tr></table></figure>
-</li>
-<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">int pthread_cond_wait(pthread_cond_t *cond,pthread_mutex_t *mutex);</div></pre></td></tr></table></figure>
-<ul>
-<li>阻塞线程</li>
-<li>将已经上锁的mutex解锁</li>
-<li>当该函数收到信号，解除阻塞，会对互斥锁加锁</li>
-</ul>
-</li>
-<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">int pthread_cond_timewait(pthread_cond_t *cond,pthread_mutex *mutex,const timespec *abstime);</div><div class="line">int pthread_cond_destroy(pthread_cond_t *cond);  </div><div class="line">int pthread_cond_signal(pthread_cond_t *cond);</div><div class="line">int pthread_cond_broadcast(pthread_cond_t *cond);  //解除所有线程的阻塞</div></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li><p>具体实现生产者消费者模型</p>
-<ul>
-<li><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div></pre></td><td class="code"><pre><div class="line">#include &lt;pthread.h&gt;</div><div class="line">#include &lt;errno.h&gt;</div><div class="line">#include &lt;stdlib.h&gt;</div><div class="line">#include &lt;stdio.h&gt;</div><div class="line">#include &lt;unistd.h&gt;</div><div class="line"> </div><div class="line">#define MAXITEMS 1000000 /* 需要生产n个item */</div><div class="line">#define MAXNTHREADS 10 /* 生产线n条 */</div><div class="line"> </div><div class="line">int buff[MAXITEMS];</div><div class="line"> </div><div class="line">struct &#123;</div><div class="line">	pthread_mutex_t mutex;</div><div class="line">	int nput;</div><div class="line">	int nval;</div><div class="line">&#125; put = &#123;</div><div class="line">	PTHREAD_MUTEX_INITIALIZER</div><div class="line">&#125;;</div><div class="line"> </div><div class="line">struct &#123;</div><div class="line">	pthread_mutex_t mutex;</div><div class="line">	pthread_cond_t cond;</div><div class="line">	int nready;</div><div class="line">&#125; nready = &#123;</div><div class="line">	PTHREAD_MUTEX_INITIALIZER, PTHREAD_COND_INITIALIZER</div><div class="line">&#125;;</div><div class="line"> </div><div class="line">//创建线程</div><div class="line">int Pthread_create(pthread_t *thread, const pthread_attr_t *attr, void *(*start_routine) (void *), void *arg) &#123;</div><div class="line">	int res = pthread_create(thread, attr, start_routine, arg);</div><div class="line">	if (res != 0) &#123;</div><div class="line">		perror("pthread_create fail");</div><div class="line">		exit(EXIT_FAILURE);</div><div class="line">	&#125;	</div><div class="line">&#125;</div><div class="line"> </div><div class="line">//互斥锁</div><div class="line">int Pthread_mutex_lock(pthread_mutex_t *mutex) &#123;</div><div class="line">	int res = pthread_mutex_lock(mutex);</div><div class="line">	if (res != 0) &#123;</div><div class="line">		perror("Pthread_mutex_lock fail");</div><div class="line">	&#125;	</div><div class="line">&#125;</div><div class="line"> </div><div class="line">//互斥解锁</div><div class="line">int Pthread_mutex_unlock(pthread_mutex_t *mutex) &#123;</div><div class="line">	int res = pthread_mutex_unlock(mutex);</div><div class="line">	if (res != 0) &#123;</div><div class="line">		perror("Pthread_mutex_unlock fail");</div><div class="line">	&#125;	</div><div class="line">&#125;</div><div class="line"> </div><div class="line">//发送线程信号</div><div class="line">int Pthread_cond_signal(pthread_cond_t *cond) &#123;</div><div class="line">	int res = pthread_cond_signal(cond);</div><div class="line">	if (res != 0) &#123;</div><div class="line">		perror("Pthread_cond_signal fail");</div><div class="line">	&#125;	</div><div class="line">&#125;</div><div class="line"> </div><div class="line">/*</div><div class="line">pthread_cond_wait会释放mutex,并进入阻塞状态,</div><div class="line">一旦获取到信号则会将mutex锁住，并返回</div><div class="line">*/</div><div class="line">int Pthread_cond_wait(pthread_cond_t *cond, pthread_mutex_t *mutex) &#123;</div><div class="line">	int res = pthread_cond_wait(cond, mutex);</div><div class="line">	if (res != 0) &#123;</div><div class="line">		perror("pthread_cond_wait fail");</div><div class="line">	&#125;	</div><div class="line">&#125;</div><div class="line"> </div><div class="line">//线程函数声明</div><div class="line">void* produce(void*);</div><div class="line">void* consume(void*);</div><div class="line"> </div><div class="line">int main(int argc, char const *argv[])</div><div class="line">&#123;</div><div class="line">	int i, count[MAXNTHREADS];</div><div class="line">	pthread_t tid_produce[MAXNTHREADS], tid_consume;</div><div class="line"> </div><div class="line">	// n个生产者</div><div class="line">	for (i=0; i&lt;MAXNTHREADS; ++i) &#123;</div><div class="line">		count[i] = 0;</div><div class="line">		Pthread_create(&amp;tid_produce[i], NULL, produce, &amp;count[i]);</div><div class="line">	&#125;</div><div class="line"> </div><div class="line">	// 1个消费者，也可以是n个</div><div class="line">	Pthread_create(&amp;tid_consume, NULL, consume, NULL);</div><div class="line"> </div><div class="line">	for (i=0; i&lt;MAXNTHREADS; ++i) &#123;</div><div class="line">		pthread_join(tid_produce[i], NULL);</div><div class="line">		printf("count[%d] = %d\n", i, count[i]);</div><div class="line">	&#125;</div><div class="line"> </div><div class="line">	pthread_join(tid_consume, NULL);</div><div class="line"> </div><div class="line">	return 0;</div><div class="line">&#125;</div><div class="line"> </div><div class="line">// 生产者</div><div class="line">void* produce(void* arg) &#123;</div><div class="line">	</div><div class="line">	int dosignal;</div><div class="line">	for ( ; ; ) &#123;</div><div class="line">		Pthread_mutex_lock(&amp;put.mutex);</div><div class="line">		if (put.nput &gt;= MAXITEMS) &#123;</div><div class="line">			Pthread_mutex_unlock(&amp;put.mutex);</div><div class="line">			return(NULL); /* 数据填满了 */</div><div class="line">		&#125;</div><div class="line"> </div><div class="line">		buff[put.nput] = put.nval;</div><div class="line">		put.nput++;</div><div class="line">		put.nval++;</div><div class="line">		Pthread_mutex_unlock(&amp;put.mutex);</div><div class="line"> </div><div class="line">		Pthread_mutex_lock(&amp;nready.mutex);</div><div class="line">		dosignal = (nready.nready == 0); /* 是否需要唤醒 */</div><div class="line">		nready.nready++;</div><div class="line">		Pthread_mutex_unlock(&amp;nready.mutex);</div><div class="line"> </div><div class="line">		if (dosignal) &#123;</div><div class="line">			Pthread_cond_signal(&amp;nready.cond);</div><div class="line">		&#125;</div><div class="line"> </div><div class="line">		*((int *)arg) += 1; /* 当前线程生产了多少个数据 */</div><div class="line"> </div><div class="line">	&#125;</div><div class="line"> </div><div class="line">	return(NULL);</div><div class="line">&#125;</div><div class="line"> </div><div class="line"> </div><div class="line">// 消费者</div><div class="line">void* consume(void* arg) &#123;</div><div class="line"> </div><div class="line">	int i;</div><div class="line"> </div><div class="line">	for (i=0; i&lt;MAXITEMS; i++) &#123;</div><div class="line"> </div><div class="line">		Pthread_mutex_lock(&amp;nready.mutex);</div><div class="line">		while (nready.nready == 0) &#123; /* while 循环是防止wait返回时发生虚假唤醒 */</div><div class="line">			Pthread_cond_wait(&amp;nready.cond, &amp;nready.mutex);</div><div class="line">		&#125;</div><div class="line">		nready.nready--;</div><div class="line">		Pthread_mutex_unlock(&amp;nready.mutex);</div><div class="line"> </div><div class="line">		//如果线程没同步成功,则会有输出</div><div class="line">		if (buff[i] != i)</div><div class="line">			printf("buff[%d] = %d\n", i, buff[i]);</div><div class="line">	&#125;</div><div class="line"> </div><div class="line">	return(NULL);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="信号量"><a href="#信号量" class="headerlink" title="信号量"></a>信号量</h2><p>对于信号量，可以理解成带计数的互斥量。</p>
-<p>具体应用的话，我没想到特别的用法，google了一下，多是照本宣科。</p>
-</li>
-</ul>
-</li>
-</ul>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/03/12/Linux线程同步笔记/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -671,8 +685,7 @@
 
       
         
-          
-            <h1 id="信号"><a href="#信号" class="headerlink" title="信号"></a>信号</h1><p>信号是由内核产生并发送的，</p>
+          <h1 id="信号"><a href="#信号" class="headerlink" title="信号"></a>信号</h1><p>信号是由内核产生并发送的，</p>
 <p>信号可以用于进程和进程之间通信，也可以用于内核和进程间的通信。</p>
 <p>虽然我们用的最多的是用信号杀死进程。但实际上我们我们可以捕捉信号做特定处理。</p>
 <h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><ul>
@@ -680,50 +693,13 @@
 <li>携带的信息量少</li>
 <li>使用在某个特定的场景中</li>
 </ul>
-<h2 id="信号的状态"><a href="#信号的状态" class="headerlink" title="信号的状态"></a>信号的状态</h2><ul>
-<li>产生<ul>
-<li>键盘：ctrl +c </li>
-<li>命令：kill</li>
-<li>系统函数：kill</li>
-<li>软条件：定时器</li>
-<li>硬件：段错误，除0错误</li>
-</ul>
-</li>
-<li>未决状态-没有被处理<ul>
-<li>等待被处理</li>
-</ul>
-</li>
-<li>递达- 信号被处理了<ul>
-<li>忽略</li>
-<li>捕捉（我们需要做的是捕捉信号并做用户自定义操作）</li>
-<li>执行了默认动作</li>
-<li>SIGKILL和SIGSTOP是不能够被捕捉，不能够被阻塞和忽略的。</li>
-</ul>
-</li>
-</ul>
-<h2 id="利用信号通信的问题"><a href="#利用信号通信的问题" class="headerlink" title="利用信号通信的问题"></a>利用信号通信的问题</h2><p>信号优先级比较高，进程收到信号之后，暂停正在处理的工作，优先处理信号，处理完成之后再继续暂停的工作。</p>
-<p>会导致有些时候代码执行到一半，来了信号，中止去做处理，处理的过程中对数据的操作影响到一开始中止的代码逻辑，设计代码时非常麻烦。</p>
-<p>如果使用信号做进程间通信，可能产生的问题和情境比较多，不建议使用信号做进程间通信。</p>
-<h2 id="阻塞信号集，未决信号集"><a href="#阻塞信号集，未决信号集" class="headerlink" title="阻塞信号集，未决信号集"></a>阻塞信号集，未决信号集</h2><p>是在pcb里，即内核里，我们不能直接操作的。</p>
-<ul>
-<li>阻塞信号集：<ul>
-<li>要屏蔽的信号，即放到未决信号集中</li>
-</ul>
-</li>
-<li>未决信号集<ul>
-<li>没有被处理信号的集合</li>
-</ul>
-</li>
-</ul>
-<h2 id="信号相关的函数"><a href="#信号相关的函数" class="headerlink" title="信号相关的函数"></a>信号相关的函数</h2><ul>
-<li>kill ：发送信号给指定进程<ul>
-<li><code>int kill(pid_t pid,int sig);</code></li>
-<li>shell 命令 kill -l 可以参考所有信号宏</li>
-</ul>
-</li>
-</ul>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/03/12/进程间通信笔记（二）/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1895,158 +1871,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://ysbbswork.github.io/2019/03/08/巴菲特工作策略笔记/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Yang Shuai">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ysbbs">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2019/03/08/巴菲特工作策略笔记/" itemprop="url">
-                  巴菲特工作策略笔记
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-08T10:13:55+08:00">
-                2019-03-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/03/08/巴菲特工作策略笔记/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2019/03/08/巴菲特工作策略笔记/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2019/03/08/巴菲特工作策略笔记/" class="leancloud_visitors" data-flag-title="巴菲特工作策略笔记">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ul>
-<li><p>巴菲特策略1：<br>杀死繁忙的工作</p>
-<p>•    首先，巴菲特让弗林特在一张纸上写下他的前25个目标。现在，你就把你的目标写下来。<br>•    接下来，他让他选出前5个。 到目前为止，没什么特别的。<br>•    最后，他让弗林特把那20个他没有选中的目标放在“不惜一切代价也要避免”的清单上。<br>​    在第三步，你会看到巴菲特在排定优先级上面的天才之处。在这一点上，大多数人只会专注于前5个目标，然后间歇性在其余的目标上投入精力。<br>​    但巴菲特没有。 他建议弗林特：“不管怎样，这些事情都不应该引起你的注意，除非你已经成功地完成了前5个目标。”</p>
-</li>
-<li><p>巴菲特策略2:<br>只和那些你认为可以永远共事的人一起工作</p>
-<p>“如果你无法想象自己能够与某个人共事一生，那么一天也不要与他们共事。”<br>——硅谷天使投资人纳瓦尔·拉威康特（Naval Ravikant）</p>
-</li>
-<li><p>巴菲特策略3：<br>让事情保持在超级超级简单的状态</p>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2096,7 +1920,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">75</span>
+                <span class="site-state-item-count">76</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2109,7 +1933,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">55</span>
+                <span class="site-state-item-count">56</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

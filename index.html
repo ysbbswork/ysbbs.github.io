@@ -260,6 +260,616 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://ysbbswork.github.io/2019/04/09/Linux下的printf输出不显示问题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yang Shuai">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ysbbs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2019/04/09/Linux下的printf输出不显示问题/" itemprop="url">
+                  Linux下的printf输出不显示问题
+                </a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-09T16:15:03+08:00">
+                2019-04-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/04/09/Linux下的printf输出不显示问题/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2019/04/09/Linux下的printf输出不显示问题/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2019/04/09/Linux下的printf输出不显示问题/" class="leancloud_visitors" data-flag-title="Linux下的printf输出不显示问题">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>今天写了个服务器的demo，但是中间的printf都没有显示出来，测试了一波，都没有找到明显的原因。</p>
+<p>查了一下，原来是输出缓冲的问题，所以单独的程序，执行结束即刷新缓冲区，带死循环的程序，陷入循环中，迟迟不刷新缓冲区，所以printf的内容不会显示到控制台。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/04/09/Linux下的printf输出不显示问题/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://ysbbswork.github.io/2019/03/31/NGINX模型和实现高并发的架构思想/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yang Shuai">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ysbbs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2019/03/31/NGINX模型和实现高并发的架构思想/" itemprop="url">
+                  NGINX模型和实现高并发的架构思想
+                </a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-31T17:41:02+08:00">
+                2019-03-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/03/31/NGINX模型和实现高并发的架构思想/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2019/03/31/NGINX模型和实现高并发的架构思想/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2019/03/31/NGINX模型和实现高并发的架构思想/" class="leancloud_visitors" data-flag-title="NGINX模型和实现高并发的架构思想">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>转载自作者：黄泽武</p>
+<p>链接：<a href="https://www.jianshu.com/p/ae35deebd9d0">https://www.jianshu.com/p/ae35deebd9d0</a></p>
+<p>来源：简书</p>
+<p>简书著作权归作者所有，任何形式的转载都请联系作者获得授权并注明出处。</p>
+<p>众所周知，nginx性能高，而nginx的高性能与其架构是分不开的。那么nginx究竟是怎么样的呢？这一节我们先来初识一下nginx框架吧。</p>
+<h4 id="NGINX进程模型"><a href="#NGINX进程模型" class="headerlink" title="NGINX进程模型"></a>NGINX进程模型</h4><p>nginx在启动后，在unix系统中会以daemon的方式在后台运行，后台进程包含一个master进程和多个worker进程。我们也可以手动地关掉后台模式，让nginx在前台运行，并且通过配置让nginx取消master进程，从而可以使nginx以单进程方式运行。很显然，生产环境下我们肯定不会这么做，所以关闭后台模式，一般是用来调试用的。所以，我们可以看到，nginx是以多进程的方式来工作的，当然nginx也是支持多线程的方式的，只是我们主流的方式还是多进程的方式，也是nginx的默认方式。</p>
+<p>nginx在启动后，会有一个master进程和多个worker进程。master进程主要用来管理worker进程，包含：接收来自外界的信号，向各worker进程发送信号，监控worker进程的运行状态，当worker进程退出后(异常情况下)，会自动重新启动新的worker进程。而基本的网络事件，则是放在worker进程中来处理了。多个worker进程之间是对等的，他们同等竞争来自客户端的请求，各进程互相之间是独立的。一个请求，只可能在一个worker进程中处理，一个worker进程，不可能处理其它进程的请求。worker进程的个数是可以设置的，一般我们会设置与机器cpu核数一致，这里面的原因与nginx的进程模型以及事件处理模型是分不开的。nginx的进程模型，可以由下图来表示：</p>
+<p><img src="https:////upload-images.jianshu.io/upload_images/2884841-ff05001fdd1df4f2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/962/format/webp" alt="img"></p>
+<p>nginx启动后，如果我们要操作nginx，要怎么做呢？从上文中我们可以看到，master来管理worker进程，所以我们只需要与master进程通信就行了。master进程会接收来自外界发来的信号，再根据信号做不同的事情。所以我们要控制nginx，只需要通过kill向master进程发送信号就行了。比如kill -HUP pid，则是告诉nginx，从容地重启nginx，我们一般用这个信号来重启nginx，或重新加载配置，因为是从容地重启，因此服务是不中断的。master进程在接收到HUP信号后是怎么做的呢？首先master进程在接到信号后，会先重新加载配置文件，然后再启动新的worker进程，并向所有老的worker进程发送信号，告诉他们可以光荣退休了。新的worker在启动后，就开始接收新的请求，而老的worker在收到来自master的信号后，就不再接收新的请求，并且在当前进程中的所有未处理完的请求处理完成后，再退出。当然，直接给master进程发送信号，这是比较老的操作方式，nginx在0.8版本之后，引入了一系列命令行参数，来方便我们管理。比如，./nginx -s reload，就是来重启nginx，./nginx -s stop，就是来停止nginx的运行。如何做到的呢？我们还是拿reload来说，我们看到，执行命令时，我们是启动一个新的nginx进程，而新的nginx进程在解析到reload参数后，就知道我们的目的是控制nginx来重新加载配置文件了，它会向master进程发送信号，然后接下来的动作，就和我们直接向master进程发送信号一样了。</p>
+<p>现在，我们知道了当我们在操作nginx的时候，nginx内部做了些什么事情，那么，worker进程又是如何处理请求的呢？我们前面有提到，worker进程之间是平等的，每个进程，处理请求的机会也是一样的。当我们提供80端口的http服务时，一个连接请求过来，每个进程都有可能处理这个连接，怎么做到的呢？首先，每个worker进程都是从master进程fork过来，在master进程里面，先建立好需要listen的socket（listenfd）之后，然后再fork出多个worker进程。所有worker进程的listenfd会在新连接到来时变得可读，为保证只有一个进程处理该连接，所有worker进程在注册listenfd读事件前抢accept_mutex，抢到互斥锁的那个进程注册listenfd读事件，在读事件里调用accept接受该连接。当一个worker进程在accept这个连接之后，就开始读取请求，解析请求，处理请求，产生数据后，再返回给客户端，最后才断开连接，这样一个完整的请求就是这样的了。我们可以看到，一个请求，完全由worker进程来处理，而且只在一个worker进程中处理。</p>
+<p>那么，nginx采用这种进程模型有什么好处呢？当然，好处肯定会很多了。首先，对于每个worker进程来说，独立的进程，不需要加锁，所以省掉了锁带来的开销，同时在编程以及问题查找时，也会方便很多。其次，采用独立的进程，可以让互相之间不会影响，一个进程退出后，其它进程还在工作，服务不会中断，master进程则很快启动新的worker进程。当然，worker进程的异常退出，肯定是程序有bug了，异常退出，会导致当前worker上的所有请求失败，不过不会影响到所有请求，所以降低了风险。当然，好处还有很多，大家可以慢慢体会。众所周知，nginx性能高，而nginx的高性能与其架构是分不开的。</p>
+<h4 id="NGINX事件模型"><a href="#NGINX事件模型" class="headerlink" title="NGINX事件模型"></a>NGINX事件模型</h4>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/03/31/NGINX模型和实现高并发的架构思想/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://ysbbswork.github.io/2019/03/31/异步、并发、协程原理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yang Shuai">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ysbbs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2019/03/31/异步、并发、协程原理/" itemprop="url">
+                  异步、并发、协程原理
+                </a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-31T16:48:08+08:00">
+                2019-03-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/03/31/异步、并发、协程原理/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2019/03/31/异步、并发、协程原理/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2019/03/31/异步、并发、协程原理/" class="leancloud_visitors" data-flag-title="异步、并发、协程原理">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>原文：<a href="http://wiki.phpboy.net/doku.php?id=2017-07:55-%E5%BC%82%E6%AD%A5_%E5%B9%B6%E5%8F%91_%E5%8D%8F%E7%A8%8B%E5%8E%9F%E7%90%86.md">http://wiki.phpboy.net/doku.php?id=2017-07:55-异步<em>并发</em>协程原理.md</a></p>
+</blockquote>
+<p>Linux 操作系统在设计上将虚拟空间划分为用户空间和内核空间，两者做了隔离是相互独立的，用户空间给应用程序使用，内核空间给内核使用。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/03/31/异步、并发、协程原理/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://ysbbswork.github.io/2019/03/13/HTTP协议介绍/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yang Shuai">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ysbbs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2019/03/13/HTTP协议介绍/" itemprop="url">
+                  HTTP协议介绍
+                </a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-13T20:03:32+08:00">
+                2019-03-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/03/13/HTTP协议介绍/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2019/03/13/HTTP协议介绍/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2019/03/13/HTTP协议介绍/" class="leancloud_visitors" data-flag-title="HTTP协议介绍">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>HTTP协议介绍的文章很多，但这篇写的比较详细，转载来了。</p>
+<hr>
+<p>转自：</p>
+<p>作者： <a href="http://www.ruanyifeng.com/">阮一峰</a></p>
+<p>原文：<a href="http://www.ruanyifeng.com/blog/2016/08/http.html">http://www.ruanyifeng.com/blog/2016/08/http.html</a></p>
+<h1 id="HTTP协议介绍"><a href="#HTTP协议介绍" class="headerlink" title="HTTP协议介绍"></a>HTTP协议介绍</h1><p>HTTP 协议是互联网的基础协议，也是网页开发的必备知识，最新版本 HTTP/2 更是让它成为技术热点。</p>
+<p>本文介绍 HTTP 协议的历史演变和设计思路。</p>
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2016/bg2016081901.jpg" alt="img"></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/03/13/HTTP协议介绍/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="https://ysbbswork.github.io/2019/03/12/守护进程/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -357,7 +967,11 @@
 
       
         
-          <p>守护进程是没有终端的，不依赖于终端的程序。</p>
+          <h2 id="旋风式介绍"><a href="#旋风式介绍" class="headerlink" title="旋风式介绍"></a>旋风式介绍</h2><p>守护进程(daemon)是没有终端的，不依赖于终端的程序。</p>
+<p>作为系统中的一个后台进程。周期性的执行某些任务，或者等待某个事件的发生。不会随用户注销而退出。</p>
+<p>创建守护进程：不能是组长进程。</p>
+<p>通过fork子进程，令父进程结束，</p>
+<p>子进程setid()创建新会话，脱离控制终端。</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2019/03/12/守护进程/#more" rel="contents">
@@ -1155,687 +1769,24 @@
 </ul>
 </li>
 </ul>
-<h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><ul>
-<li>阻塞非阻塞： 请求不能立即得到应答，需要等待，那就是阻塞；否则可以理解为非阻塞。</li>
-<li>同步异步： 某业务需要甲乙甚至多方合作的时候，</li>
-</ul>
+<h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><blockquote>
+<p>同步和异步关注的是<strong>消息通信机制</strong> (synchronous communication/ asynchronous communication)<br>所谓同步，就是在发出一个<em>调用</em>时，在没有得到结果之前，该<em>调用</em>就不返回。但是一旦调用返回，就得到返回值了。<br>换句话说，就是由<em>调用者</em>主动等待这个<em>调用</em>的结果。</p>
+<p>而异步则是相反，调用在发出之后，这个调用就直接返回了，所以没有返回结果<em>。换句话说，当一个异步过程调用发出后，调用者不会立刻得到结果。而是在</em>调用<em>发出后，</em>被调用者通过状态、通知来通知调用者，或通过回调函数处理这个调用。</p>
 <ol>
-<li>总是按照“甲方请求一次，乙方应答一次”这样的有序序列处理业务，只有当“一次请求一次应答”的过程结束才可以发生下一次的“一次请求一次应答”，那么就说他们采用的是同步。（<strong>同步IO中</strong>，<strong>对同一个描述符的操作必须是有序的</strong>）</li>
-<li>如果甲方只要有需要，就会发送请求，不管上次请求有没有得到乙方应答。而乙方只要甲方有请求就会接受，不是等这次请求处理完毕再接受甲方新请求。这样请求应答分开的序列，就可以认为是异步。异步情况下，请求和应答不需要一致进行，可能甲方后请求的业务，却先得到乙方的应答。同步是线性的，而异步可以认为是并发的。（<strong>异步IO中，异步IO可以允许多方同时对同一个描述符发送IO请求，或者一次发多个请求，当然有机制保证如何区分这些请求，</strong>）</li>
+<li>阻塞与非阻塞<br>阻塞和非阻塞关注的是<strong>程序在等待调用结果（消息，返回值）时的状态.</strong></li>
 </ol>
-<p>举个例子：</p>
-<ol>
-<li>我去买一本书，立即买到了，或者没有就走了，这就是非阻塞；（编程中设置IO成非阻塞，返回后再去检查描述符，或者等待通知，然后再去读取。相当于老板告诉我可以先忙点别的，过一会再来问问，或者老板通知我。但期间这个窗口(文件描述符)别人是用不了的）(“<strong>立即买到了”在IO中也需要等待，不能算非阻塞IO</strong>)</li>
-<li>如果恰好书店没有，我就等一直等到书店有了这本书买到了才走，这就是阻塞；而排在我后面的人呢只有我买到了书后才能再买书了。</li>
-<li>如果书店恰好没有，我就告诉书店老板，书来了告诉我一声让我来取或者直接送到我家，然后我就走了，去做别的事了，这就是异步。这时候如果很多人来买书，都是老板登记一下完事。 (<strong>从IO角度来说，“告诉我来取”，这个近似于信号驱动IO，不能算异步IO。必须书送到我家才算是异步，如果不送到我家，我想看这本书之前，终究还是需要我跑一趟</strong>)</li>
-<li>前面两种情况，非阻塞和阻塞都可以称为同步。</li>
-</ol>
-<p>反映在编程方面就是 用户进程 调用 系统调用。(用户进程对应我，内核 对应 书店老板，书对应数据资源data ， 买书就是一个系统调用了，<strong>其中内核拷贝数据到进程这个过程近似于老板送书到我手中</strong>）。</p>
-<h1 id="同步异步IO"><a href="#同步异步IO" class="headerlink" title="同步异步IO"></a>同步异步IO</h1><p>同步异步的不同在于，针对同一个描述符上的IO操作，从<strong>IO操作发起 </strong>到 <strong>得到 IO结果</strong> 这个过程而言，总是按照“发起请求，得到结果”这个有序序列进行的，这样便有了最小的等待这种情况：读取时，确知IO有数据，但需要等待内核拷贝数据到进程空间。这个最小情况的等待，同步IO都有。</p>
-<p>unix网络编程中将IO模型分为5类：阻塞IO，非阻塞IO，IO复用，信号驱动，异步IO。</p>
-<ol>
-<li>阻塞IO就是那种recv, read，一直等，等到有了数据才返回；</li>
-<li>非阻塞IO就是立即返回，设置描述符为非阻塞，但是要进程自己一直检查是否可读；</li>
-<li>IO复用其实也是阻塞的，不过可以用来等很多描述符，比起阻塞有了进步，可以算有点异步了，但需要阻塞着检查是否可读。<strong>对同一个描述符的IO操作也是有序的。</strong></li>
-<li>信号驱动采用信号机制等待，有了更多的进步，不用监视描述符了，而且不用阻塞着等待数据到来，被动等待信号通知，由信号处理程序处理。<strong>但对同一个描述符的IO操作还是有序的。</strong></li>
-<li>异步IO，发送IO请求后，不用等了，也不再需要发送IO请求获取结果了。等到通知后，其实是系统帮你把数据读取好了的，<strong>你等到的通知也不再是要求你去读写IO了，而是告诉你IO请求过程已经结束了</strong>。你要做的就是可以处理数据了。且同一个描述符上可能同时存在很多请求。(对应上面那个买书例子中，就是送书到我家，我直接看书就行了，不需要再去跑一趟了)。</li>
-</ol>
-<p>其中IO服用和信号驱动，在处理业务逻辑上可以说有异步，但在IO操作层面上来说还是同步的</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://ysbbswork.github.io/2019/03/10/通俗易懂CGI/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Yang Shuai">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ysbbs">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2019/03/10/通俗易懂CGI/" itemprop="url">
-                  通俗易懂CGI
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-10T14:00:57+08:00">
-                2019-03-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/03/10/通俗易懂CGI/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2019/03/10/通俗易懂CGI/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2019/03/10/通俗易懂CGI/" class="leancloud_visitors" data-flag-title="通俗易懂CGI">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>一直对CGI的概念就是客户端交由处理的具体请求事物的后台程序，看到这篇文章通俗易懂的把CGI讲解清楚，往后对自己写后台业务也会有更多理解。</p>
-<p>文章转载自<a href="https://blog.cuiyongjian.com/fe/tencent-cgi/">CGI</a></p>
-<p>我们知道，服务端要处理用户的请求，必须通过编程语言来编写对应的处理逻辑，而你要做的不仅如此，你碰到的第一个问题就是如何接收用户的TCP请求并解析出HTTP协议格式。</p>
-<p>OK，专业的事情交给专业的人来干。必然，我们应该用专业的Web Server(如Nginx、 Apache)来接收和解析TCP请求。而业务处理部分不可能会有开源的东西直接拿来用的，毕竟每一家公司的业务都是不同的，所以需要采用C、C++、Perl、Java、Node、Python等等编程语言来编码，并编译为一个可执行程序。(由于php等脚本语言是解释执行的，所以需要靠对应的php解释器来执行。)</p>
-<p>说到这里，问题就来了，Web服务器如何与业务处理程序进行通信呢，以及其通信时传递数据的格式是怎么样的呢。这里就需要一套标准的协议，于是人们创造了CGI协议。 所以能处理CGI协议数据的业务处理程序，就被称为CGI程序。</p>
-<p>Web Server和CGI程序通过环境变量、标准输入、标准输出进行通信。<br>协议与语言无关，只要一门语言支持标准输入、标准输入、读取环境变量，它就可以用来写CGI程序，就是说可以用bash、perl、c语言等来写。</p>
-<p>环境变量中存放的是一次请求的相关信息，比如QUERY_STRING、<br>PATH_INFO、REMOTE_ADDR、REMOTE_HOST、CONTENT_TYPE、CONTENT_LENGTH、REQUEST_METHOD、SERVER_NAME等。 从标准输入读取的数据如表单中post过来的东西。</p>
-<p><img src="https://img.cuiyongjian.com/blog/cgidemo.png" alt="img"></p>
-<h2 id="CGI"><a href="#CGI" class="headerlink" title="CGI"></a>CGI</h2><p>当客户端发出一个执行CGI程序的请求给服务器以后，服务器根据CGI的程序类别，决定某种数据传递方式，即服务器与CGI程序的沟通方式，这就是编写CGI程序的关键点。一般情况下，服务器与CGI程序之间是通过标准输入输出进行数据传递的。</p>
-<p>这种通过标准输入输出来实现服务器与CGI之间的数据传递的标准，对于基于文件的UINX系统尤其适用</p>
-<p>对服务器与CGI程序而言就是：服务器的标准输出与CGI程序的标准输入相连接，服务器标准输入与CGI的标准输出相连接。如此，就构成了一个完整的数据循环通路。</p>
-<p>事实上，每个CGI程序的环境变量集在该CGI程序开始执行到终止，其对应的环境变量集就失效了，也就是对应环境变量集生存期与CGI程序是一致的.</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/03/10/通俗易懂CGI/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://ysbbswork.github.io/2019/03/09/Shell命令笔记/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Yang Shuai">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ysbbs">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2019/03/09/Shell命令笔记/" itemprop="url">
-                  Shell命令笔记
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-09T20:12:10+08:00">
-                2019-03-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/03/09/Shell命令笔记/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2019/03/09/Shell命令笔记/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2019/03/09/Shell命令笔记/" class="leancloud_visitors" data-flag-title="Shell命令笔记">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ul>
-<li>find 目录  -name “file_name”<ul>
-<li><code>find ~ -name &quot;helloword.cpp&quot;</code></li>
-</ul>
-</li>
-<li>grep -r “context” 目录 -n<ul>
-<li><code>grep -r &quot;iosteam&quot;  ~</code></li>
-<li>-n 显示具体内容在文件第多少行</li>
-</ul>
-</li>
-<li><p>压缩格式</p>
-<ul>
-<li>tar其实是归档工具（打包工具）<ul>
-<li>c 创建归档文件</li>
-<li>x 释放归档文件</li>
-<li>v 打印提示信息</li>
-<li>f 指定压缩包名字</li>
-<li>z 使用gzip压缩 -xxx.tar.gz</li>
-<li>j 使用bzip2方式压缩 -xxx.tar.bz2</li>
-</ul>
-</li>
-<li>常用压缩格式：<ul>
-<li>.gz </li>
-<li>.bz2</li>
-</ul>
-</li>
-<li>压缩 <code>tar czvf test.tar.gz file1 file2 docment1 (原材料，可以是文件可以是目录，可多个)</code></li>
-<li>解压 <code>tar zxvf test.tar.gz -C 要解压的目录</code></li>
-</ul>
-</li>
-<li><p>file xxx：可以查看文件的文件类型</p>
-</li>
-<li><p>man文档章节</p>
-<p>如果有些命令如printf会有重名，需要查哪块具体要指定好具体章节<code>man 3 printf</code></p>
-<ul>
-<li>1：可执行程序或shell命令</li>
-<li>2：系统调用（内核提供的函数）</li>
-<li>3：库调用（程序库中的函数）</li>
-<li>4：特殊文件（通常在/dev）</li>
-<li>5：文件格式和规范（例如：/etc/passwd)</li>
-<li>6：游戏</li>
-<li>7：杂项</li>
-<li>8：系统管理命令（通常只针对root用户）</li>
-<li>9：内核例程【非标准】</li>
-</ul>
-</li>
-<li><p>env ：查看linux所有环境变量</p>
-</li>
-<li><p>stat：<code>stat hello.c</code>查看文件属性</p>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://ysbbswork.github.io/2019/03/09/ssh和sftp的关系/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Yang Shuai">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ysbbs">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2019/03/09/ssh和sftp的关系/" itemprop="url">
-                  ssh和sftp的关系
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-09T20:10:21+08:00">
-                2019-03-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/03/09/ssh和sftp的关系/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2019/03/09/ssh和sftp的关系/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2019/03/09/ssh和sftp的关系/" class="leancloud_visitors" data-flag-title="ssh和sftp的关系">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="SSH"><a href="#SSH" class="headerlink" title="SSH"></a>SSH</h1><p><strong>SSH</strong>（Secure Shell）：，由 IETF 的网络工作小组（Network Working Group）所制定；SSH 为建立在应用层和传输层基础上的安全协议。SSH 是目前较可靠，专为远程登录会话和其他网络服务提供安全性的协议。利用 SSH 协议可以有效防止远程管理过程中的信息泄露问题。<br>SSH是由客户端和服务端的软件组成的：服务端是一个守护进程(daemon)，他在后台运行并响应来自客户端的连接请求。服务端一般是sshd进程，提供了对远程连接的处理，一般包括公共密钥认证、密钥交换、对称密钥加密和非安全连接； 客户端包含ssh程序以及像scp（远程拷贝）、slogin（远程登陆）、sftp（安全文件传输）等其他的应用程序。<br>从客户端来看，SSH提供两种级别的安全验证：第一种级别（基于口令的安全验证）； 第二种级别（基于密匙的安全验证）。<br>SSH 主要有三部分组成： 传输层协议 [SSH-TRANS] ；用户认证协议 [SSH-USERAUTH] ；连接协议 [SSH-CONNECT]。</p>
-<h1 id="SFTP"><a href="#SFTP" class="headerlink" title="SFTP"></a>SFTP</h1><p><strong>SFTP</strong>（Secure File Transfer Protocol）：安全文件传送协议。可以为传输文件提供一种安全的加密方法。sftp 与 ftp 有着几乎一样的语法和功能。SFTP为SSH的一部份，是一种传输文件到服务器的安全方式。在SSH软件包中，已经包含了一个叫作SFTP(Secure File Transfer Protocol)的安全文件传输子系统，SFTP本身没有单独的守护进程，它必须使用sshd守护进程（端口号默认是22）来完成相应的连接操作，所以从某种意义上来说，SFTP并不像一个服务器程序，而更像是一个客户端程序。SFTP同样是使用加密传输认证信息和传输的数据，所以，使用SFTP是非常安全的。但是，由于这种传输方式使用了加密/解密技术，所以传输效率比普通的FTP要低得多，如果您对网络安全性要求更高时，可以使用SFTP代替FTP。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://ysbbswork.github.io/2019/03/08/做决定的方法/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Yang Shuai">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ysbbs">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2019/03/08/做决定的方法/" itemprop="url">
-                  做决定的方法
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-08T10:15:48+08:00">
-                2019-03-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/03/08/做决定的方法/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2019/03/08/做决定的方法/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2019/03/08/做决定的方法/" class="leancloud_visitors" data-flag-title="做决定的方法">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ul>
-<li><p>现实的问题：</p>
-<ul>
-<li><p>是不是自己真正的需要？</p>
-</li>
-<li><p>我有没有告诉自己所有的选择？</p>
-</li>
-<li>并对事情深思熟虑？</li>
-</ul>
-</li>
-<li><p>私人的问题：</p>
-<ul>
-<li>我有没有对自己诚实？</li>
-<li>有没有遵循自己的直觉？</li>
-<li>是不是可以拥有更好的？</li>
-</ul>
-</li>
-</ul>
+<p>阻塞调用是指调用结果返回之前，当前线程会被挂起。调用线程只有在得到结果之后才会返回。<br>非阻塞调用指在不能立刻得到结果之前，该调用不会阻塞当前线程。</p>
+<p>作者：严肃</p>
+<p>链接：<a href="https://www.zhihu.com/question/19732473/answer/20851256" target="_blank" rel="external">https://www.zhihu.com/question/19732473/answer/20851256</a></p>
+<p>老张爱喝茶，废话不说，煮开水。<br>出场人物：老张，水壶两把（普通水壶，简称水壶；会响的水壶，简称响水壶）。<br>1 老张把水壶放到火上，立等水开。（同步阻塞）<br>老张觉得自己有点傻<br>2 老张把水壶放到火上，去客厅看电视，时不时去厨房看看水开没有。（同步非阻塞）<br>老张还是觉得自己有点傻，于是变高端了，买了把会响笛的那种水壶。水开之后，能大声发出嘀~~~~的噪音。<br>3 老张把响水壶放到火上，立等水开。（异步阻塞）<br>老张觉得这样傻等意义不大<br>4 老张把响水壶放到火上，去客厅看电视，水壶响之前不再去看它了，响了再去拿壶。（异步非阻塞）</p>
+<p>作者：愚抄 链接：<a href="https://www.zhihu.com/question/19732473/answer/23434554" target="_blank" rel="external">https://www.zhihu.com/question/19732473/answer/23434554</a></p>
+</blockquote>
+<h2 id="IO多路复用-、同步、异步、阻塞非阻塞"><a href="#IO多路复用-、同步、异步、阻塞非阻塞" class="headerlink" title="IO多路复用 、同步、异步、阻塞非阻塞"></a>IO多路复用 、同步、异步、阻塞非阻塞</h2><p>同步、异步 是对 调用 来说的</p>
+<p>阻塞、非阻塞 是对 进程或者线程 来说的</p>
+<p>io多路复用 主要解决 同步非阻塞中反复轮询的问题，使用信号事件驱动进行回调通知</p>
+<blockquote>
+<p><a href="https://www.cnblogs.com/pandang/p/7366781.html" target="_blank" rel="external">https://www.cnblogs.com/pandang/p/7366781.html</a></p>
+</blockquote>
 
           
         
@@ -1920,7 +1871,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">76</span>
+                <span class="site-state-item-count">80</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1933,7 +1884,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">56</span>
+                <span class="site-state-item-count">64</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

@@ -260,6 +260,165 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://ysbbswork.github.io/2019/04/13/epoll的边缘触发和水平触发模式解析/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yang Shuai">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ysbbs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2019/04/13/epoll的边缘触发和水平触发模式解析/" itemprop="url">
+                  epoll的边缘触发和水平触发模式解析
+                </a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-13T19:54:32+08:00">
+                2019-04-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/04/13/epoll的边缘触发和水平触发模式解析/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2019/04/13/epoll的边缘触发和水平触发模式解析/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2019/04/13/epoll的边缘触发和水平触发模式解析/" class="leancloud_visitors" data-flag-title="epoll的边缘触发和水平触发模式解析">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>在学习epoll的时候，一般都会学习到epoll的水平触发和边缘触发模式。</p>
+<p>很多地方都有提到一个结论：边缘触发（ET）模式+将监听的socket的fd设置为non_blocking，可以提高效率，但对于这个增加了多少效率，并没有相关的benchmark可以看到，故整理转载了两种模式对于性能的影响分析。</p>
+<p>以下：</p>
+<blockquote>
+<p>转自：<a href="https://www.zhihu.com/question/22576054/answer/89395376">dong</a></p>
+<p>epoll的帮助中指出，使用ET模式，可以便捷的处理EPOLLOUT事件，省去打开与关闭EPOLLOUT的epoll_ctl（EPOLL_CTL_MOD）调用。从而有可能让你的性能得到一定的提升。</p>
+<p>例如你需要写出1M的数据，写出到socket 256k时，返回了EAGAIN，ET模式下，当再次返回EPOLLOUT时，继续写出待写出的数据，当没有数据需要写出时，不处理直接略过即可。而LT模式则需要先打开EPOLLOUT，当没有数据需要写出时，再关闭EPOLLOUT（否则会一直会返回EPOLLOUT事件）<br>  总体来说，ET处理EPOLLOUT方便高效些，LT不容易遗漏事件、不易产生bug</p>
+</blockquote>
+<p>ET理论上可以比LT少带来一些系统调用，所以更省一些。具体的性能提高有多少，要看应用场景。不过绝大部分场景下，LT是足够的。</p>
+<p>但是使用水平触发，可能会导致：</p>
+<p>使用了epoll，且你的fd是阻塞的。<br>如果epoll通知你fd可以写数据了。然后你啦啦啦的打算写100B数据，但是内核buf只有50B的可用空间，这时候，你的进程就被阻塞了。<br>所以说，用了epoll不能保证你的进程在读写的时候不会阻塞，在这种极端情况下，用边缘触发会带来更好的性能。</p>
+<p><strong>但是</strong>对于现代CPU来说, IO总是能先满的, 相对于龟速的网络, 多几个system call无所谓吧</p>
+<p>比如，以单线程速度见长的Redis使用的是水平触发。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/04/13/epoll的边缘触发和水平触发模式解析/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="https://ysbbswork.github.io/2019/04/11/高并发服务器学习笔记/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1656,158 +1815,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://ysbbswork.github.io/2019/03/10/进程间通信笔记（一）/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Yang Shuai">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ysbbs">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2019/03/10/进程间通信笔记（一）/" itemprop="url">
-                  进程间通信笔记（一）
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-10T15:07:52+08:00">
-                2019-03-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/03/10/进程间通信笔记（一）/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2019/03/10/进程间通信笔记（一）/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2019/03/10/进程间通信笔记（一）/" class="leancloud_visitors" data-flag-title="进程间通信笔记（一）">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="进程间通信"><a href="#进程间通信" class="headerlink" title="进程间通信"></a>进程间通信</h1><ul>
-<li>pipe进行父子进程间的通信</li>
-<li>pipe进行兄弟进程间的通信</li>
-<li>FIFO进行无血缘关系的进程间通信（FIFO又被称为命名管道）</li>
-<li>mmap函数进行有血缘无血缘进程间通信</li>
-</ul>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/03/10/进程间通信笔记（一）/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1857,7 +1864,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">81</span>
+                <span class="site-state-item-count">82</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1870,7 +1877,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">68</span>
+                <span class="site-state-item-count">69</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

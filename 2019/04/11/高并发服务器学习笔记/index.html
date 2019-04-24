@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="笔记,并发,C,epoll,服务器,select,poll," />
+  <meta name="keywords" content="笔记,C,并发,epoll,服务器,select,poll," />
 
 
 
@@ -115,7 +115,7 @@ epoll
 
 
 注意事项">
-<meta property="og:updated_time" content="2019-04-11T08:28:02.132Z">
+<meta property="og:updated_time" content="2019-04-13T12:00:24.124Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="高并发服务器学习笔记">
 <meta name="twitter:description" content="总结学习了并发服务器的几种模式，总结为笔记，相应代码在github上，以demo的形式实现了以下服务器模型。
@@ -521,7 +521,8 @@ EPOLL_CTL_DEL 将一个fd 从监听红黑树上摘下（取消监听）
 <p><strong>LT(level triggered)：LT是缺省的工作方式，并且同时支持block和no-block socket。</strong>在这种做法中，内核告诉你一个文件描述符是否就绪了，然后你可以对这个就绪的fd进行IO操作。如果你不作任何操作，内核还是会继续通知你的，所以，这种模式编程出错误可能性要小一点。<strong>传统的select/poll都是这种模型的代表。</strong></p>
 <p><strong>ET(edge-triggered)：ET是高速工作方式，只支持no-block socket。</strong>在这种模式下，当描述符从未就绪变为就绪时，内核通过epoll告诉你。然后它会假设你知道文件描述符已经就绪，并且不会再为那个文件描述符发送更多的就绪通知。请注意，如果一直不对这个fd作IO操作(从而导致它再次变成未就绪)，内核不会发送更多的通知(only once).</p>
 <p>大部分epoll模型为非阻塞的边缘触发模型。</p>
-<h3 id="epoll边缘触发模型ET"><a href="#epoll边缘触发模型ET" class="headerlink" title="epoll边缘触发模型ET"></a>epoll边缘触发模型ET</h3><p>epoll的ET模式：高效模式，但是只支持 非阻塞模式，</p>
+<p><a href="https://ysbbswork.github.io/2019/04/13/epoll%E7%9A%84%E8%BE%B9%E7%BC%98%E8%A7%A6%E5%8F%91%E5%92%8C%E6%B0%B4%E5%B9%B3%E8%A7%A6%E5%8F%91%E6%A8%A1%E5%BC%8F%E8%A7%A3%E6%9E%90/">ET模式和LT模式详细分析</a></p>
+<h3 id="epoll边缘触发模型ET"><a href="#epoll边缘触发模型ET" class="headerlink" title="epoll边缘触发模型ET"></a>epoll边缘触发模型ET</h3><p>epoll的ET模式：高效模式，但是需要设置为 非阻塞模式，</p>
 <p>将 fd 设置成非阻塞，epoll不会阻塞，read 时也不会阻塞。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">struct epoll_event event;</div><div class="line">event.events = EPOLLIN|EPOLLET;</div><div class="line">epoll_ctl(epfd,EPOLL_CTL_ADD,cfd &amp;event);</div><div class="line">int flg = fcntl(cfd, F_GETFL);</div><div class="line">flg |= O_NONBLOCK;</div><div class="line">fcntl(cfd,F_SETFL,flg);</div></pre></td></tr></table></figure>
 <h2 id="epoll反应堆模型"><a href="#epoll反应堆模型" class="headerlink" title="epoll反应堆模型"></a>epoll反应堆模型</h2><p>架构：    epoll ET模式 + 非阻塞 + void *ptr</p>
@@ -642,7 +643,7 @@ EPOLL_CTL_DEL 将一个fd 从监听红黑树上摘下（取消监听）
   <p><span>本文标题:</span><a href="/2019/04/11/高并发服务器学习笔记/">高并发服务器学习笔记</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 Yang Shuai 的个人博客">Yang Shuai</a></p>
   <p><span>发布时间:</span>2019年04月11日 - 16:04</p>
-  <p><span>最后更新:</span>2019年04月11日 - 16:04</p>
+  <p><span>最后更新:</span>2019年04月13日 - 20:04</p>
   <p><span>原始链接:</span><a href="/2019/04/11/高并发服务器学习笔记/" title="高并发服务器学习笔记">https://ysbbswork.github.io/2019/04/11/高并发服务器学习笔记/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://ysbbswork.github.io/2019/04/11/高并发服务器学习笔记/"  aria-label="复制成功！"></i></span>
   </p>
@@ -709,9 +710,9 @@ EPOLL_CTL_DEL 将一个fd 从监听红黑树上摘下（取消监听）
           
             <a href="/tags/笔记/" rel="tag"># 笔记</a>
           
-            <a href="/tags/并发/" rel="tag"># 并发</a>
-          
             <a href="/tags/C/" rel="tag"># C</a>
+          
+            <a href="/tags/并发/" rel="tag"># 并发</a>
           
             <a href="/tags/epoll/" rel="tag"># epoll</a>
           
@@ -820,7 +821,7 @@ EPOLL_CTL_DEL 将一个fd 从监听红黑树上摘下（取消监听）
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">82</span>
+                <span class="site-state-item-count">83</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -833,7 +834,7 @@ EPOLL_CTL_DEL 将一个fd 从监听红黑树上摘下（取消监听）
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">69</span>
+                <span class="site-state-item-count">72</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

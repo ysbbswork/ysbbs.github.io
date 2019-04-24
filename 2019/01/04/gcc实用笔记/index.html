@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="C/C++,笔记,GCC," />
+  <meta name="keywords" content="C/C++,笔记,GCC,动态库,静态库," />
 
 
 
@@ -93,7 +93,7 @@
 <meta property="og:url" content="https://ysbbswork.github.io/2019/01/04/gcc实用笔记/index.html">
 <meta property="og:site_name" content="ysbbs">
 <meta property="og:description" content="一般在工作中，或者使用中，对于gcc的一些了解，很多都是很熟悉，但是具体一条条列出来，发现可以对gcc的一般使用会有更清晰的了解。对于初学者或者经常使用vs这类IDE的同学，可以通过这个总结对gcc使用有个直观的入门和了解。">
-<meta property="og:updated_time" content="2019-01-04T04:49:03.154Z">
+<meta property="og:updated_time" content="2019-04-24T02:44:16.597Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="gcc实用笔记">
 <meta name="twitter:description" content="一般在工作中，或者使用中，对于gcc的一些了解，很多都是很熟悉，但是具体一条条列出来，发现可以对gcc的一般使用会有更清晰的了解。对于初学者或者经常使用vs这类IDE的同学，可以通过这个总结对gcc使用有个直观的入门和了解。">
@@ -354,7 +354,7 @@
       
         <p>一般在工作中，或者使用中，对于gcc的一些了解，很多都是很熟悉，但是具体一条条列出来，发现可以对gcc的一般使用会有更清晰的了解。对于初学者或者经常使用vs这类IDE的同学，可以通过这个总结对gcc使用有个直观的入门和了解。</p>
 <a id="more"></a>
-<ul>
+<h2 id="旋风式入门"><a href="#旋风式入门" class="headerlink" title="旋风式入门"></a>旋风式入门</h2><ul>
 <li>gcc工作流程<ul>
 <li>预处理 -E<ul>
 <li>宏替换</li>
@@ -404,6 +404,63 @@
 </ul>
 </li>
 </ul>
+<h2 id="制作静态库和动态库"><a href="#制作静态库和动态库" class="headerlink" title="制作静态库和动态库"></a>制作静态库和动态库</h2><ol>
+<li><p>制作静态库</p>
+<ol>
+<li><p>命名规则: libMyName.a</p>
+<ol>
+<li><p>制作步骤:</p>
+<ol>
+<li><p>生成.o<br>gcc -c *.c</p>
+<ol>
+<li>打包(将所有的.o文件)<br>ar rcs 静态库的名字 *.o</li>
+</ol>
+</li>
+<li><p>ar rcs libmytest.a a.o b.o c.o<br>（就是一个打包.o文件的过程）</p>
+<p>ar 工具不包含在gcc中</p>
+<p>r –&gt; 将文件插入静态库中</p>
+<p>c –&gt; 创建静态库，不管库是否存在</p>
+<p>s –&gt; 写入一个目标文件索引到库中，或者更新一个存在的目标文件索引。</p>
+<p>查看库中的符号（函数、全局变量等）： nm libmytest.a</p>
+</li>
+</ol>
+</li>
+<li>使用: main.c -L -l<br>gcc main.c (库) -LlibPath -llibname -o app -Iinclude</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><p>制作动态库</p>
+<ol>
+<li><p>动态库后缀: .so – libmyname.so</p>
+<ol>
+<li>制作步骤:<ol>
+<li>生成与位置无关的代码(.o)<br>gcc -fPIC -c *.c -Iinclude<ol>
+<li>将.o打包生成.so文件<br>gcc -shared  *.o -o libmytest.so</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>使用 main.c   lib  include<br>gcc main.c -Llib -lmytest -Iinlude -o app</li>
+</ol>
+<p>应用程序不能执行, 动态链接器连接不到自己制作的库</p>
+<ol>
+<li>临时设置的方法:<br>export LD_LIARARY_PATH=./lib</li>
+<li>永久设置的方法:<ol>
+<li>找到动态链接库的配置文件: /etc/ld.so.conf<ol>
+<li>在该文件中添加动态库的目录(绝对路径)<ol>
+<li>更新: sudo ldconfig -v</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
 
       
     </div>
@@ -420,7 +477,7 @@
   <p><span>本文标题:</span><a href="/2019/01/04/gcc实用笔记/">gcc实用笔记</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 Yang Shuai 的个人博客">Yang Shuai</a></p>
   <p><span>发布时间:</span>2019年01月04日 - 12:01</p>
-  <p><span>最后更新:</span>2019年01月04日 - 12:01</p>
+  <p><span>最后更新:</span>2019年04月24日 - 10:04</p>
   <p><span>原始链接:</span><a href="/2019/01/04/gcc实用笔记/" title="gcc实用笔记">https://ysbbswork.github.io/2019/01/04/gcc实用笔记/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://ysbbswork.github.io/2019/01/04/gcc实用笔记/"  aria-label="复制成功！"></i></span>
   </p>
@@ -490,6 +547,10 @@
             <a href="/tags/笔记/" rel="tag"># 笔记</a>
           
             <a href="/tags/GCC/" rel="tag"># GCC</a>
+          
+            <a href="/tags/动态库/" rel="tag"># 动态库</a>
+          
+            <a href="/tags/静态库/" rel="tag"># 静态库</a>
           
         </div>
       
@@ -565,8 +626,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.jpg"
@@ -581,7 +651,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">82</span>
+                <span class="site-state-item-count">83</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -594,7 +664,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">69</span>
+                <span class="site-state-item-count">72</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -619,6 +689,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#旋风式入门"><span class="nav-number">1.</span> <span class="nav-text">旋风式入门</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#制作静态库和动态库"><span class="nav-number">2.</span> <span class="nav-text">制作静态库和动态库</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

@@ -133,7 +133,7 @@ makefile中的规则
 123# （注释#）具体格式：# 目标:依赖# (tab缩进，只能是tab)命令
 
 123# 举例：编译语句：gcc a.c b.c c.c -o app 写成">
-<meta property="og:updated_time" content="2019-03-01T07:51:16.562Z">
+<meta property="og:updated_time" content="2019-04-24T02:59:28.833Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="makefile学习笔记">
 <meta name="twitter:description" content="make是什么
@@ -491,8 +491,8 @@ makefile中的规则
 </li>
 <li><p>自动变量</p>
 <ul>
-<li>$@：规则中的目标</li>
-<li>$&lt;：规则中的第一个依赖</li>
+<li><strong>$@：规则中的目标</strong></li>
+<li><strong>$&lt;：规则中的第一个依赖</strong></li>
 <li>$^：规则中的所有依赖</li>
 <li>只能在规则的命令中使用</li>
 </ul>
@@ -521,13 +521,18 @@ makefile中的规则
 </li>
 <li>匹配替换<ul>
 <li>patsubst进行替换，有三个参数</li>
-<li>obj = $(patsubst %.c,%.o,$(src))</li>
+<li>obj = \$(patsubst %.c,%.o,$(src))</li>
 </ul>
 </li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">src = $(wildcard ./*.c)</div><div class="line">obj = $(patsubst %.c, %.o, $(src))</div><div class="line">target = app</div><div class="line">$(target):$(obj)</div><div class="line">	gcc $^ -o $@</div><div class="line">	</div><div class="line">%.o:%.c</div><div class="line">	gcc -c $&lt; -o $@</div></pre></td></tr></table></figure>
 <ul>
-<li>缺点：不能清理项目</li>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">SRC=$(wildcard *.cpp)</div><div class="line">OBJ=$(SRC:.cpp=.o)</div></pre></td></tr></table></figure>
+</li>
+<li><p>用以上方法比patsubst要容易记忆</p>
+</li>
+<li><p>缺点：不能清理项目</p>
+</li>
 </ul>
 </li>
 <li><p><strong>第五个版本</strong></p>
@@ -552,8 +557,8 @@ makefile中的规则
 </li>
 <li><p>补充知识：</p>
 <ul>
-<li>rm:-f, –force    忽略不存在的文件，从不给出提示。</li>
-<li>makefile 命令加一个减号 - 代表当前命令执行失败了不会停止，继续执行下面的命令，即忽略失败</li>
+<li><strong>rm:-f, –force    忽略不存在的文件，从不给出提示。</strong></li>
+<li><strong>makefile 命令加一个减号 - 代表当前命令执行失败了不会停止，继续执行下面的命令，即忽略失败</strong></li>
 </ul>
 </li>
 </ul>
@@ -562,6 +567,27 @@ makefile中的规则
 </li>
 </ul>
 <h2 id="最终版本示例："><a href="#最终版本示例：" class="headerlink" title="最终版本示例："></a>最终版本示例：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">target=myappname</div><div class="line">#大写代表是makefile自带的变量，CPPFLAGS指的是预处理时的一些参数，默认为空，忘记了用小写的也行</div><div class="line">CPPFLAGS=./include</div><div class="line">#makefile 里变量引用的方式为$(x)</div><div class="line"></div><div class="line">#wildcard 可以检索指定目录下的文件名</div><div class="line">src=$(wildcard ./src/*.c)</div><div class="line"></div><div class="line">#patsubst进行匹配替换</div><div class="line">obj=$(patsubst %.c,%.o, $(src))</div><div class="line"></div><div class="line"></div><div class="line">#自动变量$@：表示规则中的目标</div><div class="line">$(target):$(obj)</div><div class="line">    gcc $^ -o $@</div><div class="line">    </div><div class="line"></div><div class="line">#自动变量$&lt;：表示规则中第一个条件，只在有一个条件时用，这个条件是变化的，上面编译时，需要什么目标就会通过%模式匹配生成什么编译语句。</div><div class="line">#-I 指定头文件目录</div><div class="line">%.o:%.c</div><div class="line">    echo $&lt;</div><div class="line">    gcc -c $&lt; -I (CPPFLAGS) -o $@</div><div class="line">    </div><div class="line">    </div><div class="line">    </div><div class="line">clean:</div><div class="line">	-rm -f *.o $(target)</div><div class="line">    </div><div class="line"></div><div class="line">.PHONY: clean</div></pre></td></tr></table></figure>
+<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><h3 id=""><a href="#" class="headerlink" title="@"></a>@</h3><p>make执行到每一句命令的时候，不仅会执行那个命令，同时还会将命令完整的打印输出到屏幕上，但是作为执行命令的符号，我们有时候不希望打印在屏幕上，不好看，也显得乱，例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">echo &quot;begin!&quot;</div></pre></td></tr></table></figure>
+<p>最终输出为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">echo begin!</div></pre></td></tr></table></figure>
+<p>不是我们希望的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">begin!</div></pre></td></tr></table></figure>
+<p>这时候就需要使用到@符号。</p>
+<ul>
+<li>@<ul>
+<li><strong>在命令前加上@符号后就可以使make不显示这个命令本身和相关参数</strong></li>
+</ul>
+</li>
+</ul>
+<p>例1：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">@echo &quot;begin!&quot;</div></pre></td></tr></table></figure>
+<p>输出为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">begin!</div></pre></td></tr></table></figure>
+<p>例二：（不仅不显示命令本身，相关的参数也会被自动去掉）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">@g++ -c test.cpp -o test.o</div></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">test.o</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -578,7 +604,7 @@ makefile中的规则
   <p><span>本文标题:</span><a href="/2019/02/26/makefile学习笔记/">makefile学习笔记</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 Yang Shuai 的个人博客">Yang Shuai</a></p>
   <p><span>发布时间:</span>2019年02月26日 - 20:02</p>
-  <p><span>最后更新:</span>2019年03月01日 - 15:03</p>
+  <p><span>最后更新:</span>2019年04月24日 - 10:04</p>
   <p><span>原始链接:</span><a href="/2019/02/26/makefile学习笔记/" title="makefile学习笔记">https://ysbbswork.github.io/2019/02/26/makefile学习笔记/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://ysbbswork.github.io/2019/02/26/makefile学习笔记/"  aria-label="复制成功！"></i></span>
   </p>
@@ -748,7 +774,7 @@ makefile中的规则
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">82</span>
+                <span class="site-state-item-count">83</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -761,7 +787,7 @@ makefile中的规则
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">69</span>
+                <span class="site-state-item-count">72</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -796,7 +822,7 @@ makefile中的规则
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#make是什么"><span class="nav-number">1.</span> <span class="nav-text">make是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最终版本示例："><span class="nav-number">2.</span> <span class="nav-text">最终版本示例：</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#make是什么"><span class="nav-number">1.</span> <span class="nav-text">make是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最终版本示例："><span class="nav-number">2.</span> <span class="nav-text">最终版本示例：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#补充"><span class="nav-number">3.</span> <span class="nav-text">补充</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">3.1.</span> <span class="nav-text">@</span></a></li></ol></li></ol></div>
             
 
           </div>

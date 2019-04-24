@@ -93,7 +93,7 @@
 <meta property="og:url" content="https://ysbbswork.github.io/2019/01/04/gcc实用笔记/index.html">
 <meta property="og:site_name" content="ysbbs">
 <meta property="og:description" content="一般在工作中，或者使用中，对于gcc的一些了解，很多都是很熟悉，但是具体一条条列出来，发现可以对gcc的一般使用会有更清晰的了解。对于初学者或者经常使用vs这类IDE的同学，可以通过这个总结对gcc使用有个直观的入门和了解。">
-<meta property="og:updated_time" content="2019-04-24T02:44:16.597Z">
+<meta property="og:updated_time" content="2019-04-24T03:19:04.262Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="gcc实用笔记">
 <meta name="twitter:description" content="一般在工作中，或者使用中，对于gcc的一些了解，很多都是很熟悉，但是具体一条条列出来，发现可以对gcc的一般使用会有更清晰的了解。对于初学者或者经常使用vs这类IDE的同学，可以通过这个总结对gcc使用有个直观的入门和了解。">
@@ -425,10 +425,15 @@
 </li>
 </ol>
 </li>
-<li>使用: main.c -L -l<br>gcc main.c (库) -LlibPath -llibname -o app -Iinclude</li>
+<li><p>使用: main.c -L -l<br>gcc main.c (库) -LlibPath -llibname -o app -Iinclude</p>
+</li>
 </ol>
 </li>
 </ol>
+<p>注：有时静态库也需要加-fPIC生成位置无关的代码</p>
+<ul>
+<li>这取决于你对静态库有什么用处。如果你只想把它链接到程序中，它不需要PIC代码（libtool调用一个便利库，因为你几乎可以没有它，它只是帮助你的编译过程达到合理的大小）。否则，如果你打算将共享库与它链接，则需要在静态库中使用PIC代码。</li>
+</ul>
 </li>
 <li><p>制作动态库</p>
 <ol>
@@ -477,7 +482,7 @@
   <p><span>本文标题:</span><a href="/2019/01/04/gcc实用笔记/">gcc实用笔记</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 Yang Shuai 的个人博客">Yang Shuai</a></p>
   <p><span>发布时间:</span>2019年01月04日 - 12:01</p>
-  <p><span>最后更新:</span>2019年04月24日 - 10:04</p>
+  <p><span>最后更新:</span>2019年04月24日 - 11:04</p>
   <p><span>原始链接:</span><a href="/2019/01/04/gcc实用笔记/" title="gcc实用笔记">https://ysbbswork.github.io/2019/01/04/gcc实用笔记/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://ysbbswork.github.io/2019/01/04/gcc实用笔记/"  aria-label="复制成功！"></i></span>
   </p>
@@ -651,7 +656,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">83</span>
+                <span class="site-state-item-count">84</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -664,7 +669,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">72</span>
+                <span class="site-state-item-count">74</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

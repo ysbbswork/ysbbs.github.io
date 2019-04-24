@@ -133,7 +133,7 @@ makefile中的规则
 123# （注释#）具体格式：# 目标:依赖# (tab缩进，只能是tab)命令
 
 123# 举例：编译语句：gcc a.c b.c c.c -o app 写成">
-<meta property="og:updated_time" content="2019-04-24T02:59:28.833Z">
+<meta property="og:updated_time" content="2019-04-24T04:54:22.261Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="makefile学习笔记">
 <meta name="twitter:description" content="make是什么
@@ -489,7 +489,7 @@ makefile中的规则
 <li>CC</li>
 </ul>
 </li>
-<li><p>自动变量</p>
+<li><p><strong>自动变量</strong></p>
 <ul>
 <li><strong>$@：规则中的目标</strong></li>
 <li><strong>$&lt;：规则中的第一个依赖</strong></li>
@@ -499,14 +499,14 @@ makefile中的规则
 </li>
 <li><p>例：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">obj = main.o add.o sub.o mul.o</div><div class="line">target = app</div><div class="line">$(target):$(obj)</div><div class="line">	gcc $(obj) -o $(target)</div><div class="line"></div><div class="line">%.o:%.c</div><div class="line">	gcc -c $&lt; -o $@</div></pre></td></tr></table></figure>
-<p>模式匹配：</p>
-<p>%.o:%.c</p>
-<p>第一次：main.o没有，向下找匹配规则，自动变量会自动生成规则</p>
-<p>main.o:main.c</p>
-<p>​    gcc -c main.c -o main.o</p>
-<p>第二次：add.o</p>
-<p>add.o:add.c</p>
-<p>​    gcc -c add.c -o add.o</p>
+<p><strong>模式匹配：</strong></p>
+<p><strong>%.o:%.c</strong></p>
+<p><strong>第一次：main.o没有，向下找匹配规则，自动变量会自动生成规则</strong></p>
+<p><strong>main.o:main.c</strong></p>
+<p>​    <strong>gcc -c main.c -o main.o</strong></p>
+<p><strong>第二次：add.o</strong></p>
+<p><strong>add.o:add.c</strong></p>
+<p>​    <strong>gcc -c add.c -o add.o</strong></p>
 </li>
 <li><p>缺点：可移植性比较差</p>
 </li>
@@ -525,16 +525,19 @@ makefile中的规则
 </ul>
 </li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">src = $(wildcard ./*.c)</div><div class="line">obj = $(patsubst %.c, %.o, $(src))</div><div class="line">target = app</div><div class="line">$(target):$(obj)</div><div class="line">	gcc $^ -o $@</div><div class="line">	</div><div class="line">%.o:%.c</div><div class="line">	gcc -c $&lt; -o $@</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">SOURCES = $(wildcard *.cpp)</div><div class="line">OBJS=$(patsubst %.cpp,%.o, $(SOURCES))</div></pre></td></tr></table></figure>
+<p>第二种匹配替换方法：</p>
 <ul>
 <li><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">SRC=$(wildcard *.cpp)</div><div class="line">OBJ=$(SRC:.cpp=.o)</div></pre></td></tr></table></figure>
 </li>
-<li><p>用以上方法比patsubst要容易记忆</p>
-</li>
-<li><p>缺点：不能清理项目</p>
+<li><p>用这种方法比patsubst要容易记忆</p>
 </li>
 </ul>
 </li>
+</ul>
+</li>
+</ul>
+<ul>
 <li><p><strong>第五个版本</strong></p>
 <ul>
 <li><p>让make生成不是终极目标的目标</p>
@@ -559,8 +562,6 @@ makefile中的规则
 <ul>
 <li><strong>rm:-f, –force    忽略不存在的文件，从不给出提示。</strong></li>
 <li><strong>makefile 命令加一个减号 - 代表当前命令执行失败了不会停止，继续执行下面的命令，即忽略失败</strong></li>
-</ul>
-</li>
 </ul>
 </li>
 </ul>
@@ -604,7 +605,7 @@ makefile中的规则
   <p><span>本文标题:</span><a href="/2019/02/26/makefile学习笔记/">makefile学习笔记</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 Yang Shuai 的个人博客">Yang Shuai</a></p>
   <p><span>发布时间:</span>2019年02月26日 - 20:02</p>
-  <p><span>最后更新:</span>2019年04月24日 - 10:04</p>
+  <p><span>最后更新:</span>2019年04月24日 - 12:04</p>
   <p><span>原始链接:</span><a href="/2019/02/26/makefile学习笔记/" title="makefile学习笔记">https://ysbbswork.github.io/2019/02/26/makefile学习笔记/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://ysbbswork.github.io/2019/02/26/makefile学习笔记/"  aria-label="复制成功！"></i></span>
   </p>
@@ -774,7 +775,7 @@ makefile中的规则
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">83</span>
+                <span class="site-state-item-count">84</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -787,7 +788,7 @@ makefile中的规则
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">72</span>
+                <span class="site-state-item-count">74</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

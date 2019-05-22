@@ -97,7 +97,7 @@
 <meta property="og:description" content="学习Vim相关的教程有很多，有Book，甚至有在线的练习网站，
 我将最常用的几个命令和vim的相关以笔记的方式整理出来，
 算是一个 旋风式 入门了吧。">
-<meta property="og:updated_time" content="2019-01-05T13:39:09.546Z">
+<meta property="og:updated_time" content="2019-04-25T14:35:30.537Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vim旋风式入门笔记">
 <meta name="twitter:description" content="学习Vim相关的教程有很多，有Book，甚至有在线的练习网站，
@@ -503,6 +503,12 @@
 </ul>
 </li>
 </ul>
+<h2 id="补充一些命令"><a href="#补充一些命令" class="headerlink" title="补充一些命令"></a>补充一些命令</h2><ul>
+<li>全文缩进调整<ul>
+<li>全文的话gg=G</li>
+</ul>
+</li>
+</ul>
 
       
     </div>
@@ -519,7 +525,7 @@
   <p><span>本文标题:</span><a href="/2019/01/05/Vim旋风式入门笔记/">Vim旋风式入门笔记</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 Yang Shuai 的个人博客">Yang Shuai</a></p>
   <p><span>发布时间:</span>2019年01月05日 - 21:01</p>
-  <p><span>最后更新:</span>2019年01月05日 - 21:01</p>
+  <p><span>最后更新:</span>2019年04月25日 - 22:04</p>
   <p><span>原始链接:</span><a href="/2019/01/05/Vim旋风式入门笔记/" title="Vim旋风式入门笔记">https://ysbbswork.github.io/2019/01/05/Vim旋风式入门笔记/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://ysbbswork.github.io/2019/01/05/Vim旋风式入门笔记/"  aria-label="复制成功！"></i></span>
   </p>
@@ -689,7 +695,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">84</span>
+                <span class="site-state-item-count">86</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -702,7 +708,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">74</span>
+                <span class="site-state-item-count">80</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -737,7 +743,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#vim三种模式"><span class="nav-number">1.</span> <span class="nav-text">vim三种模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#命令模式操作："><span class="nav-number">2.</span> <span class="nav-text">命令模式操作：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#删除操作："><span class="nav-number">2.1.</span> <span class="nav-text">删除操作：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#复制粘贴操作"><span class="nav-number">2.2.</span> <span class="nav-text">复制粘贴操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#替换操作："><span class="nav-number">2.3.</span> <span class="nav-text">替换操作：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#搜索操作："><span class="nav-number">2.4.</span> <span class="nav-text">搜索操作：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文本编辑模式"><span class="nav-number">3.</span> <span class="nav-text">文本编辑模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#进入文本编辑模式"><span class="nav-number">3.1.</span> <span class="nav-text">进入文本编辑模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#末行模式"><span class="nav-number">4.</span> <span class="nav-text">末行模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#垂直分屏打开"><span class="nav-number">5.</span> <span class="nav-text">垂直分屏打开</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vi-的配置"><span class="nav-number">6.</span> <span class="nav-text">vi 的配置</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#vim三种模式"><span class="nav-number">1.</span> <span class="nav-text">vim三种模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#命令模式操作："><span class="nav-number">2.</span> <span class="nav-text">命令模式操作：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#删除操作："><span class="nav-number">2.1.</span> <span class="nav-text">删除操作：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#复制粘贴操作"><span class="nav-number">2.2.</span> <span class="nav-text">复制粘贴操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#替换操作："><span class="nav-number">2.3.</span> <span class="nav-text">替换操作：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#搜索操作："><span class="nav-number">2.4.</span> <span class="nav-text">搜索操作：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文本编辑模式"><span class="nav-number">3.</span> <span class="nav-text">文本编辑模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#进入文本编辑模式"><span class="nav-number">3.1.</span> <span class="nav-text">进入文本编辑模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#末行模式"><span class="nav-number">4.</span> <span class="nav-text">末行模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#垂直分屏打开"><span class="nav-number">5.</span> <span class="nav-text">垂直分屏打开</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vi-的配置"><span class="nav-number">6.</span> <span class="nav-text">vi 的配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#补充一些命令"><span class="nav-number">7.</span> <span class="nav-text">补充一些命令</span></a></li></ol></div>
             
 
           </div>

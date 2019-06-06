@@ -97,7 +97,7 @@
 <meta property="og:description" content="问题描述在编译时遇到：
 12345undefined reference to `xxxx&amp;apos;undefined reference to `xxxx&amp;apos;undefined reference to `xxxx&amp;apos;undefined reference to `xxxx&amp;apos;collect2: error: ld returned 1 exit status
 但检查发">
-<meta property="og:updated_time" content="2019-06-06T07:02:02.726Z">
+<meta property="og:updated_time" content="2019-06-06T07:06:56.403Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="一次g++链接问题debug笔记">
 <meta name="twitter:description" content="问题描述在编译时遇到：
@@ -376,6 +376,11 @@
 <li>在g++错误提示里带上了命名空间，这部分都是在头文件里声明的，所以说明头文件正确包含了</li>
 </ul>
 </li>
+</ul>
+</li>
+<li>怀疑库有问题？<ul>
+<li>网络上建议我用nm命令查看so的符号表，看看这个函数是否正常，于是nm -D 库文件，查看了下，结果函数正常的，包含了提示的那些接口。</li>
+<li>说明库是没问题的</li>
 </ul>
 </li>
 <li>那就还是链接问题<ul>

@@ -260,6 +260,324 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://ysbbswork.github.io/2017/11/28/隐藏在cin中的陷阱/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yang Shuai">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ysbbs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/11/28/隐藏在cin中的陷阱/" itemprop="url">
+                  隐藏在cin中的陷阱
+                </a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-28T16:50:25+08:00">
+                2017-11-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/11/28/隐藏在cin中的陷阱/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/11/28/隐藏在cin中的陷阱/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2017/11/28/隐藏在cin中的陷阱/" class="leancloud_visitors" data-flag-title="隐藏在cin中的陷阱">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><strong>本博客采用创作共用版权协议, 要求署名、非商业用途和保持一致. 转载本博客文章必须也遵循署名-非商业用途-保持一致的创作共用协议.</strong></p>
+<p>在C++中有很多时候会栽在cin缓存区这个坑里，特别是将输入作为循环判断条件的时候，输入错误的情况下往往会陷入死循环。例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">int i;</div><div class="line">while (1) &#123;</div><div class="line">	cout &lt;&lt; &quot;输入数字&quot;;</div><div class="line">	cin &gt;&gt; i;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>想要达到的效果是循环输入数字，一旦输入错误，比如输入为一个字母的时候，往往会陷入到一个死循环中。</p>
+<p>不停的输出提示信息，但是不允许用户再次输入。</p>
+<p>查了一下发现，</p>
+<p>这个是因为cin缓冲区没有清理，cin以后的每一次一次循环时直接读取缓冲区了</p>
+<p>因此，在输入前加上清空输入缓冲区的语句就可以解决问题。c++用于清空输入缓存的函数有三个：cin.clear（），cin.sync（），cin.ignore（）。</p>
+<p>cin.clear（）是用来更改cin的状态标示符的，cin在接收到错误的输入的时候，会设置状态位good。如果good位不为1，则cin不接受输入，直接跳过。如果下次输入前状态位没有改变那么即使清除了缓冲区数据流也无法输入。所以清除缓冲区之前必须要cin.clear（）。</p>
+<p>cin.ignore（a，ch）：从输入缓冲去中提取字符，提取的字符被忽略，不被使用。每抛弃一个字符，它都要计数和比较字符，如果计数值达到a或者被忽略的字符是ch，则cin.ignore（）函数终止执行。默认参数是a=1，即仅忽略缓冲区中的第一个字符。它的一个常用功能是用来清除以回车结束的输入缓冲区的内容，消除上一次输入对下一次输入的影响。比如cin.ignore（1024，’\n’），通常把第一个参数设置得足够大，这样实际上总是只有第二个参数起作用，所以这一句就是把回车（包括回车）之前的所有字符从输入缓冲区中清除。</p>
+<p>cin.sync（）的作用是清除输入缓冲区全部的内容。</p>
+<p>所以加上在下一次输入前加上两行，清除错误缓存区即可。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">int i;</div><div class="line">while (1) &#123;</div><div class="line">	cout &lt;&lt; &quot;输入数字&quot;;</div><div class="line">	cin &gt;&gt; i;</div><div class="line">	cin.clear();</div><div class="line">	cin.ignore();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>不知道为什么我使用cin.sync()并不能清除输入缓冲区全部的内容，还是会出现死循环。</p>
+<p>所以用cin.clear();cin.ignore();</p>
+<p>cin这个缓存区清理在循环中是一个不可忽略的陷阱，</p>
+<p>不中招也很难了解到，所以</p>
+<p>every built ,every debug.</p>
+<p>debug again ,better again.</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://ysbbswork.github.io/2017/11/21/C中main函数输入参数小结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yang Shuai">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ysbbs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/11/21/C中main函数输入参数小结/" itemprop="url">
+                  C中main函数输入参数小结
+                </a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-21T11:54:11+08:00">
+                2017-11-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/11/21/C中main函数输入参数小结/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/11/21/C中main函数输入参数小结/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2017/11/21/C中main函数输入参数小结/" class="leancloud_visitors" data-flag-title="C中main函数输入参数小结">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><strong>本博客采用创作共用版权协议, 要求署名、非商业用途和保持一致. 转载本博客文章必须也遵循署名-非商业用途-保持一致的创作共用协议.</strong></p>
+<p>C/C++中main函数可以加入输入参数，比如为程序运行加上一个参数，或者打开一个文件进行处理等。</p>
+<p>主要是通过<code>int main(int argc,  char* argv[])</code>的方式，</p>
+<p><code>argc</code>是命令行的总的参数个数，<code>aargv[]</code>是记录每个参数的数组，</p>
+<p>这里运行程序本身是作为一个参数一直存在，即第0个参数，</p>
+<p>举例：</p>
+<p>程序名称为program，为一个打开文件并读取的程序</p>
+<p>命令行中：</p>
+<p>-&gt; program a.txt</p>
+<p>此时 argc = 2,</p>
+<p>argv[0] = “program”</p>
+<p>grav[1] = “a.txt”</p>
+<p>所以在程序中判断是否有参数输入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">if (argc &lt; 2)</div><div class="line">&#123;</div><div class="line">	printf(&quot;没有输入参数\n&quot;);</div><div class="line">	return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>有参数就依次将grav[1]等传入即可。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="https://ysbbswork.github.io/2017/11/13/英语写作好帮手之Ginger-New-Tab/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1457,319 +1775,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://ysbbswork.github.io/2017/06/01/巧妙设置hosts文件实现部分翻墙/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Yang Shuai">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ysbbs">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/06/01/巧妙设置hosts文件实现部分翻墙/" itemprop="url">
-                  巧妙设置hosts实现翻墙
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-01T12:23:26+08:00">
-                2017-06-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/06/01/巧妙设置hosts文件实现部分翻墙/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/06/01/巧妙设置hosts文件实现部分翻墙/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2017/06/01/巧妙设置hosts文件实现部分翻墙/" class="leancloud_visitors" data-flag-title="巧妙设置hosts实现翻墙">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>国内的GFW有时候太过严格（恶心），导致一些学术开发用站都登录不了，连chrome都不能愉快的完善了，大多数土豪都办了VPN套餐，但基本的学习生产环境的翻墙，只需要设置好hosts文件就可以了。</p>
-<p>一个好的hosts文件，可以满足且不仅限于以下网站的连接各使用：</p>
-<p>Google、谷歌学术、维基百科、ccFox.info、ProjectH、Battle.NET 、WordPress、Microsoft Live、GitHub、Amazon、Archive、Box.com、Disqus、SoundCloud、inoreader、Feedly、FlipBoard、Twitter、Tumblr、Facebook、Flickr、imgur、Instagram、DuckDuckGo、Ixquick、Yahoo、Google Services、Google apis、Android、Youtube、Google Drive、UpLoad、Appspot、Googl eusercontent、Gstatic、Gmail、Google other、Google Play等</p>
-<h3 id="下载hosts"><a href="#下载hosts" class="headerlink" title="下载hosts"></a>下载hosts</h3><p>国内提供稳定完整的hosts的网站有很多，</p>
-<p>我推荐个<a href="https://laod.cn/hosts/2017-google-hosts.html" target="_blank" rel="external">老D</a>，提供一个傻瓜式一站服务（运行批处理时记得右键用管理员身份运行）</p>
-<p><a href="https://eyun.baidu.com/enterprise/share/init?cid=8272058700880591108&amp;uk=3171722477&amp;sid=201705271726824413" target="_blank" rel="external">hosts下载地址</a></p>
-<p>百度网盘提取码：laod 解压密码：laod.cn</p>
-<blockquote>
-<p>里面包含Windows &amp; Mac 、Android &amp; Linux请对号入座。<br>另外windows可以直接运行批处理命令，hosts会自动替换（如果无法自动替换，请用管理员身份权限手动修改）<br>注意：批处理命令会直接覆盖现有hosts，如现有hosts内容重要的话请备份后再使用，或者手动修改！<br>所提供的hosts仅限于学习使用！hosts里不会添加屏蔽广告条目，也不会劫持任何网站。</p>
-</blockquote>
-<p><strong>注意：</strong><br>Google、Gmail、维基百科、Twitter、Facebook等必须请用<strong>https</strong>加密方式打开。<br>一般这些网站都是SSL加密链接，如：</p>
-<p>谷歌学术：<a href="https://laod.cn/go.php?url=https://scholar.google.com/" target="_blank" rel="external">https://scholar.google.com/</a><br>谷歌：<a href="https://laod.cn/go.php?url=https://www.google.com/ncr" target="_blank" rel="external">https://www.google.com/ncr</a><br>谷歌香港：<a href="https://laod.cn/go.php?url=https://www.google.com.hk/ncr" target="_blank" rel="external">https://www.google.com.hk/ncr</a><br>Twitter：<a href="https://laod.cn/go.php?url=https://twitter.com/?lang=zh-cn" target="_blank" rel="external">https://twitter.com/?lang=zh-cn</a></p>
-<p>另外可能有的地区&amp;网络（铁通、联通）hosts无法正常使用，这个不是你我能左右的！<br>建议不要使用国产浏览器，国产软件也是，特别是360，因为国产浏览器即使你使用https<br>它也会强制你使用默认http，还有就是会上传用户数据，尽可能使用Chrome<br>下载&amp;修改hosts安全软件可能会“报毒”（误报）你可以暂时退出或者添加信任即可！</p>
-<h3 id="修改hosts后生效方法："><a href="#修改hosts后生效方法：" class="headerlink" title="修改hosts后生效方法："></a>修改hosts后生效方法：</h3><ul>
-<li><p><strong>通用方法</strong></p>
-<p>重启或者拔网线(断网) -&gt; 插网线(重新连接网络)</p>
-</li>
-<li><p>如不行请清空浏览器缓存（老D建议不要使用国产浏览器，请使用谷歌Chrome浏览器）</p>
-</li>
-</ul>
-<p>干脆就重启一下吧，谁让重启大法好呢~</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://ysbbswork.github.io/2017/05/25/细谈P问题、NP问题和NPC问题/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Yang Shuai">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ysbbs">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/05/25/细谈P问题、NP问题和NPC问题/" itemprop="url">
-                  细谈P问题、NP问题和NPC问题
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-25T20:44:32+08:00">
-                2017-05-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/05/25/细谈P问题、NP问题和NPC问题/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/25/细谈P问题、NP问题和NPC问题/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2017/05/25/细谈P问题、NP问题和NPC问题/" class="leancloud_visitors" data-flag-title="细谈P问题、NP问题和NPC问题">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="算法中的时间复杂度和P问题、NP问题和NPC问题"><a href="#算法中的时间复杂度和P问题、NP问题和NPC问题" class="headerlink" title="算法中的时间复杂度和P问题、NP问题和NPC问题"></a>算法中的时间复杂度和P问题、NP问题和NPC问题</h2><p>摘自<a href="http://www.matrix67.com/blog/archives/105">Matrix67</a><br>有删改，便于理解。</p>
-<h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><p>还是先用几句话简单说明一下时间复杂度。<br>时间复杂度并不是表示一个程序解决问题需要花多少时间，而是当问题规模扩大后，程序需要的时间长度增长得有多快。<br>也就是说，对于高速处理数据的计算机来说，处理某一个特定数据的效率不能衡量一个程序的好坏，而应该看当这个数据的规模变大到数百倍后，程序运行时间是否还是一样，或者也跟着慢了数百倍，或者变慢了数万倍。<br>不管数据有多大，程序处理花的时间始终是那么多的，我们就说这个程序很好，具有O(1)的时间复杂度，也称常数级复杂度；<br>数据规模变得有多大，花的时间也跟着变得有多长，这个程序的时间复杂度就是O(n)，比如找n个数中的最大值；<br>而像冒泡排序、插入排序等，数据扩大2倍，时间变慢4倍的，属于O(n^2)的复杂度。<br>还有一些穷举类的算法，所需时间长度成几何阶数上涨，这就是O(a^n)的指数级复杂度，甚至O(n!)的阶乘级复杂度。<br>不会存在O(2*n^2)的复杂度，因为前面的那个“2”是系数，根本不会影响到整个程序的时间增长。<br>同样地，O (n^3+n^2)的复杂度也就是O(n^3)的复杂度。<br>因此，我们会说，一个O(0.01*n^3)的程序的效率比O(100*n^2)的效率低，尽管在n很小的时候，前者优于后者，但后者时间随数据规模增长得慢，最终O(n^3)的复杂度将远远超过O(n^2)。<br>我们也说，O(n^100)的复杂度小于O(1.01^n)的复杂度。<br>容易看出，前面的几类复杂度被分为两种级别，其中后者的复杂度无论如何都远远大于前者：<br>一种是O(1),O(log(n)),O(n^a)等，我们把它叫做<strong>多项式级</strong>的复杂度，因为它的规模n出现在底数的位置；<br>另一种是O(a^n)和O(n!)型复杂度，它是<strong>非多项式级</strong>的，其复杂度计算机往往不能承受。<br>当我们在解决一个问题时，我们选择的算法通常都需要是多项式级的复杂度，非多项式级的复杂度需要的时间太多，往往会超时，除非是数据规模非常小。</p>
-<h3 id="P问题、NP问题和NPC问题"><a href="#P问题、NP问题和NPC问题" class="headerlink" title="P问题、NP问题和NPC问题"></a>P问题、NP问题和NPC问题</h3><p>自然地，人们会想到一个问题：会不会所有的问题都可以找到复杂度为多项式级的算法呢？很遗憾，答案是否定的。有些问题甚至根本不可能找到一个正确的算法来，这称之为“不可解问题”(Undecidable Decision Problem)。<br>比如，输出从1到n这n个数的全排列。不管你用什么方法，你的复杂度都是阶乘级，因为你总得用阶乘级的时间打印出结果来。有人说，这样的“问题”不是一个“正规”的问题，正规的问题是让程序解决一个问题，输出一个“YES”或“NO”（这被称为判定性问题），或者一个什么什么的最优值（这被称为最优化问题）。<br>那么，根据这个定义，我也能举出一个不大可能会有多项式级算法的问题来：Hamilton回路。<br>问题是这样的：给你一个图，问你能否找到一条经过每个顶点一次且恰好一次（不遗漏也不重复）最后又走回来的路（满足这个条件的路径叫做Hamilton回路）。<br>这个问题现在还没有找到多项式级的算法。<br>事实上，这个问题就是我们后面要说的NPC问题。</p>
-<p>下面引入P类问题的概念：<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/05/25/细谈P问题、NP问题和NPC问题/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1819,7 +1824,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">91</span>
+                <span class="site-state-item-count">93</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

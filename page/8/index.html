@@ -260,6 +260,405 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://ysbbswork.github.io/2018/03/05/C-QT设计模式（第二版）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yang Shuai">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ysbbs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2018/03/05/C-QT设计模式（第二版）/" itemprop="url">
+                  C++QT设计模式（第二版）
+                </a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-05T16:07:50+08:00">
+                2018-03-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/03/05/C-QT设计模式（第二版）/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/03/05/C-QT设计模式（第二版）/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2018/03/05/C-QT设计模式（第二版）/" class="leancloud_visitors" data-flag-title="C++QT设计模式（第二版）">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>《C++QT设计模式（第二版）》读书笔记</p>
+<p>Alan Ezust</p>
+<p>Paul Ezust</p>
+<p>好习惯：</p>
+<p>定义<strong>类</strong>，应将它的定义放到一个与这个类同名的头文件中，并添加预处理宏来避免多次包含。例：<code>aclass.h</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> _ACLASS_H_</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> _ACLASS_H_</span></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;Qstring&gt;</span></span></div><div class="line"><span class="keyword">class</span> Aclass&#123;</div><div class="line">  <span class="keyword">public</span>:</div><div class="line">  ...</div><div class="line">  </div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></div></pre></td></tr></table></figure>
+<p>再将这个类成员函数的具体实现写入一个单独的实现文件中去，命名为同名的cpp文件：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;QString&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">"aclass.h"</span></span></div><div class="line"></div><div class="line">QString Aclass::aprintfunc() <span class="keyword">const</span>&#123;</div><div class="line">    ...;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>默认情况下，类的成员是private类型</p>
+</blockquote>
+<h1 id="类的友元"><a href="#类的友元" class="headerlink" title="类的友元"></a>类的友元</h1><p><strong> 友元可以是一个类，另外一个类的成员函数，或者任何一个非成员函数。</strong></p>
+<p>破坏封装性可能会危害程序的课维护性，因此应该尽量少的使用友元，不得已使用时候也要倍加小心。</p>
+<p>通常而言，为了达到以下两个目的才是用友元函数：</p>
+<ul>
+<li>为了使用工厂方法，此时需要对某个类强制实施某些创建规则。（具体待补充）</li>
+<li>为了使用全局运算符函数，比如operator&lt;&lt;()</li>
+</ul>
+<h1 id="析构函数"><a href="#析构函数" class="headerlink" title="析构函数"></a>析构函数</h1><p>如果某个类满足以下条件，则无需提供析构函数：</p>
+<ul>
+<li>只拥有非指针的简单类型成员</li>
+<li>拥有已经适当定义的析构函数的类成员</li>
+<li>它是满足某些条件的一种QT类（待补充）</li>
+</ul>
+<h1 id="stactic"><a href="#stactic" class="headerlink" title="stactic"></a>stactic</h1><blockquote>
+<p>全局命名空间污染：将名称添加到全局作用域中（例如，声明全局变量或者全局函数）</p>
+<p>这是不好的编程风格</p>
+<p>相对于全局变量，我们更倾向于使用static成员（且一般可以代替全局变量），因为static成员不会在全局命名空间中增加不必要的名称</p>
+</blockquote>
+<p>每个static数据成员都必须在类定义之外的文件中被初始化（定义），一般在对应的类的实现文件中初始化。</p>
+<p>.cpp中</p>
+<p><code>int Thing::s_count = 0;</code></p>
+<h1 id="类的声明和定义"><a href="#类的声明和定义" class="headerlink" title="类的声明和定义"></a>类的声明和定义</h1><p>例：</p>
+<p>egg.h:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">[...]</div><div class="line">#include&quot;chinken.h&quot;</div><div class="line">class Egg&#123;</div><div class="line">  public:</div><div class="line">  Chicken* getParent();</div><div class="line">&#125;;</div><div class="line">[...]</div></pre></td></tr></table></figure>
+<p>chicken.h:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">#include &quot;egg.h&quot;</div><div class="line">class Chicken&#123;</div><div class="line">  public:</div><div class="line">  Egg* layEgg();</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>一个头文件包含另外一个头文件，另一个又包含回来了，<strong>预处理器不允许这样的循环依赖。</strong></p>
+<p>这两个头文件都不需要包含另一个头文件，因为这样做<strong>会不必要的在头文件之间建立一种强依赖性</strong>。</p>
+<p><strong>在正确的情况下，C++允许使用前置类声明，而不必包含某个特定的头文件。</strong></p>
+<p>例：egg.h</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">class Chinken;//前置类声明</div><div class="line">class Egg&#123;</div><div class="line">  Chinken* getparent();</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p><strong>注意</strong>：cpp文件中可以包含多个头文件，而不会导致它们之间的循环依赖性。.cpp文件对两个头文件具有依赖性，但头文件之间彼此不存在依赖性。</p>
+<p>例：egg.cpp</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">#include&quot;chicken.h&quot;</div><div class="line">#include&quot;egg.h&quot;</div><div class="line">Chicken* Egg::getParent()&#123;</div><div class="line">  return new Chicken();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>因此，前置类声明使得定义双向关系成为可能，</p>
+<h1 id="转换构造函数"><a href="#转换构造函数" class="headerlink" title="转换构造函数"></a>转换构造函数</h1><p>当一个构造函数只有一个参数，而且该参数又不是本类的const引用时，这种构造函数称为转换构造函数。</p>
+<p>用转换构造函数可以将一个指定类型的数据转换为类的对象，但是不能反过来将一个类的对象转换为一个其他类型的数据。 类型转换函数的作用是将一个类的对象转换成另一个类型的数据。</p>
+<p>转换构造函数的作用是将某种类型的数据转换为类的对象，当一个构造函数只有一个参数，而且该参数又不是本类的const引用时，这种构造函数称为转换构造函数。试验了一下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">class A</div><div class="line">&#123;</div><div class="line">public:</div><div class="line">    int a;</div><div class="line">    A(int a) :a(a) &#123;&#125;</div><div class="line">    A reta()</div><div class="line">    &#123;</div><div class="line">        return a;</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line">int main()</div><div class="line">&#123;</div><div class="line">    A a(2);</div><div class="line">    A b = a.reta();</div><div class="line">    A c = 3;</div><div class="line">    cout&lt;&lt;b.a&lt;&lt;&quot;\n&quot;&lt;&lt;c.a&lt;&lt;endl;</div><div class="line">    return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p> 结果是输出2和3</p>
+<p><strong>实际上这是由隐式转换机制造成的，如果不想要这种效果，可以在构造函数前加上explicit声明。加上之后上面的代码就会编译出错</strong>，提示</p>
+<p>无法从“int”转换为“A”。</p>
+<p>既然能将数据转换为类型，类型也能转换为数据。c++的类型转换函数可以将一个类的对象转换为一个指定类型的数据。</p>
+<p>类型转换函数的一般形式为 :</p>
+<p>operator <a href="http://baike.baidu.com/view/2368989.htm" target="_blank" rel="external">类型名</a>()</p>
+<p>{实现转换的语句}</p>
+<p>测试代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">class A</div><div class="line">&#123;</div><div class="line">public:</div><div class="line">    int a;</div><div class="line">    A(int a) :a(a) &#123;&#125;</div><div class="line">    operator int()</div><div class="line">    &#123;</div><div class="line">        return a;</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line">int main()</div><div class="line">&#123;</div><div class="line">    A a(2);</div><div class="line">    int b = a + 3;</div><div class="line">    A c = a + 4;</div><div class="line">    cout&lt;&lt;b&lt;&lt;&quot;\n&quot;&lt;&lt;c.a&lt;&lt;endl;</div><div class="line">    return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>结果输出5和6</p>
+<h1 id="const成员函数"><a href="#const成员函数" class="headerlink" title="const成员函数"></a>const成员函数</h1><p>当将关键字const应用到一个（非static的）类成员函数时，其含义是比较特殊的。如果放置在参数之后，const就成为函数签名的一部分，从而保证此函数不会改变主题对象的状态。</p>
+<p>要理解只一点，好方法就是意识到每一个非static成员函数都有一个称为this的隐式参数，this是一个指向主题对象的指针。当将一个成员函数声明为const时，就相当于告诉编译器只要此函数被调用，this就是一个指向const的指针。</p>
+<p>可以看一下原始的C++到C语言的预处理器是如何处理成员函数的。因为C语言不支持重载函数或成员函数，预处理器会将这些函数翻译成具有“重整名称”的C语言函数，例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">cpp中</div><div class="line">class Point&#123;</div><div class="line">  public:</div><div class="line">  void set(int nx ,int ny)&#123;&#125;</div><div class="line">  Qstring toString() const&#123;&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">c语言预处理后大概版本：</div><div class="line">_Point_set_int_int(Point* this,int nx,int ny)</div><div class="line">_Point_toString_string_const(const Point* this)</div></pre></td></tr></table></figure>
+<h1 id="用QT实现Unicode显示"><a href="#用QT实现Unicode显示" class="headerlink" title="用QT实现Unicode显示"></a>用QT实现Unicode显示</h1><p>QtextStream能够针对Unicode的QString和其它类型的Qt起作用</p>
+<p>所以配合QString的QtextStream可以顺利实现打印中文字符</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;QTextStream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;QString&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line"><span class="keyword">const</span> <span class="keyword">char</span>* charstr=<span class="string">"这是中文"</span>;</div><div class="line"><span class="function">QTextStream <span class="title">cout</span><span class="params">(<span class="built_in">stdout</span>,QIODevice::WriteOnly)</span></span>;<span class="comment">//WriteOnly，可省略：QTextStream cout(stdout);</span></div><div class="line">QString str=charstr;</div><div class="line"><span class="built_in">cout</span>&lt;&lt;str&lt;&lt;<span class="built_in">endl</span>;</div><div class="line"><span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="C-中避免使用数组"><a href="#C-中避免使用数组" class="headerlink" title="C++中避免使用数组"></a>C++中避免使用数组</h1><p>在C++中，数组被看成是“邪恶的”，</p>
+<p>下面是应该避免在C++中使用数组的一些理由：</p>
+<ul>
+<li>编译器和运行时系统都不会检查数组的下标是否位于正确范围之内</li>
+<li>使用数组的程序员有责任编写额外的范围检查代码</li>
+<li>数组的大小可以是固定不变的，或者必须使用堆中的动态内存</li>
+<li>对于堆数组，程序员有责任确保所有情况下正确释放内存</li>
+<li>为此需要深入理解C++已经异常，特别是发生异常时的底层处理机制。向数组插入、预分配或追加元素都是费时的操作（再运行时和开发时都是如此）。</li>
+</ul>
+<h1 id="QStringList与迭代"><a href="#QStringList与迭代" class="headerlink" title="QStringList与迭代"></a>QStringList与迭代</h1><p>例子：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;QStringList&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;QDebug&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line"></div><div class="line">QString winter=<span class="string">"December,January,February"</span>;</div><div class="line">QString spring=<span class="string">"March,April,May"</span>;</div><div class="line">QString summer=<span class="string">"June,July,Auguest"</span>;</div><div class="line">QString fall=<span class="string">"September,October,November"</span>;</div><div class="line"></div><div class="line">QStringList <span class="built_in">list</span>;</div><div class="line"><span class="built_in">list</span>&lt;&lt;winter;</div><div class="line"><span class="built_in">list</span>+=spring;</div><div class="line"><span class="built_in">list</span>.append(summer);</div><div class="line"><span class="built_in">list</span>&lt;&lt;fall;</div><div class="line"></div><div class="line">qDebug()&lt;&lt;"The spring mouths are: "&lt;&lt;<span class="built_in">list</span>[1];</div><div class="line"></div><div class="line">QString allmonths=<span class="built_in">list</span>.join(", ");//把元素连成一个字符串</div><div class="line">qDebug()&lt;&lt;allmonths;</div><div class="line"></div><div class="line">QStringList list2=allmonths.split(", ");//按某个字符，把一个字符串拆成列表</div><div class="line">qDebug()&lt;&lt;list2.size();</div><div class="line">qDebug()&lt;&lt;list2[1];</div><div class="line"></div><div class="line">foreach(<span class="keyword">const</span> QString &amp;str,<span class="built_in">list</span>)&#123;//QT foreach循环——类似于python的<span class="keyword">for</span>循环</div><div class="line">    qDebug()&lt;&lt;QString(" [%1] ").arg(str);</div><div class="line">&#125;</div><div class="line"></div><div class="line">//C++STL风格的迭代</div><div class="line"><span class="keyword">for</span>(QStringList::iterator it =<span class="built_in">list</span>.begin();it!=<span class="built_in">list</span>.end();++it)&#123;</div><div class="line">    QString current =*it;</div><div class="line">    qDebug()&lt;&lt;"[["&lt;&lt;current&lt;&lt;"]]";</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">return</span> 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="运算符重载"><a href="#运算符重载" class="headerlink" title="运算符重载"></a>运算符重载</h1><p>例：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Complex&#123;</div><div class="line">    <span class="keyword">friend</span> ostream&amp; <span class="keyword">operator</span>&lt;&lt;(ostream&amp; out,<span class="keyword">const</span> Complex&amp; c);</div><div class="line">    <span class="keyword">friend</span> Complex <span class="keyword">operator</span>-(<span class="keyword">const</span> Complex&amp; c1,<span class="keyword">const</span> Complex &amp; c2);</div><div class="line">    <span class="keyword">friend</span> Complex <span class="keyword">operator</span>*(<span class="keyword">const</span> Complex&amp; c1,<span class="keyword">const</span> Complex &amp; c2);</div><div class="line">  	<span class="keyword">friend</span> Complex <span class="keyword">operator</span>/(<span class="keyword">const</span> Complex&amp; c1,<span class="keyword">const</span> Complex &amp; c2);</div><div class="line">  <span class="keyword">public</span>:</div><div class="line">  Complex&amp; <span class="keyword">operator</span>+=(<span class="keyword">const</span> Complex &amp; c);</div><div class="line">  Complex&amp; <span class="keyword">operator</span>+=(<span class="keyword">const</span> Complex &amp; c);</div><div class="line">  </div><div class="line">  Complex <span class="keyword">operator</span>+(<span class="keyword">const</span> Complex &amp; c);<span class="comment">//这里应该将运算符重载函数声明成非成员友元函数</span></div><div class="line">  </div><div class="line">  <span class="keyword">private</span>:</div><div class="line">  <span class="keyword">double</span> m_r,m_i</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>例子中声明的运算符都是二元的（接收两个操作数）。对成员函数而言，却只有一个形式参数，因为第一个（左边的）操作数都是隐式的：*this</p>
+<p><strong>虽然可以将运算符重载为成员函数或者全局函数，但需要注意，它们的主要差异是调用它们的方式。特别地，成员函数运算符要求有一个用作左操作数的对象，而全局函数允许对任何一个操作数进行某种类型转换。</strong></p>
+<p>例：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//为什么+更适合作为非成员函数的理由</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="function">Complex <span class="title">c1</span><span class="params">(<span class="number">4.5</span>,<span class="number">1.2</span>)</span></span>;</div><div class="line">    <span class="function">Complex <span class="title">c2</span><span class="params">(<span class="number">3.6</span>,<span class="number">1.7</span>)</span></span>;</div><div class="line">  </div><div class="line">  Complex c3=c1+c2;</div><div class="line">  Complex c4=c3+<span class="number">1.4</span>;<span class="comment">//提升右操作数</span></div><div class="line">  Complex c5=<span class="number">8.0</span>-c4;<span class="comment">//提升左操作数</span></div><div class="line">  Complex c6=<span class="number">1.2</span>+c4;<span class="comment">//错误，左操作数没有针对成员运算符而提升</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>所以重载操作符应该视情况重载全局的运算符，将全局运算符重载函数声明成<strong>非成员友元函数</strong>。</p>
+<h1 id="从函数返回应用"><a href="#从函数返回应用" class="headerlink" title="从函数返回应用"></a>从函数返回应用</h1><p>有时候将函数设计成返回引用是非常有用的。例如，可以将多个操作“链”起来：</p>
+<p><code>cout&lt;&lt;thing1&lt;&lt;thing2&lt;&lt;thing3...;</code></p>
+<p>返回引用（尤其是*this)通常用来给成员函数提供左值行为。</p>
+<p>采用引用参数，就可以通过将对象的别名指定成const来保护返回的引用。</p>
+<p>例：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="function"><span class="keyword">int</span>&amp; <span class="title">maxi</span><span class="params">(<span class="keyword">int</span>&amp; x,<span class="keyword">int</span>&amp; y)</span></span>&#123;</div><div class="line">    <span class="keyword">return</span>(x&gt;y)?x:y;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">int</span> a= <span class="number">10</span>,b=<span class="number">20</span>;</div><div class="line">    maxi(a,b)=<span class="number">5</span>;<span class="comment">//给b赋值5</span></div><div class="line">    maxi(a,b)+=<span class="number">6</span>;<span class="comment">//给a增加6，a现在为16</span></div><div class="line">    ++maxi(a,b);<span class="comment">//给a增加1</span></div><div class="line">    <span class="built_in">cout</span>&lt;&lt;a&lt;&lt;<span class="string">"\t"</span>&lt;&lt;b&lt;&lt;<span class="built_in">endl</span>;</div><div class="line">  <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>注意</strong>：要小心，不要让函数返回一个临时（局部）对象的引用。当函数返回时，所有局部变量都销毁了。</p>
+<h1 id="inline函数的一些规则"><a href="#inline函数的一些规则" class="headerlink" title="inline函数的一些规则"></a>inline函数的一些规则</h1><ul>
+<li>inline函数必须在被调用之前定义（仅仅声明它是不够的）。</li>
+<li>在一个源代码模块中只能有一次inline定义。</li>
+<li>如果类成员函数的定义出现在类定义之内，则成员函数就是隐含inline的。</li>
+</ul>
+<p>如果函数太复杂，或者编译器选项改变了，则编译器可能会忽略inline指令。大多数编译器会拒绝包含如下语句的inline函数：</p>
+<ul>
+<li>while,for,do-while语句</li>
+<li>switch语句</li>
+<li>超过一定数量的代码行</li>
+</ul>
+<h1 id="继承和多态"><a href="#继承和多态" class="headerlink" title="继承和多态"></a>继承和多态</h1><p>没有<code>virtual时候*p1和*p2的具体类型靠函数指针类型来判断</code>：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="keyword">class</span> A</div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">getnum</span><span class="params">()</span> </span>&#123;<span class="comment">//A类中没有virtual函数</span></div><div class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; a &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line"></div><div class="line"><span class="keyword">private</span>:</div><div class="line">	<span class="keyword">int</span> a;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">class</span> B:<span class="keyword">public</span> A</div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">getnum</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; b&lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line"><span class="keyword">private</span>:</div><div class="line">	<span class="keyword">int</span> b;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">	A* p1 = <span class="keyword">new</span>(A);</div><div class="line">	<span class="function">A* <span class="title">p2</span><span class="params">(<span class="keyword">new</span> B)</span></span>;</div><div class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="keyword">typeid</span>(p1).name() &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;<span class="comment">//打印A*，指针类型始终不变</span></div><div class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="keyword">typeid</span>(p2).name() &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;<span class="comment">//打印A*，指针类型始终不变</span></div><div class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="keyword">typeid</span>(*p1).name() &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;<span class="comment">//打印A</span></div><div class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="keyword">typeid</span>(*p2).name() &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;<span class="comment">//打印A</span></div><div class="line">	<span class="built_in">std</span>::<span class="built_in">cin</span>.get();</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>有<code>virtual时候*p1和*p2的具体类型通过指向类型判断</code>，虚函数有虚函数表，可以确定数据类型：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="keyword">class</span> A</div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">getnum</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; a &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line"></div><div class="line"><span class="keyword">private</span>:</div><div class="line">	<span class="keyword">int</span> a;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">class</span> B:<span class="keyword">public</span> A</div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">getnum</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; b&lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line"><span class="keyword">private</span>:</div><div class="line">	<span class="keyword">int</span> b;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">	A* p1 = <span class="keyword">new</span>(A);</div><div class="line">	<span class="function">A* <span class="title">p2</span><span class="params">(<span class="keyword">new</span> B)</span></span>;</div><div class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="keyword">typeid</span>(p1).name() &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;<span class="comment">//打印A*，指针类型始终不变</span></div><div class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="keyword">typeid</span>(p2).name() &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;<span class="comment">//打印A*，指针类型始终不变</span></div><div class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="keyword">typeid</span>(*p1).name() &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;<span class="comment">//打印A</span></div><div class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="keyword">typeid</span>(*p2).name() &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;<span class="comment">//打印B，根据虚函数表判断具体指向数据类型</span></div><div class="line">	<span class="built_in">std</span>::<span class="built_in">cin</span>.get();</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://ysbbswork.github.io/2018/01/22/优雅的在latex中添加参考文献/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yang Shuai">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ysbbs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2018/01/22/优雅的在latex中添加参考文献/" itemprop="url">
+                  优雅的在latex中添加参考文献
+                </a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-22T18:57:55+08:00">
+                2018-01-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/01/22/优雅的在latex中添加参考文献/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/01/22/优雅的在latex中添加参考文献/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2018/01/22/优雅的在latex中添加参考文献/" class="leancloud_visitors" data-flag-title="优雅的在latex中添加参考文献">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>BibTeX 是一个使用数据库的的方式来管理参考文献程序, 用于协调LaTeX的参考文献处理.</p>
+<p>BibTeX 文件的后缀名为 .bib . 先来看一个例子:</p>
+<p>@article{Gettys90,<br>author = {Jim Gettys and Phil Karlton and Scott McGregor},<br>title = {The {X} Window System, Version 11},<br>journal = {Software Practice and Experience},<br>volume = {20},<br>number = {S2},<br>year = {1990},<br>abstract = {A technical overview of the X11 functionality. This is an update of the X10 TOG paper by Scheifler \&amp; Gettys.}<br>}</p>
+<p>在文献网站上都有导出bib数据库格式的链接，</p>
+<p>把所有的引用卸载一个.bib文件中，例如test.bib，</p>
+<p>然后在文章中导入：<code>\bibliography{test}</code></p>
+<p>就完成了文章引用了~</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="https://ysbbswork.github.io/2018/01/15/c-中异常的简单处理/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1509,302 +1908,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://ysbbswork.github.io/2017/11/05/如何开始写第一篇paper/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Yang Shuai">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ysbbs">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/11/05/如何开始写第一篇paper/" itemprop="url">
-                  如何开始写第一篇paper
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-05T12:36:20+08:00">
-                2017-11-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/11/05/如何开始写第一篇paper/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/11/05/如何开始写第一篇paper/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2017/11/05/如何开始写第一篇paper/" class="leancloud_visitors" data-flag-title="如何开始写第一篇paper">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><strong>本博客采用创作共用版权协议, 要求署名、非商业用途和保持一致. 转载本博客文章必须也遵循署名-非商业用途-保持一致的创作共用协议.</strong></p>
-<p>这篇Simon Jones教人写paper的文章我遇见的很早，但是没有认真的去对待，最近着手去写paper的时候才意识到为什么我没有去做到write earlier，想到这个词才回头来翻这篇文章。回忆我整个research的过程，包括中间遇到心理历程，都无一不被文章开篇所戳中，泪目，就像那句老话，道理我都懂，但不栽一脚不会懂得道理的深刻。。。如果你还没有开始写paper，doing research ，那么认真吧Write earlier看完并照着做，会让你少走很多弯路。</p>
-<p>以下：</p>
-<p>最著名的教人写 paper 的大师应该是 Simon Jones，他给过一系列学术演讲、学术写作的视频和 Tutorial。</p>
-<p><strong># Write earlier.</strong><br>做研究的顺序是，有了 idea—&gt;writing paper—&gt; doing research/experiments<br>一旦有了 idea，立刻开始动手写，而不是我们常见的开始做实验。因为做实验、做研究（调研）的过程会让我们分心，可能偏离了 idea 的初衷。太过发散，使得最初的 idea 变得模糊，也使得自己丧失信心。<br>writing paper is not reporting, is doing! writing helps clear our minds.<br>不要觉得写论文只是汇报自己的工作，实际上写论文真的是 DOING research 的一部分，很重要的一部分。<br>Every researcher often thinks their idea is trivial.<br>这是一个 natural stage，不管你觉得自己的 idea 有多么 trivial，insignificant，都要写下来，都要开始做。<br>Writing paper helps develop the idea.<br>实际上，Research 就像是 snowflake，或者是 flower。你从一个点，一个雪花一角发现一些什么，有了一些 idea。在做的过程中，你可能会遇到 depress，遇到挫折，但是也可能会发现出更多新的东西。发展出你的理论，你的研究。<br><strong># Identify your idea.</strong><br>paper is a primary mechanism to convey your idea.<br>所以作为读者，读完你的 paper，要明白你传达的是什么 idea。 one paper, one idea. and sharp!<br>Can you hear the “ping”?<br>先写下自己的 main idea，清晰的表达出来，再继续 flow 下去。<br><strong># Tell the story.</strong><br>Imagine you are explaining at a whiteboard<br>说出问题，说出问题的吸引力和难以解决，再说出自己的 idea，解决方法……用这种 flow 方法顺下来。帮助读者理解。Structure</p>
-<p><strong># Introduction.</strong><br>Introduction (1P) 用 example 说明你的 problem，这里不要把 problem 说的太 general.<br>Using bulleted lists to state your contributions. 注意加上是在哪个 Section 里可以找到 evidence to support each claim (contribution)<br>Contributions should be refutable!!!<br>No “the rest of this paper is…”. 因为没人会读这些。相反，直接用前进式的叙述方式来表达出来你接下来的顺序。<br><strong># Related Work.</strong><br>不要在第二部分开始写 related work，因为这部分常常是你的 idea 和读者之间的 barrier。<br>把 Related work leave it to the end.<br>因为即使在白板演说中，也不会一开始就说 related work。但是会在讲自己的 idea 的过程中，提到别人的工作。可以写上引用，再说 I will discuss it more in Section 8 之类的。<br>不要为了让自己的工作显得好，就故意只说别人的不好，故意 downplay 别人的工作。相反， be generous. 感谢别人的工作，感谢别人的 inspiring works. 这不会让你的工作显得 worse。<br>同时说出自己工作的不足。 Acknowledge weaknesses in your approach. 不要让 reviewer 去质疑你，更好的是自己保持诚实，也是一种 tactics.<br><strong># Put your readers first.</strong><br>在整个论文中间部分，也是最好写的部分。写出 the problem, the idea, the details.<br>Presenting the idea 时 conveying the intuition first. 一定是先说自己的 intuition，这样会让读者无论读不读细节都有所收获。<br>Remember: explain it as you’re explaining at a whiteboard.<br>所以，还是先写例子，再讲 intuition，再讲 general case.<br>同时，用最直接的方式表达出你的 idea。而不是你在研究中走的弯路。<br><strong># Listen to your readers.</strong><br>Getting help. 找尽可能多的对你的 paper 不熟悉的 guinea pigs 来读你的 paper. 专业读者好，不专业的读者也好！但是每个人只有一次第一次读你的 paper 的机会，珍惜这些机会。所以要告诉他们，请他们告诉你在他们读你论文时，是什么时候 get lost. 这很重要。听他们为什么 get lost，再回忆自己怎么重新向他们解释自己的论文的。记住自己的解释方式，重新修改自己的论文。<br>找专家帮助的时候，可以用这种句式 “could you help me ensure that I describe your work fairly?” 同时，重视他们的 comments。<br>如果 reviewer misunderstand 了你的工作，一定要努力想怎么 rewrite.</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://ysbbswork.github.io/2017/09/13/C中的typedef用法小结/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Yang Shuai">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ysbbs">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/09/13/C中的typedef用法小结/" itemprop="url">
-                  C中的typedef用法小结
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-13T10:28:16+08:00">
-                2017-09-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/09/13/C中的typedef用法小结/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/09/13/C中的typedef用法小结/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2017/09/13/C中的typedef用法小结/" class="leancloud_visitors" data-flag-title="C中的typedef用法小结">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p><strong>本博客采用创作共用版权协议, 要求署名、非商业用途和保持一致. 转载本博客文章必须也遵循署名-非商业用途-保持一致的创作共用协议.</strong></p>
-<p>typedef和#define宏有点相似，但比#define实际要复杂的多，也隐藏了很多陷阱，从网上摘了一些总结的很好的例子，希望下次用typedef的时候更能游刃有余。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/09/13/C中的typedef用法小结/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1854,7 +1957,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">98</span>
+                <span class="site-state-item-count">100</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1867,7 +1970,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">86</span>
+                <span class="site-state-item-count">87</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

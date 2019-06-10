@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Linux,笔记,线程," />
+  <meta name="keywords" content="笔记,GO," />
 
 
 
@@ -87,27 +87,49 @@
 
 
 
-<meta name="description" content="进程创建完线程之后，地址空间没有变化，进程退化成了线程——主线程。
-创建出的子线程和主线程共用地址空间，但主线程和子线程有各自独立的pcb，
-子线程的pcb是从主线程拷贝来的。">
+<meta name="description" content="接口
+定义
+
+Interface类型可以定义一组方法，但是这些不需要实现。并且interface不能
+包含任何变量
+
+interface 类型默认是一个指针
+
+
+123456type example interface&amp;#123;        Method1(参数列表) 返回值列表        Method2(参数列表) 返回值列表        …&amp;#125;
+
+接口有点像纯虚函数的父类，用">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linux多线程笔记">
-<meta property="og:url" content="https://ysbbswork.github.io/2019/03/12/Linux多线程笔记/index.html">
+<meta property="og:title" content="GO语言学习笔记6——接口">
+<meta property="og:url" content="https://ysbbswork.github.io/2019/06/10/GO语言学习笔记6——接口/index.html">
 <meta property="og:site_name" content="ysbbs">
-<meta property="og:description" content="进程创建完线程之后，地址空间没有变化，进程退化成了线程——主线程。
-创建出的子线程和主线程共用地址空间，但主线程和子线程有各自独立的pcb，
-子线程的pcb是从主线程拷贝来的。">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/005HFdfGgy1g0xw3o26v8j30k00ce431.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/005HFdfGgy1g0yrvfaiz2j30i009t77q.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/005HFdfGgy1g0yrwkilpmj30g00biwka.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/005HFdfGgy1g0ys0wy1l7j30qa0ddtco.jpg">
-<meta property="og:updated_time" content="2019-03-12T09:51:29.749Z">
+<meta property="og:description" content="接口
+定义
+
+Interface类型可以定义一组方法，但是这些不需要实现。并且interface不能
+包含任何变量
+
+interface 类型默认是一个指针
+
+
+123456type example interface&amp;#123;        Method1(参数列表) 返回值列表        Method2(参数列表) 返回值列表        …&amp;#125;
+
+接口有点像纯虚函数的父类，用">
+<meta property="og:updated_time" content="2019-06-10T10:17:10.077Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Linux多线程笔记">
-<meta name="twitter:description" content="进程创建完线程之后，地址空间没有变化，进程退化成了线程——主线程。
-创建出的子线程和主线程共用地址空间，但主线程和子线程有各自独立的pcb，
-子线程的pcb是从主线程拷贝来的。">
-<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/005HFdfGgy1g0xw3o26v8j30k00ce431.jpg">
+<meta name="twitter:title" content="GO语言学习笔记6——接口">
+<meta name="twitter:description" content="接口
+定义
+
+Interface类型可以定义一组方法，但是这些不需要实现。并且interface不能
+包含任何变量
+
+interface 类型默认是一个指针
+
+
+123456type example interface&amp;#123;        Method1(参数列表) 返回值列表        Method2(参数列表) 返回值列表        …&amp;#125;
+
+接口有点像纯虚函数的父类，用">
 
 
 
@@ -135,13 +157,13 @@
 
 
 
-  <link rel="canonical" href="https://ysbbswork.github.io/2019/03/12/Linux多线程笔记/"/>
+  <link rel="canonical" href="https://ysbbswork.github.io/2019/06/10/GO语言学习笔记6——接口/"/>
 
 
 
 
 
-  <title> Linux多线程笔记 | ysbbs </title>
+  <title> GO语言学习笔记6——接口 | ysbbs </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -270,7 +292,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://ysbbswork.github.io/2019/03/12/Linux多线程笔记/">
+    <link itemprop="mainEntityOfPage" href="https://ysbbswork.github.io/2019/06/10/GO语言学习笔记6——接口/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Yang Shuai">
@@ -291,7 +313,7 @@
             
             
               
-                Linux多线程笔记
+                GO语言学习笔记6——接口
               
             
           </h2>
@@ -306,8 +328,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-12T17:49:42+08:00">
-                2019-03-12
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-10T18:16:42+08:00">
+                2019-06-10
               </time>
             
 
@@ -325,8 +347,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/03/12/Linux多线程笔记/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2019/03/12/Linux多线程笔记/" itemprop="commentCount"></span>
+                <a href="/2019/06/10/GO语言学习笔记6——接口/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2019/06/10/GO语言学习笔记6——接口/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -334,7 +356,7 @@
 
           
           
-             <span id="/2019/03/12/Linux多线程笔记/" class="leancloud_visitors" data-flag-title="Linux多线程笔记">
+             <span id="/2019/06/10/GO语言学习笔记6——接口/" class="leancloud_visitors" data-flag-title="GO语言学习笔记6——接口">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -363,120 +385,77 @@
       
 
       
-        <p>进程创建完线程之后，地址空间没有变化，进程退化成了线程——主线程。</p>
-<p>创建出的子线程和主线程共用地址空间，但主线程和子线程有各自独立的pcb，</p>
-<p>子线程的pcb是从主线程拷贝来的。</p>
-<p><img src="http://ww1.sinaimg.cn/large/005HFdfGgy1g0xw3o26v8j30k00ce431.jpg" alt=""></p>
+        <h1 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h1><ul>
+<li><p>定义</p>
+<ul>
+<li><p>Interface类型可以定义一组方法，但是这些不需要实现。并且interface不能</p>
+<p>包含任何变量</p>
+</li>
+<li><p>interface 类型默认是一个指针</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">type example interface&#123;</div><div class="line"></div><div class="line">        Method1(参数列表) 返回值列表</div><div class="line">        Method2(参数列表) 返回值列表</div><div class="line">        …</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>接口有点像纯虚函数的父类，用来实现多态</p>
+<ul>
+<li>只要一个类型实现了这个接口，这个接口就可以指向这个类型</li>
+<li>这个接口类型可以指向所有实现它的方法的自定义类型<ul>
+<li>可以指向typeA，也可以指向typeB</li>
+<li>多态<ul>
+<li>一种事物有多种形态，都可以按照统一的接口进行操作</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <a id="more"></a>
 <ul>
-<li>在Linux下：<ul>
-<li>内核只看pcb，所以在Linux看起来，线程就是进程，轻量级的进程。</li>
-</ul>
-</li>
-<li>多线程和多进程的区别：<ul>
-<li>多进程：<ul>
-<li>始终共享的资源：<ul>
-<li>代码</li>
-<li>内存映射区</li>
-<li>文件描述符</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>多线程共享资源<ul>
-<li>堆</li>
-<li>全局变量</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p>线程更节省资源，内核只认pcb，看到这么多pcb就分配这么多时间片过来，效率不变，但线程资源占用的更少了。</p>
-<h2 id="主线程和子线程"><a href="#主线程和子线程" class="headerlink" title="主线程和子线程"></a>主线程和子线程</h2><ul>
-<li>共享：<ul>
-<li>.text</li>
-<li>.bss</li>
-<li>.data</li>
-<li>堆</li>
-<li>动态库加载区</li>
-<li>环境变量</li>
-<li>命令行参数</li>
-<li>通信：全局变量，堆</li>
-</ul>
-</li>
-<li>不共享：<ul>
-<li>栈区</li>
-<li>如果有5个线程，栈区被平均分成5分</li>
-</ul>
-</li>
-</ul>
-<h2 id="创建线程"><a href="#创建线程" class="headerlink" title="创建线程"></a>创建线程</h2><ul>
-<li><p>函数原型：</p>
+<li><p>接口实现</p>
 <ul>
-<li><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">//如果成功0，失败返回错误号</div><div class="line">//不能使用perror()了，因为没有生成errornumber</div><div class="line">int pthread_create(</div><div class="line">	pyhread_t* thread,//线程ID（无符号长整数），是传出参数</div><div class="line">	const pthread_attr_t *attr,//线程属性,NULL</div><div class="line">	void*(*start_routine)(void*),//线程处理函数</div><div class="line">	void *arg //线程处理函数参数</div><div class="line">	)</div></pre></td></tr></table></figure>
+<li><p>Golang中的接口，不需要显示的实现。只要一个变量，含有接口类型中</p>
+<p>的所有方法，那么这个变量就实现这个接口。</p>
 </li>
-<li><p>例</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;pthead.h&gt;</span><span class="comment">//线程对应的头文件</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span>* <span class="title">myfunc</span><span class="params">(<span class="keyword">void</span>* arg)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="comment">// 打印子线程的id</span></div><div class="line">    <span class="built_in">printf</span>(<span class="string">"child thread id: %lu\n"</span>,pthread_self());</div><div class="line">    <span class="keyword">return</span> <span class="literal">NULL</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc,<span class="keyword">const</span> <span class="keyword">char</span>* argv[])</span></span></div><div class="line">&#123;</div><div class="line">    <span class="comment">//创建一个子线程</span></div><div class="line">    <span class="comment">//线程ID</span></div><div class="line">    <span class="keyword">pthread_t</span> pthid;</div><div class="line">    pthread_create(&amp;pthid,<span class="literal">NULL</span>,myfunc,<span class="literal">NULL</span>);</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"parent thread id:%lu\n"</span>,pthread_self());</div><div class="line">    </div><div class="line">    sleep(<span class="number">2</span>);</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<li><p>如果一个变量含有了多个interface类型的方法，那么这个变量就实现了多个</p>
+<p>接口。</p>
+</li>
+<li><p>如果一个变量只含有了1个interface的方部分方法，那么这个变量没有实现</p>
+<p>这个接口。</p>
 </li>
 </ul>
 </li>
-</ul>
-<p>编译时要连接库：<code>-lpthread</code></p>
-<h2 id="线程思维"><a href="#线程思维" class="headerlink" title="线程思维"></a>线程思维</h2><p>例如如下代码，运行时不会按照预期：</p>
-<p><img src="http://ww1.sinaimg.cn/large/005HFdfGgy1g0yrvfaiz2j30i009t77q.jpg" alt=""></p>
-<p>运行时，线程打印的i-th有重复的，</p>
-<p><img src="http://ww1.sinaimg.cn/large/005HFdfGgy1g0yrwkilpmj30g00biwka.jpg" alt=""></p>
-<p>原因是因为线程抢占cpu时是分片的：</p>
-<p><img src="http://ww1.sinaimg.cn/large/005HFdfGgy1g0ys0wy1l7j30qa0ddtco.jpg" alt=""></p>
-<p>几个线程获得的都是主线程的i的内存地址，而这个i一直都是变化的。</p>
-<h2 id="打印返回错误信息"><a href="#打印返回错误信息" class="headerlink" title="打印返回错误信息"></a>打印返回错误信息</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">char *strerror(int errnum);</div></pre></td></tr></table></figure>
-<h2 id="单个协程退出"><a href="#单个协程退出" class="headerlink" title="单个协程退出"></a>单个协程退出</h2><p>函数：<code>void pthread_exit(void *retval);</code></p>
+<li><p>接口是用来定义一组规范</p>
 <ul>
-<li>retval 指针会带一些信息，必须指向全局或堆的。退出不携带信息则用NULL</li>
-</ul>
-<h2 id="阻塞等待线程退出"><a href="#阻塞等待线程退出" class="headerlink" title="阻塞等待线程退出"></a>阻塞等待线程退出</h2><p>并获取线程退出状态</p>
-<p>函数：<code>int pthread_join(pthread_t thread,void **retval);</code></p>
-<ul>
-<li>thread：要回收的子线程的线程id</li>
-<li>retval：读取线程退出的时候携带的状态信息<ul>
-<li>传出参数</li>
-<li>void *ptr;</li>
-<li>pthread_join(pthid,&amp;ptr);</li>
-<li>指向的内存和pthread_exit参数指向同一块内存地址</li>
+<li>面向接口编程</li>
+<li>模块和模块之间定义接口来定义格式规范</li>
 </ul>
 </li>
 </ul>
-<h2 id="线程分离"><a href="#线程分离" class="headerlink" title="线程分离"></a>线程分离</h2><p>一般线程分离是在线程创建时pthread_create的线程属性设置分离。</p>
-<p>也可以使用pthread_detach进行设置线程分离，但不常用。</p>
-<p>函数：<code>intpthread_detach(pthread_t thread);</code></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> main</div><div class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></div><div class="line"></div><div class="line"><span class="keyword">type</span> Test <span class="keyword">interface</span> &#123;</div><div class="line">	Print()</div><div class="line">	Sleep()</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">type</span> Student <span class="keyword">struct</span> &#123;</div><div class="line">	name  <span class="keyword">string</span></div><div class="line">	age   <span class="keyword">int</span></div><div class="line">	score <span class="keyword">int</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="params">(p Student)</span> <span class="title">Print</span><span class="params">()</span></span> &#123;</div><div class="line">	fmt.Println(<span class="string">"name:"</span>, p.name)</div><div class="line">	fmt.Println(<span class="string">"age:"</span>, p.age)</div><div class="line">	fmt.Println(<span class="string">"score:"</span>, p.score)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="params">(p Student)</span> <span class="title">Sleep</span><span class="params">()</span></span> &#123;</div><div class="line">	fmt.Println(<span class="string">"student sleep"</span>)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</div><div class="line">	<span class="keyword">var</span> t Test</div><div class="line">	fmt.Println(<span class="string">"t:"</span>, t)</div><div class="line">	<span class="keyword">var</span> stu Student = Student&#123;</div><div class="line">		name:  <span class="string">"stu1"</span>,</div><div class="line">		age:   <span class="number">20</span>,</div><div class="line">		score: <span class="number">200</span>,</div><div class="line">	&#125;</div><div class="line">    </div><div class="line">	t = stu</div><div class="line">	t.Print()</div><div class="line">	t.Sleep()</div><div class="line"></div><div class="line">	fmt.Println(<span class="string">"t:"</span>, t)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <ul>
-<li>调用该函数之后不需要pthread_join</li>
-<li>子线程会自动回收自己的pcb</li>
-</ul>
-<h3 id="使用设置属性设置线程分离"><a href="#使用设置属性设置线程分离" class="headerlink" title="使用设置属性设置线程分离"></a>使用设置属性设置线程分离</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;pthead.h&gt;</span><span class="comment">//线程对应的头文件</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span>* <span class="title">myfunc</span><span class="params">(<span class="keyword">void</span>* arg)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="comment">// 打印子线程的id</span></div><div class="line">    <span class="built_in">printf</span>(<span class="string">"child thread id: %lu\n"</span>,pthread_self());</div><div class="line">    <span class="keyword">return</span> <span class="literal">NULL</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc,<span class="keyword">const</span> <span class="keyword">char</span>* argv[])</span></span></div><div class="line">&#123;</div><div class="line">    <span class="comment">//创建一个子线程</span></div><div class="line">    <span class="comment">//线程ID</span></div><div class="line">    <span class="keyword">pthread_t</span> pthid;</div><div class="line">    <span class="comment">//初始化线程的属性</span></div><div class="line">    <span class="keyword">pthread_attr_t</span> attr;</div><div class="line">    pthtread_attr_init(&amp;attr);</div><div class="line">    <span class="comment">// 设置分离</span></div><div class="line">    pthread_attr_setdetachstate(&amp;attr,PTHREAD_CREATE_DETACHED);</div><div class="line">    <span class="comment">//创建线程的时候设置线程分离</span></div><div class="line">    pthread_create(&amp;pthid,&amp;attr,myfunc,<span class="literal">NULL</span>);</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"parent thread id:%lu\n"</span>,pthread_self());</div><div class="line">   </div><div class="line">    sleep(<span class="number">2</span>);</div><div class="line">    </div><div class="line">    <span class="comment">//释放资源</span></div><div class="line">    pthread_attr_destroy(&amp;attr);</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="杀死（取消）线程"><a href="#杀死（取消）线程" class="headerlink" title="杀死（取消）线程"></a>杀死（取消）线程</h2><p>函数：<code>pthread_cancel(ptread_t thread);</code></p>
+<li><p>接口也可以嵌套</p>
+</li>
+<li><p><strong>空接口里面没有任何方法</strong></p>
 <ul>
-<li>注意事项：<ul>
-<li>在要杀死的子进程对应处理的函数内部，必须做一次系统调用。</li>
-<li>没有调用系统调用的地方可以使用<code>pthread_testcancel</code>设置一个取消点</li>
-</ul>
+<li><p><strong>意味着任何类型都实现了空接口</strong></p>
+</li>
+<li><p>空接口可以指向任何类型</p>
+</li>
+<li><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> inter <span class="keyword">interface</span>&#123;&#125;</div><div class="line"><span class="keyword">var</span> a <span class="keyword">int</span></div><div class="line">inter = a</div><div class="line">fmt.Printf(<span class="string">"type is %T"</span>,inter) <span class="comment">//输出为int</span></div></pre></td></tr></table></figure>
 </li>
 </ul>
-<h2 id="多线程数据混乱"><a href="#多线程数据混乱" class="headerlink" title="多线程数据混乱"></a>多线程数据混乱</h2><p>原因：</p>
-<ul>
-<li>多线程操作了共享的资源</li>
-<li>因为cpu调度问题</li>
-</ul>
-<p>解决：</p>
-<ul>
-<li>线程同步</li>
-<li>什么叫同步<ul>
-<li>协同步调，按照先后顺序执行操作</li>
-</ul>
 </li>
-<li>锁<ul>
-<li>本来多线程访问共享资源的时候，可以并行，通过加锁机制，并行——&gt;串行。</li>
+<li><p>一个实现排序接口的例子：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> main</div><div class="line"></div><div class="line"><span class="keyword">import</span> (</div><div class="line">	<span class="string">"fmt"</span></div><div class="line">	<span class="string">"math/rand"</span></div><div class="line">	<span class="string">"sort"</span></div><div class="line">)</div><div class="line"></div><div class="line"><span class="keyword">type</span> Student <span class="keyword">struct</span> &#123;</div><div class="line">	Name     <span class="keyword">string</span></div><div class="line">	Id       <span class="keyword">string</span></div><div class="line">	Age      <span class="keyword">int</span></div><div class="line">	sortType <span class="keyword">int</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">type</span> StudentArray []Student</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="params">(p StudentArray)</span> <span class="title">Len</span><span class="params">()</span> <span class="title">int</span></span> &#123;</div><div class="line">	<span class="keyword">return</span> <span class="built_in">len</span>(p)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="params">(p StudentArray)</span> <span class="title">Less</span><span class="params">(i, j <span class="keyword">int</span>)</span> <span class="title">bool</span></span> &#123;</div><div class="line">	<span class="keyword">return</span> p[i].Name &lt; p[j].Name</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="params">(p StudentArray)</span> <span class="title">Swap</span><span class="params">(i, j <span class="keyword">int</span>)</span></span> &#123;</div><div class="line">	p[i], p[j] = p[j], p[i]</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</div><div class="line">	<span class="keyword">var</span> stus StudentArray</div><div class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">10</span>; i++ &#123;</div><div class="line">		stu := Student&#123;</div><div class="line">			Name: fmt.Sprintf(<span class="string">"stu%d"</span>, rand.Intn(<span class="number">100</span>)),</div><div class="line">			Id:   fmt.Sprintf(<span class="string">"110%d"</span>, rand.Int()),</div><div class="line">			Age:  rand.Intn(<span class="number">100</span>),</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		stus = <span class="built_in">append</span>(stus, stu)</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">for</span> _, v := <span class="keyword">range</span> stus &#123;</div><div class="line">		fmt.Println(v)</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	fmt.Println(<span class="string">"\n\n"</span>)</div><div class="line">	sort.Sort(stus)</div><div class="line">	<span class="keyword">for</span> _, v := <span class="keyword">range</span> stus &#123;</div><div class="line">		fmt.Println(v)</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
 </ul>
+<h2 id="类型断言"><a href="#类型断言" class="headerlink" title="类型断言"></a>类型断言</h2><ul>
+<li><p>类型断言，由于接口是一般类型，不知道具体类型，如果要转成具体类型可以采用以下方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var t int</div><div class="line">var x interface&#123;&#125;</div><div class="line">x = t</div><div class="line">y, ok = x.(int)   //转成int，带检查</div></pre></td></tr></table></figure>
+</li>
+<li><p>传入参数，动态判断类型</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">func classifier(items ...interface&#123;&#125;) &#123;</div><div class="line">	for i, x := range items &#123; </div><div class="line">			switch x.(type) &#123;</div><div class="line">			 case bool:      </div><div class="line">			 	fmt.Printf(&quot;param #%d is a bool\n&quot;, i)</div><div class="line">			 case float64:    </div><div class="line">			 	fmt.Printf(&quot;param #%d is a float64\n&quot;, i)</div><div class="line">			 case int, int64: </div><div class="line">			 	fmt.Printf(&quot;param #%d is an int\n&quot;, i)</div><div class="line">			 case nil: </div><div class="line">			 	fmt.Printf(&quot;param #%d is nil\n&quot;, i)</div><div class="line">			 case string: </div><div class="line">			 	fmt.Printf(&quot;param #%d is a string\n&quot;, i)</div><div class="line">			  default: </div><div class="line">			  	fmt.Printf(&quot;param #%d’s type is unknown\n&quot;, i)</div><div class="line">	  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 </ul>
 
@@ -492,12 +471,12 @@
   <script type="text/javascript" src="http://jslibs.wuxubj.cn/sweetalert_mini/jquery-1.7.1.min.js"></script>
   <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
   <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
-  <p><span>本文标题:</span><a href="/2019/03/12/Linux多线程笔记/">Linux多线程笔记</a></p>
+  <p><span>本文标题:</span><a href="/2019/06/10/GO语言学习笔记6——接口/">GO语言学习笔记6——接口</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 Yang Shuai 的个人博客">Yang Shuai</a></p>
-  <p><span>发布时间:</span>2019年03月12日 - 17:03</p>
-  <p><span>最后更新:</span>2019年03月12日 - 17:03</p>
-  <p><span>原始链接:</span><a href="/2019/03/12/Linux多线程笔记/" title="Linux多线程笔记">https://ysbbswork.github.io/2019/03/12/Linux多线程笔记/</a>
-    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://ysbbswork.github.io/2019/03/12/Linux多线程笔记/"  aria-label="复制成功！"></i></span>
+  <p><span>发布时间:</span>2019年06月10日 - 18:06</p>
+  <p><span>最后更新:</span>2019年06月10日 - 18:06</p>
+  <p><span>原始链接:</span><a href="/2019/06/10/GO语言学习笔记6——接口/" title="GO语言学习笔记6——接口">https://ysbbswork.github.io/2019/06/10/GO语言学习笔记6——接口/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://ysbbswork.github.io/2019/06/10/GO语言学习笔记6——接口/"  aria-label="复制成功！"></i></span>
   </p>
   <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>
 </div>
@@ -560,11 +539,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Linux/" rel="tag"># Linux</a>
-          
             <a href="/tags/笔记/" rel="tag"># 笔记</a>
           
-            <a href="/tags/线程/" rel="tag"># 线程</a>
+            <a href="/tags/GO/" rel="tag"># GO</a>
           
         </div>
       
@@ -577,8 +554,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/10/进程间通信笔记（一）/" rel="next" title="进程间通信笔记（一）">
-                <i class="fa fa-chevron-left"></i> 进程间通信笔记（一）
+              <a href="/2019/06/10/GO语言学习笔记5——结构体/" rel="next" title="GO语言学习笔记5——结构体">
+                <i class="fa fa-chevron-left"></i> GO语言学习笔记5——结构体
               </a>
             
           </div>
@@ -586,10 +563,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/03/12/进程间通信笔记（二）/" rel="prev" title="进程间通信笔记（二）">
-                进程间通信笔记（二） <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -615,8 +588,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2019/03/12/Linux多线程笔记/"
-           data-title="Linux多线程笔记" data-url="https://ysbbswork.github.io/2019/03/12/Linux多线程笔记/">
+      <div class="ds-thread" data-thread-key="2019/06/10/GO语言学习笔记6——接口/"
+           data-title="GO语言学习笔记6——接口" data-url="https://ysbbswork.github.io/2019/06/10/GO语言学习笔记6——接口/">
       </div>
     
   </div>
@@ -713,7 +686,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#主线程和子线程"><span class="nav-number">1.</span> <span class="nav-text">主线程和子线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建线程"><span class="nav-number">2.</span> <span class="nav-text">创建线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程思维"><span class="nav-number">3.</span> <span class="nav-text">线程思维</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#打印返回错误信息"><span class="nav-number">4.</span> <span class="nav-text">打印返回错误信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单个协程退出"><span class="nav-number">5.</span> <span class="nav-text">单个协程退出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#阻塞等待线程退出"><span class="nav-number">6.</span> <span class="nav-text">阻塞等待线程退出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程分离"><span class="nav-number">7.</span> <span class="nav-text">线程分离</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用设置属性设置线程分离"><span class="nav-number">7.1.</span> <span class="nav-text">使用设置属性设置线程分离</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#杀死（取消）线程"><span class="nav-number">8.</span> <span class="nav-text">杀死（取消）线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多线程数据混乱"><span class="nav-number">9.</span> <span class="nav-text">多线程数据混乱</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#接口"><span class="nav-number">1.</span> <span class="nav-text">接口</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#类型断言"><span class="nav-number">1.1.</span> <span class="nav-text">类型断言</span></a></li></ol></li></ol></div>
             
 
           </div>

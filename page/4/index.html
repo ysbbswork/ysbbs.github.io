@@ -260,6 +260,199 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://ysbbswork.github.io/2019/03/09/Shell命令笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yang Shuai">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ysbbs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2019/03/09/Shell命令笔记/" itemprop="url">
+                  Shell命令笔记
+                </a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-09T20:12:10+08:00">
+                2019-03-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/03/09/Shell命令笔记/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2019/03/09/Shell命令笔记/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2019/03/09/Shell命令笔记/" class="leancloud_visitors" data-flag-title="Shell命令笔记">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ul>
+<li>find 目录  -name “file_name”<ul>
+<li><code>find ~ -name &quot;helloword.cpp&quot;</code></li>
+</ul>
+</li>
+<li>grep -r “context” 目录 -n<ul>
+<li><code>grep -r &quot;iosteam&quot;  ~</code></li>
+<li>-n 显示具体内容在文件第多少行</li>
+</ul>
+</li>
+<li><p>压缩格式</p>
+<ul>
+<li>tar其实是归档工具（打包工具）<ul>
+<li>c 创建归档文件</li>
+<li>x 释放归档文件</li>
+<li>v 打印提示信息</li>
+<li>f 指定压缩包名字</li>
+<li>z 使用gzip压缩 -xxx.tar.gz</li>
+<li>j 使用bzip2方式压缩 -xxx.tar.bz2</li>
+</ul>
+</li>
+<li>常用压缩格式：<ul>
+<li>.gz </li>
+<li>.bz2</li>
+</ul>
+</li>
+<li>压缩 <code>tar czvf test.tar.gz file1 file2 docment1 (原材料，可以是文件可以是目录，可多个)</code></li>
+<li>解压 <code>tar zxvf test.tar.gz -C 要解压的目录</code></li>
+</ul>
+</li>
+<li><p>file xxx：可以查看文件的文件类型</p>
+</li>
+<li><p>man文档章节</p>
+<p>如果有些命令如printf会有重名，需要查哪块具体要指定好具体章节<code>man 3 printf</code></p>
+<ul>
+<li>1：可执行程序或shell命令</li>
+<li>2：系统调用（内核提供的函数）</li>
+<li>3：库调用（程序库中的函数）</li>
+<li>4：特殊文件（通常在/dev）</li>
+<li>5：文件格式和规范（例如：/etc/passwd)</li>
+<li>6：游戏</li>
+<li>7：杂项</li>
+<li>8：系统管理命令（通常只针对root用户）</li>
+<li>9：内核例程【非标准】</li>
+</ul>
+</li>
+<li><p>env ：查看linux所有环境变量</p>
+</li>
+<li><p>stat：<code>stat hello.c</code>查看文件属性</p>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="https://ysbbswork.github.io/2019/03/09/ssh和sftp的关系/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1642,153 +1835,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://ysbbswork.github.io/2019/01/04/gcc实用笔记/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Yang Shuai">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ysbbs">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2019/01/04/gcc实用笔记/" itemprop="url">
-                  gcc实用笔记
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-04T12:48:08+08:00">
-                2019-01-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/01/04/gcc实用笔记/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2019/01/04/gcc实用笔记/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2019/01/04/gcc实用笔记/" class="leancloud_visitors" data-flag-title="gcc实用笔记">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>一般在工作中，或者使用中，对于gcc的一些了解，很多都是很熟悉，但是具体一条条列出来，发现可以对gcc的一般使用会有更清晰的了解。对于初学者或者经常使用vs这类IDE的同学，可以通过这个总结对gcc使用有个直观的入门和了解。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/01/04/gcc实用笔记/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1838,7 +1884,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">97</span>
+                <span class="site-state-item-count">98</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
